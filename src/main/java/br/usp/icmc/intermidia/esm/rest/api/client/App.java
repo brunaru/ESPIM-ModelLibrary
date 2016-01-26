@@ -9,8 +9,9 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.experiment.Experiment;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.experiment.ExperimentRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.json.ActiveSample;
-import br.usp.icmc.intermidia.esm.rest.api.client.json.Experiment;
 import br.usp.icmc.intermidia.esm.rest.api.client.json.Person;
 import br.usp.icmc.intermidia.esm.rest.api.client.json.QuestionIntervention;
 import br.usp.icmc.intermidia.esm.rest.api.client.json.Researcher;
@@ -121,17 +122,20 @@ public class App {
 		Experiment experiment = new Experiment();
 		experiment.setDescription("Esse é um experimento de teste para saber se está ok.");
 		experiment.setTitle("Meu experimento teste");
-		experiment.setParticipants(participants);
-		experiment.setResearchers(researchers);
-		experiment.setSamples(samples);
-		// POST experiment
-		String experimentJson = gson.toJson(experiment);
-		WebResource experimentResource = client.resource(REST_API_ADDRESS + "experiments");
-		ClientResponse experimentResponse = experimentResource.type("application/json").post(ClientResponse.class, experimentJson);
-		URI experimentLocation = experimentResponse.getLocation();
+		ExperimentRestFacade experimentFacade = new ExperimentRestFacade();
+		URI experimentLocation = experimentFacade.post(experiment);
 		System.out.println(experimentLocation);
-	    
-	    System.out.println("SUCESSO");	    
+		
+		experimentFacade.putParticipantRelationship(experimentLocation, participants.get(0));
+		experimentFacade.putParticipantRelationship(experimentLocation, participants.get(1));
+		experimentFacade.putResearcherRelationship(experimentLocation, researchers.get(0));
+		experimentFacade.putSampleRelationship(experimentLocation, samples.get(0));
+		
+		experimentFacade.getAll();
+		
+		experimentFacade.deleteRelationship(experimentLocation, participants.get(1));
+
+	    System.out.println("SUCESSO");
 	}
 
 	void testPeople() {

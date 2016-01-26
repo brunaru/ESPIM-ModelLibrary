@@ -1,13 +1,16 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.json;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.experiment;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 public class Experiment {
 
 	private String title;
 
 	private String description;
+	
+	private Map<String, URI> links;
 
 	private List<URI> researchers;
 
@@ -31,28 +34,36 @@ public class Experiment {
 		this.description = description;
 	}
 
-	public List<URI> getResearchers() {
+	protected List<URI> getResearchers() {
 		return researchers;
 	}
 
-	public void setResearchers(List<URI> researchers) {
+	protected void setResearchers(List<URI> researchers) {
 		this.researchers = researchers;
 	}
 
-	public List<URI> getParticipants() {
+	protected List<URI> getParticipants() {
 		return participants;
 	}
 
-	public void setParticipants(List<URI> participants) {
+	protected void setParticipants(List<URI> participants) {
 		this.participants = participants;
 	}
 
-	public List<URI> getSamples() {
+	protected List<URI> getSamples() {
 		return samples;
 	}
 
-	public void setSamples(List<URI> samples) {
+	protected void setSamples(List<URI> samples) {
 		this.samples = samples;
+	}
+
+	public Map<String, URI> getLinks() {
+		return links;
+	}
+
+	public void setLinks(Map<String, URI> links) {
+		this.links = links;
 	}
 
 }
