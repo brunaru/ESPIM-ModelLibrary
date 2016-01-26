@@ -126,10 +126,10 @@ public class App {
 		URI experimentLocation = experimentFacade.post(experiment);
 		System.out.println(experimentLocation);
 		
-		experimentFacade.putParticipantRelationship(experimentLocation, participants.get(0));
-		experimentFacade.putParticipantRelationship(experimentLocation, participants.get(1));
-		experimentFacade.putResearcherRelationship(experimentLocation, researchers.get(0));
-		experimentFacade.putSampleRelationship(experimentLocation, samples.get(0));
+		experimentFacade.putRelationship(experimentLocation, participants.get(0));
+		experimentFacade.putRelationship(experimentLocation, participants.get(1));
+		experimentFacade.putRelationship(experimentLocation, researchers.get(0));
+		experimentFacade.putRelationship(experimentLocation, samples.get(0));
 		
 		experimentFacade.getAll();
 		

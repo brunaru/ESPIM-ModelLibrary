@@ -2,15 +2,14 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade.experiment;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
-public class Experiment {
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+
+public class Experiment extends AbstractJsonModel {
 
 	private String title;
 
 	private String description;
-	
-	private Map<String, URI> links;
 
 	private List<URI> researchers;
 
@@ -57,13 +56,4 @@ public class Experiment {
 	protected void setSamples(List<URI> samples) {
 		this.samples = samples;
 	}
-
-	public Map<String, URI> getLinks() {
-		return links;
-	}
-
-	public void setLinks(Map<String, URI> links) {
-		this.links = links;
-	}
-
 }

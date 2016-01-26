@@ -3,7 +3,11 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.core.GenericTypeResolver;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -13,20 +17,25 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.experiment.Experiment;
+public abstract class GenericRestFacade<T extends AbstractJsonModel> implements RestFacade<T> {
 
-public class GenericRestFacade {
+	private final Client client;
+	private final Gson gson;
+	private final Class<T> genericType;
+	private final String[] linkNames;
+	private final String resourceName;
 
-	private Client client;
-	private Gson gson;
-
-	public GenericRestFacade() {
+	@SuppressWarnings("unchecked")
+	public GenericRestFacade(String resourceName, String[] linkNames) {
+		this.resourceName = resourceName;
 		client = Client.create();
 		gson = new Gson();
+		this.linkNames = linkNames;
+		this.genericType = (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), GenericRestFacade.class);
 	}
 
-	public Object get(Long id, String resourceName) {
-		String s = Constants.REST_API_ADDRESS + resourceName + id;
+	public T get(Long id) {
+		String s = Constants.REST_API_ADDRESS + resourceName + "/" + id;
 		try {
 			URI location = new URI(s);
 			return get(location);
@@ -36,25 +45,53 @@ public class GenericRestFacade {
 		}
 	}
 
-	public String get(URI location) {
+	public T get(URI location) {
 		WebResource resource = client.resource(location);
 		ClientResponse response = resource.accept("application/json").get(ClientResponse.class);
 		String json = response.getEntity(String.class);
+		T object = gson.fromJson(json, genericType);
+		setLinksMap(object, json);
 		if (response.getStatus() != 200) {
 			error(response);
 			return null;
 		}
-		return json;
+		return object;
 	}
 
-	public String getAll(String resourceName) {
+	public void setLinksMap(T object, String json) {
+		JsonParser jsonParser = new JsonParser();
+		JsonElement obj = jsonParser.parse(json);
+		Map<String, URI> links = new HashMap<String, URI>();
+		for (String linkName : linkNames) {
+			JsonElement jElement = obj.getAsJsonObject().get("_links").getAsJsonObject().get(linkName).getAsJsonObject()
+					.get("href");
+			URI location = gson.fromJson(jElement, URI.class);
+			links.put(linkName, location);
+		}
+		object.setLinks(links);
+	}
+
+	public List<T> getAll() {
 		WebResource resource = client.resource(Constants.REST_API_ADDRESS + resourceName);
 		ClientResponse response = resource.accept("application/json").get(ClientResponse.class);
 		String json = response.getEntity(String.class);
-		return json;
+		JsonParser jsonParser = new JsonParser();
+		JsonArray jsonArray = jsonParser.parse(json).getAsJsonObject().get("_embedded").getAsJsonObject()
+				.getAsJsonArray(resourceName);
+		List<T> objects = new ArrayList<T>();
+		for (JsonElement obj : jsonArray) {
+			T object = gson.fromJson(obj, genericType);
+			setLinksMap(object, obj.toString());
+			objects.add(object);
+		}
+		if (response.getStatus() != 200) {
+			error(response);
+			return null;
+		}
+		return objects;
 	}
 
-	public URI post(Object object, String resourceName) {
+	public URI post(T object) {
 		String json = gson.toJson(object);
 		WebResource resource = client.resource(Constants.REST_API_ADDRESS + resourceName);
 		ClientResponse response = resource.type("application/json").post(ClientResponse.class, json);
@@ -66,8 +103,8 @@ public class GenericRestFacade {
 		return location;
 	}
 
-	public URI put(Object object, Long id, String resourceName) {
-		String s = Constants.REST_API_ADDRESS + resourceName + id;
+	public URI put(T object, Long id) {
+		String s = Constants.REST_API_ADDRESS + resourceName + "/" + id;
 		try {
 			URI location = new URI(s);
 			return put(object, location);
@@ -77,7 +114,7 @@ public class GenericRestFacade {
 		}
 	}
 
-	public URI put(Object object, URI location) {
+	public URI put(T object, URI location) {
 		String json = gson.toJson(object);
 		WebResource resource = client.resource(location);
 		ClientResponse response = resource.type("application/json").put(ClientResponse.class, json);
@@ -89,20 +126,22 @@ public class GenericRestFacade {
 		return location;
 	}
 
-	protected List<URI> getRelationshipLinks(URI relationshipLocation, String relationshipName) {
+	public List<URI> getRelationshipLinks(URI relationshipLocation, String relationshipName) {
 		List<URI> relationships = new ArrayList<URI>();
-		WebResource resource = client.resource(relationshipLocation);
-		ClientResponse response = resource.accept("application/json").get(ClientResponse.class);
-		String json = response.getEntity(String.class);
-		JsonParser jsonParser = new JsonParser();
-		JsonArray jsonArray = jsonParser.parse(json).getAsJsonObject().get("_embedded").getAsJsonObject()
-				.getAsJsonArray(relationshipName);
-		for (JsonElement obj : jsonArray) {
-			JsonElement pLink = obj.getAsJsonObject().get("_links").getAsJsonObject().get("self").getAsJsonObject()
-					.get("href");
-			URI pURI = gson.fromJson(pLink, URI.class);
-			relationships.add(pURI);
-		}
+		if (relationshipLocation != null) {
+			WebResource resource = client.resource(relationshipLocation);
+			ClientResponse response = resource.accept("application/json").get(ClientResponse.class);
+			String json = response.getEntity(String.class);
+			JsonParser jsonParser = new JsonParser();
+			JsonArray jsonArray = jsonParser.parse(json).getAsJsonObject().get("_embedded").getAsJsonObject()
+					.getAsJsonArray(relationshipName);
+			for (JsonElement obj : jsonArray) {
+				JsonElement pLink = obj.getAsJsonObject().get("_links").getAsJsonObject().get("self").getAsJsonObject()
+						.get("href");
+				URI pURI = gson.fromJson(pLink, URI.class);
+				relationships.add(pURI);
+			}
+		}			
 		return relationships;
 	}
 
@@ -118,8 +157,8 @@ public class GenericRestFacade {
 		}
 	}
 
-	public boolean delete(Long id, String resourceName) {
-		String s = Constants.REST_API_ADDRESS + resourceName + id;
+	public boolean delete(Long id) {
+		String s = Constants.REST_API_ADDRESS + resourceName + "/" + id;
 		try {
 			URI location = new URI(s);
 			return delete(location);
@@ -141,10 +180,6 @@ public class GenericRestFacade {
 
 	protected void error(ClientResponse response) {
 		System.out.println("ExperimentRestFacade Failed : HTTP error code : " + response.getStatus());
-	}
-
-	private void setLinksMap(Experiment experiment, JsonElement obj, String linkName) {
-
 	}
 
 }
