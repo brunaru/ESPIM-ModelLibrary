@@ -1,8 +1,11 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.json;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
 import java.util.Date;
 
-public abstract class Result {
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.sample.Sample;
+
+public abstract class Result extends AbstractJsonModel {
 	
 	private Date started;
 	

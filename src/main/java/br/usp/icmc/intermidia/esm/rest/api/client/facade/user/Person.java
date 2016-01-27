@@ -1,6 +1,8 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.json;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.user;
 
-public class Person {
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+
+public class Person extends AbstractJsonModel {
 
 	private String name;
 

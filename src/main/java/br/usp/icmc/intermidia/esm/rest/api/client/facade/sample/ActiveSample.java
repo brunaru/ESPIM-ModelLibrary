@@ -1,4 +1,4 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.json;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.sample;
 import java.net.URI;
 import java.util.List;
 
@@ -10,11 +10,11 @@ public class ActiveSample extends Sample {
 		this.setType("active");
 	}
 
-	public List<URI> getInterventions() {
+	protected List<URI> getInterventions() {
 		return interventions;
 	}
 
-	public void setInterventions(List<URI> interventions) {
+	protected void setInterventions(List<URI> interventions) {
 		this.interventions = interventions;
 	}
 	

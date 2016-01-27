@@ -1,4 +1,4 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.json;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.user;
 import java.net.URI;
 import java.util.List;
 
@@ -16,11 +16,11 @@ public class Researcher extends Person {
 		this.password = password;
 	}
 
-	public List<URI> getContacts() {
+	protected List<URI> getContacts() {
 		return contacts;
 	}
 
-	public void setContacts(List<URI> contacts) {
+	protected void setContacts(List<URI> contacts) {
 		this.contacts = contacts;
 	}
 

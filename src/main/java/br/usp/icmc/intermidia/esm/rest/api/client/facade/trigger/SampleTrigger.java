@@ -1,6 +1,8 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.json;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger;
 
-public class SampleTrigger {
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+
+public class SampleTrigger extends AbstractJsonModel {
 	
 	/** Time type trigger. */
 	public static final int TYPE_TIME = 0;

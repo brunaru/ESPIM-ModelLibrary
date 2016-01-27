@@ -1,6 +1,8 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.json;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
 
-public abstract class Intervention {
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+
+public abstract class Intervention extends AbstractJsonModel {
 	
 	private String type;
 	

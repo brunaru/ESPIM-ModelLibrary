@@ -1,4 +1,4 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.json;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
 import java.net.URI;
 import java.sql.Blob;

@@ -1,9 +1,11 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.json;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.sample;
 
 import java.net.URI;
 import java.util.List;
 
-public abstract class Sample {
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+
+public abstract class Sample extends AbstractJsonModel {
 	
 	private String type;
 	
@@ -31,19 +33,19 @@ public abstract class Sample {
 		this.description = description;
 	}
 
-	public List<URI> getTriggers() {
+	protected List<URI> getTriggers() {
 		return triggers;
 	}
 
-	public void setTriggers(List<URI> triggers) {
+	protected void setTriggers(List<URI> triggers) {
 		this.triggers = triggers;
 	}
 
-	public List<URI> getSensors() {
+	protected List<URI> getSensors() {
 		return sensors;
 	}
 
-	public void setSensors(List<URI> sensors) {
+	protected void setSensors(List<URI> sensors) {
 		this.sensors = sensors;
 	}
 

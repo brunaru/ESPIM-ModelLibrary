@@ -1,6 +1,8 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.json;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.sensor;
 
-public class Sensor {
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+
+public class Sensor extends AbstractJsonModel {
 	
 	/** Used for capturing sensors during an interval. */
 	public static final int SENSOR_TYPE_INTERVAL = 0;
