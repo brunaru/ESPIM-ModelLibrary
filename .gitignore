@@ -62,3 +62,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 /target/
+target/classes/META-INF/maven/intermidia/esm-client/pom.properties
+target/classes/META-INF/MANIFEST.MF
