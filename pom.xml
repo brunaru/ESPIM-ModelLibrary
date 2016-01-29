@@ -8,7 +8,6 @@
 	<packaging>jar</packaging>
 
 	<name>esm-client</name>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,6 +30,5 @@
 			<artifactId>spring-core</artifactId>
 			<version>4.2.4.RELEASE</version>
 		</dependency>
-
 	</dependencies>
 </project>

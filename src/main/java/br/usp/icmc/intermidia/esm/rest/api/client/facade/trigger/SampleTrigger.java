@@ -5,24 +5,24 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 public class SampleTrigger extends AbstractJsonModel {
 	
 	/** Time type trigger. */
-	public static final int TYPE_TIME = 0;
+	public static final String TYPE_TIME = "time";
 	
 	/** Manual type trigger. */
-	public static final int TYPE_MANUAL = 1;
+	public static final String TYPE_MANUAL = "manual";
 	
 	/** Contextual type trigger. */
-	public static final int TYPE_CONTEXTUAL = 2;
+	public static final String TYPE_CONTEXTUAL = "contextual";
 	
 	/** Time, manual or contextual. */
-	private int sampleType;
+	private String sampleType;
 	
 	private String triggerCondition;
 
-	public int getSampleType() {
+	public String getSampleType() {
 		return sampleType;
 	}
 
-	public void setSampleType(int sampleType) {
+	public void setSampleType(String sampleType) {
 		this.sampleType = sampleType;
 	}
 

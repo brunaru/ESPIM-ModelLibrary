@@ -135,13 +135,16 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 			JsonParser jsonParser = new JsonParser();
 			JsonArray jsonArray = jsonParser.parse(json).getAsJsonObject().get("_embedded").getAsJsonObject()
 					.getAsJsonArray(relationshipName);
+			if (jsonArray == null) {
+				return relationships;
+			}
 			for (JsonElement obj : jsonArray) {
 				JsonElement pLink = obj.getAsJsonObject().get("_links").getAsJsonObject().get("self").getAsJsonObject()
 						.get("href");
 				URI pURI = gson.fromJson(pLink, URI.class);
 				relationships.add(pURI);
 			}
-		}			
+		}
 		return relationships;
 	}
 

@@ -6,7 +6,7 @@ import java.util.List;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.GenericRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
-public abstract class SampleRestFacade extends GenericRestFacade<Sample> implements RestFacade<Sample> {
+public abstract class SampleRestFacade<T extends Sample> extends GenericRestFacade<T> implements RestFacade<T> {
 
 	/* Relationships */
 	private static final String TRIGGERS = "triggers";
@@ -35,7 +35,7 @@ public abstract class SampleRestFacade extends GenericRestFacade<Sample> impleme
 	}
 	
 	protected URI putSensorRelationship(URI objectLocation, URI relationshipLocation) {
-		Sample sample = get(objectLocation);
+		T sample = get(objectLocation);
 		List<URI> sensors = getRelationshipLinks(sample.getLinks().get(SENSORS), SENSORS);
 		sensors.add(relationshipLocation);
 		sample.setSensors(sensors);
@@ -43,7 +43,7 @@ public abstract class SampleRestFacade extends GenericRestFacade<Sample> impleme
 	}
 
 	protected URI putTriggerRelationship(URI objectLocation, URI relationshipLocation) {
-		Sample sample = get(objectLocation);
+		T sample = get(objectLocation);
 		List<URI> triggers = getRelationshipLinks(sample.getLinks().get(TRIGGERS), TRIGGERS);
 		triggers.add(relationshipLocation);
 		sample.setTriggers(triggers);
