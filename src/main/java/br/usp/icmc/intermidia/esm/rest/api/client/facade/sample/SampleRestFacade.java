@@ -9,15 +9,16 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 public abstract class SampleRestFacade<T extends Sample> extends GenericRestFacade<T> implements RestFacade<T> {
 
 	/* Relationships */
-	private static final String TRIGGERS = "triggers";
-	private static final String SENSORS = "sensors";
+	protected static final String TRIGGERS = "triggers";
+	protected static final String SENSORS = "sensors";
+	protected static final String RESULTS = "results";
 
-	private static final String[] linkNames = { TRIGGERS, SENSORS };
+	private static final String[] linkNames = { TRIGGERS, SENSORS, RESULTS };
 
 	public SampleRestFacade(String resource) {
 		super(resource, linkNames);
 	}
-	
+
 	public SampleRestFacade(String resource, String[] links) {
 		super(resource, links);
 	}
@@ -29,11 +30,13 @@ public abstract class SampleRestFacade<T extends Sample> extends GenericRestFaca
 			return putTriggerRelationship(objectLocation, relationshipLocation);
 		} else if (relationship.contains(SENSORS)) {
 			return putSensorRelationship(objectLocation, relationshipLocation);
+		} else if (relationship.contains(RESULTS)) {
+			return putResultsRelationship(objectLocation, relationshipLocation);
 		} else {
 			return null;
-		}		
+		}
 	}
-	
+
 	protected URI putSensorRelationship(URI objectLocation, URI relationshipLocation) {
 		T sample = get(objectLocation);
 		List<URI> sensors = getRelationshipLinks(sample.getLinks().get(SENSORS), SENSORS);
@@ -47,6 +50,14 @@ public abstract class SampleRestFacade<T extends Sample> extends GenericRestFaca
 		List<URI> triggers = getRelationshipLinks(sample.getLinks().get(TRIGGERS), TRIGGERS);
 		triggers.add(relationshipLocation);
 		sample.setTriggers(triggers);
+		return put(sample, objectLocation);
+	}
+
+	protected URI putResultsRelationship(URI objectLocation, URI relationshipLocation) {
+		T sample = get(objectLocation);
+		List<URI> results = getRelationshipLinks(sample.getLinks().get(RESULTS), RESULTS);
+		results.add(relationshipLocation);
+		sample.setResults(results);
 		return put(sample, objectLocation);
 	}
 

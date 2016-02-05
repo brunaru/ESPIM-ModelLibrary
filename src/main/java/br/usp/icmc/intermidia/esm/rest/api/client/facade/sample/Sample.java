@@ -17,6 +17,8 @@ public abstract class Sample extends AbstractJsonModel {
 	
 	private List <URI> sensors;
 	
+	private List <URI> results;
+	
 	public String getTitle() {
 		return title;
 	}
@@ -55,6 +57,14 @@ public abstract class Sample extends AbstractJsonModel {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	protected List <URI> getResults() {
+		return results;
+	}
+
+	protected void setResults(List <URI> results) {
+		this.results = results;
 	}
 
 }

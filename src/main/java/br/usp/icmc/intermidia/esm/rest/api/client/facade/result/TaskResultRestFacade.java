@@ -2,16 +2,15 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
 import java.net.URI;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.GenericRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
-public class TaskResultRestFacade extends GenericRestFacade<TaskResult> implements RestFacade<TaskResult> {
+public class TaskResultRestFacade extends ResultRestFacade<TaskResult> implements RestFacade<TaskResult> {
 
 	private static final String RESOURCE = "task-result";
 	/* Relationships */
 	private static final String TASK = "task";
 
-	private static final String[] linkNames = { TASK };
+	private static final String[] linkNames = { TASK, PARTICIPANT };
 
 	public TaskResultRestFacade() {
 		super(RESOURCE, linkNames);
@@ -19,9 +18,16 @@ public class TaskResultRestFacade extends GenericRestFacade<TaskResult> implemen
 
 	@Override
 	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
-		TaskResult taskResult = get(objectLocation);
-		taskResult.setTask(relationshipLocation);
-		return put(taskResult, objectLocation);
+		String relationship = relationshipLocation.toString();
+		if (relationship.contains(PARTICIPANT)) {
+			return putParticipantRelationship(objectLocation, relationshipLocation);
+		} else if (relationship.contains(TASK)) {
+			TaskResult taskResult = get(objectLocation);
+			taskResult.setTask(relationshipLocation);
+			return put(taskResult, objectLocation);
+		} else {
+			return null;
+		}		
 	}
 
 }

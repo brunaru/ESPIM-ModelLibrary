@@ -8,12 +8,16 @@ public class TaskResult extends Result {
 	private URI task;
 	
 	private Blob resultData;
+	
+	public TaskResult() {
+		this.setType("task");
+	}
 
-	public URI getTask() {
+	protected URI getTask() {
 		return task;
 	}
 
-	public void setTask(URI task) {
+	protected void setTask(URI task) {
 		this.task = task;
 	}
 

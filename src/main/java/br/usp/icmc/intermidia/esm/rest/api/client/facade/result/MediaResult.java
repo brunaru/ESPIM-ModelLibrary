@@ -9,11 +9,15 @@ public class MediaResult extends Result {
 	
 	private Blob resultData;
 
-	public URI getMedia() {
+	public MediaResult() {
+		this.setType("media");
+	}
+
+	protected URI getMedia() {
 		return media;
 	}
 
-	public void setMedia(URI media) {
+	protected void setMedia(URI media) {
 		this.media = media;
 	}
 

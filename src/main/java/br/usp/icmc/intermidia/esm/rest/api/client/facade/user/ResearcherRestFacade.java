@@ -20,11 +20,16 @@ public class ResearcherRestFacade extends GenericRestFacade<Researcher> implemen
 
 	@Override
 	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
-		Researcher researcher = get(objectLocation);
-		List<URI> contacts = getRelationshipLinks(researcher.getLinks().get(CONTACTS), CONTACTS);
-		contacts.add(relationshipLocation);
-		researcher.setContacts(contacts);
-		return put(researcher, objectLocation);
+		String relationship = relationshipLocation.toString();
+		if (relationship.contains(CONTACTS)) {
+			Researcher researcher = get(objectLocation);
+			List<URI> contacts = getRelationshipLinks(researcher.getLinks().get(CONTACTS), CONTACTS);
+			contacts.add(relationshipLocation);
+			researcher.setContacts(contacts);
+			return put(researcher, objectLocation);
+		} else {
+			return null;
+		}
 	}
 
 }

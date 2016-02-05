@@ -68,7 +68,7 @@ public class App {
 		URI question2Location = questionFacade.post(question2);
 		
 		SampleTrigger trigger = new SampleTrigger();
-		trigger.setSampleType(SampleTrigger.TYPE_MANUAL);
+		trigger.setTriggerType(SampleTrigger.TYPE_MANUAL);
 		trigger.setTriggerCondition(null);		
 		// POST trigger
 		TriggerRestFacade triggerFacade = new TriggerRestFacade();

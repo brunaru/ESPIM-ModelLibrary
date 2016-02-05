@@ -14,17 +14,9 @@ public class SampleTrigger extends AbstractJsonModel {
 	public static final String TYPE_CONTEXTUAL = "contextual";
 	
 	/** Time, manual or contextual. */
-	private String sampleType;
+	private String triggerType;
 	
 	private String triggerCondition;
-
-	public String getSampleType() {
-		return sampleType;
-	}
-
-	public void setSampleType(String sampleType) {
-		this.sampleType = sampleType;
-	}
 
 	public String getTriggerCondition() {
 		return triggerCondition;
@@ -32,6 +24,14 @@ public class SampleTrigger extends AbstractJsonModel {
 
 	public void setTriggerCondition(String triggerCondition) {
 		this.triggerCondition = triggerCondition;
+	}
+
+	public String getTriggerType() {
+		return triggerType;
+	}
+
+	public void setTriggerType(String triggerType) {
+		this.triggerType = triggerType;
 	}
 
 }

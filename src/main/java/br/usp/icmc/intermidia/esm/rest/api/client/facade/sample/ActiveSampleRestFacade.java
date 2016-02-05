@@ -11,14 +11,12 @@ public class ActiveSampleRestFacade extends SampleRestFacade<ActiveSample> imple
 	private static final String RESOURCE = "active-samples";
 	/* Relationships */
 	private static final String INTERVENTIONS = "interventions";
-	private static final String TRIGGERS = "triggers";
-	private static final String SENSORS = "sensors";
 	/* Intervention types */
 	private static final String INTERVENTION_MEDIA = "media-interventions";
 	private static final String INTERVENTION_QUESTION = "question-interventions";
 	private static final String INTERVENTION_TASK = "task-interventions";
 
-	private static final String[] linkNames = { INTERVENTIONS, TRIGGERS, SENSORS };
+	private static final String[] linkNames = { INTERVENTIONS, TRIGGERS, SENSORS, RESULTS };
 
 	public ActiveSampleRestFacade() {
 		super(RESOURCE, linkNames);
@@ -33,9 +31,11 @@ public class ActiveSampleRestFacade extends SampleRestFacade<ActiveSample> imple
 			return putTriggerRelationship(objectLocation, relationshipLocation);
 		} else if (relationship.contains(SENSORS)) {
 			return putSensorRelationship(objectLocation, relationshipLocation);
+		} else if (relationship.contains(RESULTS)) {
+			return putResultsRelationship(objectLocation, relationshipLocation);
 		} else {
 			return null;
-		}		
+		}
 	}
 
 	private URI putInterventionsRelationship(URI objectLocation, URI relationshipLocation) {

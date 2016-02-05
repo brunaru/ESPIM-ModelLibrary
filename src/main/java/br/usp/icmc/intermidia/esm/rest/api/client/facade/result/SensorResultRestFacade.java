@@ -2,16 +2,15 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
 import java.net.URI;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.GenericRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
-public class SensorResultRestFacade extends GenericRestFacade<SensorResult> implements RestFacade<SensorResult> {
+public class SensorResultRestFacade extends ResultRestFacade<SensorResult> implements RestFacade<SensorResult> {
 
 	private static final String RESOURCE = "sensor-results";
 	/* Relationships */
 	private static final String SENSOR = "sensor";
 
-	private static final String[] linkNames = { SENSOR };
+	private static final String[] linkNames = { SENSOR, PARTICIPANT };
 
 	public SensorResultRestFacade() {
 		super(RESOURCE, linkNames);
@@ -19,9 +18,16 @@ public class SensorResultRestFacade extends GenericRestFacade<SensorResult> impl
 
 	@Override
 	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
-		SensorResult sensorResult = get(objectLocation);
-		sensorResult.setSensor(relationshipLocation);
-		return put(sensorResult, objectLocation);
+		String relationship = relationshipLocation.toString();
+		if (relationship.contains(PARTICIPANT)) {
+			return putParticipantRelationship(objectLocation, relationshipLocation);
+		} else if (relationship.contains(SENSOR)) {
+			SensorResult sensorResult = get(objectLocation);
+			sensorResult.setSensor(relationshipLocation);
+			return put(sensorResult, objectLocation);
+		} else {
+			return null;
+		}
 	}
 
 }

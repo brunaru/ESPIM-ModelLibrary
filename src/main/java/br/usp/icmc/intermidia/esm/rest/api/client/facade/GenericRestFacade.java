@@ -182,7 +182,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	}
 
 	protected void error(ClientResponse response) {
-		System.out.println("ExperimentRestFacade Failed : HTTP error code : " + response.getStatus());
+		System.out.println("Failed : HTTP error code : " + response.getStatus());
 	}
 
 }

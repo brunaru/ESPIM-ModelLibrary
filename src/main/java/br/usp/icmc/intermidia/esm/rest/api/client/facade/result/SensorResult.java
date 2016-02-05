@@ -8,12 +8,16 @@ public class SensorResult extends Result {
 	private URI sensor;
 	
 	private Blob resultData;
+	
+	public SensorResult() {
+		this.setType("sensor");
+	}
 
-	public URI getSensor() {
+	protected URI getSensor() {
 		return sensor;
 	}
 
-	public void setSensor(URI sensor) {
+	protected void setSensor(URI sensor) {
 		this.sensor = sensor;
 	}
 

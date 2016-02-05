@@ -6,7 +6,11 @@ public class QuestionResult extends Result {
 
 	private URI question;
 	
-	private String answer;	
+	private String answer;
+	
+	public QuestionResult() {
+		this.setType("question");
+	}
 
 	public String getAnswer() {
 		return answer;
@@ -16,11 +20,11 @@ public class QuestionResult extends Result {
 		this.answer = answer;
 	}
 
-	public URI getQuestion() {
+	protected URI getQuestion() {
 		return question;
 	}
 
-	public void setQuestion(URI question) {
+	protected void setQuestion(URI question) {
 		this.question = question;
 	}
 
