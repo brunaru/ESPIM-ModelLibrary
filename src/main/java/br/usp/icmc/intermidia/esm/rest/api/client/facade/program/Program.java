@@ -1,21 +1,21 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.experiment;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.program;
 
 import java.net.URI;
 import java.util.List;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
-public class Experiment extends AbstractJsonModel {
+public class Program extends AbstractJsonModel {
 
 	private String title;
 
 	private String description;
 
-	private List<URI> researchers;
+	private List<URI> observers;
 
 	private List<URI> participants;
 
-	private List<URI> samples;
+	private List<URI> events;
 
 	public String getTitle() {
 		return title;
@@ -33,12 +33,12 @@ public class Experiment extends AbstractJsonModel {
 		this.description = description;
 	}
 
-	protected List<URI> getResearchers() {
-		return researchers;
+	protected List<URI> getObservers() {
+		return observers;
 	}
 
-	protected void setResearchers(List<URI> researchers) {
-		this.researchers = researchers;
+	protected void setObservers(List<URI> observers) {
+		this.observers = observers;
 	}
 
 	protected List<URI> getParticipants() {
@@ -49,11 +49,11 @@ public class Experiment extends AbstractJsonModel {
 		this.participants = participants;
 	}
 
-	protected List<URI> getSamples() {
-		return samples;
+	protected List<URI> getEvents() {
+		return events;
 	}
 
-	protected void setSamples(List<URI> samples) {
-		this.samples = samples;
+	protected void setEvents(List<URI> events) {
+		this.events = events;
 	}
 }

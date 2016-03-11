@@ -1,4 +1,4 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.sample;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.event;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -6,9 +6,9 @@ import java.util.List;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
-public class ActiveSampleRestFacade extends SampleRestFacade<ActiveSample> implements RestFacade<ActiveSample> {
+public class ActiveEventRestFacade extends EventRestFacade<ActiveEvent> implements RestFacade<ActiveEvent> {
 
-	private static final String RESOURCE = "active-samples";
+	private static final String RESOURCE = "active-events";
 	/* Relationships */
 	private static final String INTERVENTIONS = "interventions";
 	/* Intervention types */
@@ -18,7 +18,7 @@ public class ActiveSampleRestFacade extends SampleRestFacade<ActiveSample> imple
 
 	private static final String[] linkNames = { INTERVENTIONS, TRIGGERS, SENSORS, RESULTS };
 
-	public ActiveSampleRestFacade() {
+	public ActiveEventRestFacade() {
 		super(RESOURCE, linkNames);
 	}
 
@@ -39,14 +39,14 @@ public class ActiveSampleRestFacade extends SampleRestFacade<ActiveSample> imple
 	}
 
 	private URI putInterventionsRelationship(URI objectLocation, URI relationshipLocation) {
-		ActiveSample sample = get(objectLocation);
+		ActiveEvent event = get(objectLocation);
 		List<URI> interventions = new ArrayList<URI>();
-		interventions.addAll(getRelationshipLinks(sample.getLinks().get(INTERVENTIONS), INTERVENTION_QUESTION));
-		interventions.addAll(getRelationshipLinks(sample.getLinks().get(INTERVENTIONS), INTERVENTION_TASK));
-		interventions.addAll(getRelationshipLinks(sample.getLinks().get(INTERVENTIONS), INTERVENTION_MEDIA));	
+		interventions.addAll(getRelationshipLinks(event.getLinks().get(INTERVENTIONS), INTERVENTION_QUESTION));
+		interventions.addAll(getRelationshipLinks(event.getLinks().get(INTERVENTIONS), INTERVENTION_TASK));
+		interventions.addAll(getRelationshipLinks(event.getLinks().get(INTERVENTIONS), INTERVENTION_MEDIA));	
 		interventions.add(relationshipLocation);
-		sample.setInterventions(interventions);
-		return put(sample, objectLocation);
+		event.setInterventions(interventions);
+		return put(event, objectLocation);
 	}
 
 }

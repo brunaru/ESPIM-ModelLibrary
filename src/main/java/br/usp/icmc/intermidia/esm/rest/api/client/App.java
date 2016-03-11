@@ -4,18 +4,18 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.experiment.Experiment;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.experiment.ExperimentRestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.ActiveEvent;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.ActiveEventRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.QuestionIntervention;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.QuestionInterventionRestFacade;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.sample.ActiveSample;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.sample.ActiveSampleRestFacade;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.SampleTrigger;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.TriggerRestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.program.Program;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.program.ProgramRestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.EventTrigger;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.EventRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.ParticipantRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Person;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Researcher;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.ResearcherRestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Observer;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.ObserverRestFacade;
 
 public class App {
 	
@@ -24,12 +24,12 @@ public class App {
 	}
 	
 	static void testExperiment() {		
-		Researcher researcher = new Researcher();
+		Observer researcher = new Observer();
 		researcher.setName("Bruna Rodrigues");
 		researcher.setEmail("brunaru7@gmail.com");
 		researcher.setPassword("123456");
 		// POST researcher
-		ResearcherRestFacade researcherFacade = new ResearcherRestFacade();
+		ObserverRestFacade researcherFacade = new ObserverRestFacade();
 		URI researcherLocation = researcherFacade.post(researcher);
 		
 		Person participant1 = new Person();
@@ -67,27 +67,27 @@ public class App {
 		URI question1Location = questionFacade.post(question1);
 		URI question2Location = questionFacade.post(question2);
 		
-		SampleTrigger trigger = new SampleTrigger();
-		trigger.setTriggerType(SampleTrigger.TYPE_MANUAL);
+		EventTrigger trigger = new EventTrigger();
+		trigger.setTriggerType(EventTrigger.TYPE_MANUAL);
 		trigger.setTriggerCondition(null);		
 		// POST trigger
-		TriggerRestFacade triggerFacade = new TriggerRestFacade();
+		EventRestFacade triggerFacade = new EventRestFacade();
 		URI triggerLocation = triggerFacade.post(trigger);
 
-		ActiveSample sample = new ActiveSample();
+		ActiveEvent sample = new ActiveEvent();
 		sample.setTitle("Amostra Teste");
 		sample.setDescription("Esta é uma amostra ativa de teste.");
 		// POST active-samples
-		ActiveSampleRestFacade activeSampleFacade = new ActiveSampleRestFacade();
+		ActiveEventRestFacade activeSampleFacade = new ActiveEventRestFacade();
 		URI sampleLocation = activeSampleFacade.post(sample);
 		activeSampleFacade.putRelationship(sampleLocation, question1Location);
 		activeSampleFacade.putRelationship(sampleLocation, question2Location);
 		activeSampleFacade.putRelationship(sampleLocation, triggerLocation);
 		
-		Experiment experiment = new Experiment();
+		Program experiment = new Program();
 		experiment.setDescription("Esse é um experimento de teste para saber se está ok.");
 		experiment.setTitle("Meu experimento teste");
-		ExperimentRestFacade experimentFacade = new ExperimentRestFacade();
+		ProgramRestFacade experimentFacade = new ProgramRestFacade();
 		URI experimentLocation = experimentFacade.post(experiment);
 				
 		experimentFacade.putRelationship(experimentLocation, participant1Location);

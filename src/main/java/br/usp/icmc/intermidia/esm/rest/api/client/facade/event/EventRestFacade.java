@@ -1,4 +1,4 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.sample;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.event;
 
 import java.net.URI;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.GenericRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
-public abstract class SampleRestFacade<T extends Sample> extends GenericRestFacade<T> implements RestFacade<T> {
+public abstract class EventRestFacade<T extends Event> extends GenericRestFacade<T> implements RestFacade<T> {
 
 	/* Relationships */
 	protected static final String TRIGGERS = "triggers";
@@ -15,11 +15,11 @@ public abstract class SampleRestFacade<T extends Sample> extends GenericRestFaca
 
 	private static final String[] linkNames = { TRIGGERS, SENSORS, RESULTS };
 
-	public SampleRestFacade(String resource) {
+	public EventRestFacade(String resource) {
 		super(resource, linkNames);
 	}
 
-	public SampleRestFacade(String resource, String[] links) {
+	public EventRestFacade(String resource, String[] links) {
 		super(resource, links);
 	}
 
@@ -38,27 +38,27 @@ public abstract class SampleRestFacade<T extends Sample> extends GenericRestFaca
 	}
 
 	protected URI putSensorRelationship(URI objectLocation, URI relationshipLocation) {
-		T sample = get(objectLocation);
-		List<URI> sensors = getRelationshipLinks(sample.getLinks().get(SENSORS), SENSORS);
+		T event = get(objectLocation);
+		List<URI> sensors = getRelationshipLinks(event.getLinks().get(SENSORS), SENSORS);
 		sensors.add(relationshipLocation);
-		sample.setSensors(sensors);
-		return put(sample, objectLocation);
+		event.setSensors(sensors);
+		return put(event, objectLocation);
 	}
 
 	protected URI putTriggerRelationship(URI objectLocation, URI relationshipLocation) {
-		T sample = get(objectLocation);
-		List<URI> triggers = getRelationshipLinks(sample.getLinks().get(TRIGGERS), TRIGGERS);
+		T event = get(objectLocation);
+		List<URI> triggers = getRelationshipLinks(event.getLinks().get(TRIGGERS), TRIGGERS);
 		triggers.add(relationshipLocation);
-		sample.setTriggers(triggers);
-		return put(sample, objectLocation);
+		event.setTriggers(triggers);
+		return put(event, objectLocation);
 	}
 
 	protected URI putResultsRelationship(URI objectLocation, URI relationshipLocation) {
-		T sample = get(objectLocation);
-		List<URI> results = getRelationshipLinks(sample.getLinks().get(RESULTS), RESULTS);
+		T event = get(objectLocation);
+		List<URI> results = getRelationshipLinks(event.getLinks().get(RESULTS), RESULTS);
 		results.add(relationshipLocation);
-		sample.setResults(results);
-		return put(sample, objectLocation);
+		event.setResults(results);
+		return put(event, objectLocation);
 	}
 
 }

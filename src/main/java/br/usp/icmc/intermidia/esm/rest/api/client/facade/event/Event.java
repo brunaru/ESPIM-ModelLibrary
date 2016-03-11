@@ -1,11 +1,11 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.sample;
+package br.usp.icmc.intermidia.esm.rest.api.client.facade.event;
 
 import java.net.URI;
 import java.util.List;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
-public abstract class Sample extends AbstractJsonModel {
+public abstract class Event extends AbstractJsonModel {
 	
 	private String type;
 	

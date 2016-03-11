@@ -7,13 +7,13 @@ public class Sensor extends AbstractJsonModel {
 	/** Used for capturing sensors during an interval. */
 	public static final int SENSOR_TYPE_INTERVAL = 0;
 	
-	/** Used for capturing sensors during a sample. */
+	/** Used for capturing sensors during a event. */
 	public static final int SENSOR_TYPE_TASK = 1;
 	
 	/** Activity sensor. */
 	public static final int SENSOR_ACTIVITY = 1;
 	
-	/** Interval or sample. */
+	/** Interval or whole event. */
 	private int sensorType;
 	
 	/** ACITIVTY, LIGHT, AUDIO, ETC. */

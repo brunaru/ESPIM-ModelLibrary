@@ -2,7 +2,7 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade.user;
 import java.net.URI;
 import java.util.List;
 
-public class Researcher extends Person {
+public class Observer extends Person {
 	
 	private String password;
 	

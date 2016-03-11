@@ -5,13 +5,13 @@ import java.net.URI;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.GenericRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
-public class TriggerRestFacade extends GenericRestFacade<SampleTrigger> implements RestFacade<SampleTrigger> {
+public class EventRestFacade extends GenericRestFacade<EventTrigger> implements RestFacade<EventTrigger> {
 
 	private static final String RESOURCE = "triggers";
 
 	private static final String[] linkNames = {};
 
-	public TriggerRestFacade() {
+	public EventRestFacade() {
 		super(RESOURCE, linkNames);
 	}
 

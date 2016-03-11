@@ -6,15 +6,15 @@ import java.util.List;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.GenericRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
-public class ResearcherRestFacade extends GenericRestFacade<Researcher> implements RestFacade<Researcher> {
+public class ObserverRestFacade extends GenericRestFacade<Observer> implements RestFacade<Observer> {
 
-	private static final String RESOURCE = "researchers";
+	private static final String RESOURCE = "observers";
 	/* Relationships */
 	private static final String CONTACTS = "contacts";
 
 	private static final String[] linkNames = { CONTACTS };
 
-	public ResearcherRestFacade() {
+	public ObserverRestFacade() {
 		super(RESOURCE, linkNames);
 	}
 
@@ -22,11 +22,11 @@ public class ResearcherRestFacade extends GenericRestFacade<Researcher> implemen
 	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
 		String relationship = relationshipLocation.toString();
 		if (relationship.contains(CONTACTS)) {
-			Researcher researcher = get(objectLocation);
-			List<URI> contacts = getRelationshipLinks(researcher.getLinks().get(CONTACTS), CONTACTS);
+			Observer observer = get(objectLocation);
+			List<URI> contacts = getRelationshipLinks(observer.getLinks().get(CONTACTS), CONTACTS);
 			contacts.add(relationshipLocation);
-			researcher.setContacts(contacts);
-			return put(researcher, objectLocation);
+			observer.setContacts(contacts);
+			return put(observer, objectLocation);
 		} else {
 			return null;
 		}
