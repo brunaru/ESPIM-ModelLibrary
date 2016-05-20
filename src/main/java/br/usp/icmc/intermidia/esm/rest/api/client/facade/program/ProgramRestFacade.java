@@ -21,14 +21,14 @@ public class ProgramRestFacade extends GenericRestFacade<Program> implements Res
 		super(RESOURCE, linkNames);
 	}
 	
-	public Program findByParticipantsEmail(String email) {
+	public List<Program> findByParticipantsEmail(String email) {
 		String s = Constants.REST_API_ADDRESS + RESOURCE + "/" + "search/findByParticipantsEmail?email=" + email;
-		return findByEmail(email, s, "findByParticipantsEmail");
+		return findMultipleByEmail(email, s, "findByParticipantsEmail");
 	}
 
-	public Program findByObserversEmail(String email) {
+	public List<Program> findByObserversEmail(String email) {
 		String s = Constants.REST_API_ADDRESS + RESOURCE + "/" + "search/findByObserversEmail?email=" + email;
-		return findByEmail(email, s, "findByObserversEmail");
+		return findMultipleByEmail(email, s, "findByObserversEmail");
 	}
 
 	@Override

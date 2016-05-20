@@ -24,7 +24,7 @@ public class App {
 	}
 	
 	static void testExperiment() {		
-		Observer researcher = new Observer();
+		/*Observer researcher = new Observer();
 		researcher.setName("Bruna Rodrigues");
 		researcher.setEmail("brunaru7@gmail.com");
 		researcher.setPassword("123456");
@@ -97,13 +97,14 @@ public class App {
 		
 		// TEST
 		//experimentFacade.getAll();
-		//experimentFacade.deleteRelationship(experimentLocation, participant2Location);
+		//experimentFacade.deleteRelationship(experimentLocation, participant2Location);*/
 		
-		//ProgramRestFacade experimentFacade = new ProgramRestFacade();
-		//ObserverRestFacade researcherFacade = new ObserverRestFacade();
-		//ParticipantRestFacade participantFacade = new ParticipantRestFacade();
-		Program pro1 = experimentFacade.findByObserversEmail("brunaru7@gmail.com");
-		Program pro2 = experimentFacade.findByParticipantsEmail("clau.silva271@gmail.com");
+		ProgramRestFacade experimentFacade = new ProgramRestFacade();
+		ObserverRestFacade researcherFacade = new ObserverRestFacade();
+		ParticipantRestFacade participantFacade = new ParticipantRestFacade();
+		
+		List<Program> pro1 = experimentFacade.findByObserversEmail("brunaru7@gmail.com");
+		List<Program> pro2 = experimentFacade.findByParticipantsEmail("clau.silva271@gmail.com");
 		Observer o = researcherFacade.findByEmail("brunaru7@gmail.com");
 		Person p = participantFacade.findByEmail("clau.silva271@gmail.com");
 

@@ -92,20 +92,33 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	}
 	
 	public T findByEmail(String email, String searchString, String findStatment) {
+		List<T> objs = findMultipleByEmail(email, searchString, findStatment);
+		return objs.get(0);
+	}
+
+	public List<T> findMultipleByEmail(String email, String searchString, String findStatment) {
 		try {
 			URI searchURI = new URI(searchString);
 			Client client = Client.create();
 			WebResource resource = client.resource(searchURI);
 			ClientResponse response = resource.accept("application/json").get(ClientResponse.class);
 			String json = response.getEntity(String.class);
-			json = json.substring(json.indexOf("\"_links"));
-			json = json.substring(json.indexOf("https"), json.indexOf("}"));
-			json = json.substring(0, json.indexOf("\""));
-			if (json.contains(findStatment)) {
-				return null;
+
+			List<T> objs = new ArrayList<T>();
+			while (json.contains("self")) {
+				json = json.substring(json.indexOf("\"self\""));
+				String url = json.substring(json.indexOf("https"), (json.indexOf("}")));
+				url = url.substring(0, url.lastIndexOf("\""));
+				if (!url.contains(findStatment)) {
+					URI location = new URI(url);
+					T obj = get(location);
+					if (obj != null) {
+						objs.add(obj);
+					}
+				}
+				json = json.substring(5);
 			}
-			URI location = new URI(json);
-			return get(location);
+			return objs;
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 			return null;
