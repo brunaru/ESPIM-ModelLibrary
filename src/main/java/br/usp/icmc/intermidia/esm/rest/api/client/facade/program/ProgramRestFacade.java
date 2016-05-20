@@ -3,6 +3,7 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade.program;
 import java.net.URI;
 import java.util.List;
 
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.Constants;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.GenericRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
@@ -18,6 +19,16 @@ public class ProgramRestFacade extends GenericRestFacade<Program> implements Res
 
 	public ProgramRestFacade() {
 		super(RESOURCE, linkNames);
+	}
+	
+	public Program findByParticipantsEmail(String email) {
+		String s = Constants.REST_API_ADDRESS + RESOURCE + "/" + "search/findByParticipantsEmail?email=" + email;
+		return findByEmail(email, s, "findByParticipantsEmail");
+	}
+
+	public Program findByObserversEmail(String email) {
+		String s = Constants.REST_API_ADDRESS + RESOURCE + "/" + "search/findByObserversEmail?email=" + email;
+		return findByEmail(email, s, "findByObserversEmail");
 	}
 
 	@Override

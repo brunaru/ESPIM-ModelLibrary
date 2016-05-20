@@ -90,6 +90,27 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		}
 		return objects;
 	}
+	
+	public T findByEmail(String email, String searchString, String findStatment) {
+		try {
+			URI searchURI = new URI(searchString);
+			Client client = Client.create();
+			WebResource resource = client.resource(searchURI);
+			ClientResponse response = resource.accept("application/json").get(ClientResponse.class);
+			String json = response.getEntity(String.class);
+			json = json.substring(json.indexOf("\"_links"));
+			json = json.substring(json.indexOf("https"), json.indexOf("}"));
+			json = json.substring(0, json.indexOf("\""));
+			if (json.contains(findStatment)) {
+				return null;
+			}
+			URI location = new URI(json);
+			return get(location);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public URI post(T object) {
 		String json = gson.toJson(object);

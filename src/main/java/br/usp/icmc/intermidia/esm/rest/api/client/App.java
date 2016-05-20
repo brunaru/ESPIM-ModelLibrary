@@ -11,7 +11,7 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.QuestionIn
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.program.Program;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.program.ProgramRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.EventTrigger;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.EventRestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.EventTriggerRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.ParticipantRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Person;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Observer;
@@ -71,7 +71,7 @@ public class App {
 		trigger.setTriggerType(EventTrigger.TYPE_MANUAL);
 		trigger.setTriggerCondition(null);		
 		// POST trigger
-		EventRestFacade triggerFacade = new EventRestFacade();
+		EventTriggerRestFacade triggerFacade = new EventTriggerRestFacade();
 		URI triggerLocation = triggerFacade.post(trigger);
 
 		ActiveEvent sample = new ActiveEvent();
@@ -98,8 +98,16 @@ public class App {
 		// TEST
 		//experimentFacade.getAll();
 		//experimentFacade.deleteRelationship(experimentLocation, participant2Location);
+		
+		//ProgramRestFacade experimentFacade = new ProgramRestFacade();
+		//ObserverRestFacade researcherFacade = new ObserverRestFacade();
+		//ParticipantRestFacade participantFacade = new ParticipantRestFacade();
+		Program pro1 = experimentFacade.findByObserversEmail("brunaru7@gmail.com");
+		Program pro2 = experimentFacade.findByParticipantsEmail("clau.silva271@gmail.com");
+		Observer o = researcherFacade.findByEmail("brunaru7@gmail.com");
+		Person p = participantFacade.findByEmail("clau.silva271@gmail.com");
 
-		System.out.println(experimentLocation);
+		//System.out.println(experimentLocation);
 	    System.out.println("SUCESSO");
 	}
 }
