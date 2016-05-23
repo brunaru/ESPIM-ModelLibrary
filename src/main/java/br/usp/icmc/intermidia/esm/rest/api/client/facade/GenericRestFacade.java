@@ -93,6 +93,9 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	
 	public T findByEmail(String email, String searchString, String findStatment) {
 		List<T> objs = findMultipleByEmail(email, searchString, findStatment);
+		if (objs == null || objs.isEmpty()) {
+			return null;
+		}
 		return objs.get(0);
 	}
 
