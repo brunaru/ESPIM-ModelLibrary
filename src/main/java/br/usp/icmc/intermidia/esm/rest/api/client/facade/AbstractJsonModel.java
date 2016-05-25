@@ -6,13 +6,23 @@ import java.util.Map;
 public class AbstractJsonModel {
 	
 	private Map<String, URI> links;
+	
+	private URI selfLocation;
 
 	public Map<String, URI> getLinks() {
 		return links;
 	}
 
-	public void setLinks(Map<String, URI> links) {
+	protected void setLinks(Map<String, URI> links) {
 		this.links = links;
+	}
+
+	public URI getSelfLocation() {
+		return selfLocation;
+	}
+
+	public void setSelfLocation(URI selfLocation) {
+		this.selfLocation = selfLocation;
 	}
 
 }

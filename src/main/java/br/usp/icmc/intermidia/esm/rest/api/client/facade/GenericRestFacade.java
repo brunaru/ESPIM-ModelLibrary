@@ -22,15 +22,19 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	private final Client client;
 	private final Gson gson;
 	private final Class<T> genericType;
-	private final String[] linkNames;
+	private final List<String> linkNames;
 	private final String resourceName;
 
 	@SuppressWarnings("unchecked")
-	public GenericRestFacade(String resourceName, String[] linkNames) {
+	public GenericRestFacade(String resourceName, String[] links) {
 		this.resourceName = resourceName;
 		client = Client.create();
 		gson = new Gson();
-		this.linkNames = linkNames;
+		this.linkNames = new ArrayList<String>();
+		for (String link : links) {
+			this.linkNames.add(link);
+		}
+		this.linkNames.add("self");
 		this.genericType = (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), GenericRestFacade.class);
 	}
 
@@ -67,6 +71,9 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 					.get("href");
 			URI location = gson.fromJson(jElement, URI.class);
 			links.put(linkName, location);
+			if (linkName.equalsIgnoreCase("self")) {
+				object.setSelfLocation(location);
+			}
 		}
 		object.setLinks(links);
 	}

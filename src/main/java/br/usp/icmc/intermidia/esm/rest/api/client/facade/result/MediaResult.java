@@ -13,7 +13,7 @@ public class MediaResult extends Result {
 		this.setType("media");
 	}
 
-	protected URI getMedia() {
+	public URI getMedia() {
 		return media;
 	}
 

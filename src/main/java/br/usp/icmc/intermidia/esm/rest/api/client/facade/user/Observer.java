@@ -26,7 +26,7 @@ public class Observer extends Person {
 		this.password = password;
 	}
 
-	protected List<URI> getContacts() {
+	public List<URI> getContacts() {
 		return contacts;
 	}
 

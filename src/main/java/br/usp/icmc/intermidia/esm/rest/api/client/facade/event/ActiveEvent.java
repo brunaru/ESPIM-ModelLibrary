@@ -10,7 +10,7 @@ public class ActiveEvent extends Event {
 		this.setType("active");
 	}
 
-	protected List<URI> getInterventions() {
+	public List<URI> getInterventions() {
 		return interventions;
 	}
 

@@ -35,7 +35,7 @@ public abstract class Result extends AbstractJsonModel {
 		return participant;
 	}
 
-	public void setParticipant(URI participant) {
+	protected void setParticipant(URI participant) {
 		this.participant = participant;
 	}
 

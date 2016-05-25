@@ -35,7 +35,7 @@ public abstract class Event extends AbstractJsonModel {
 		this.description = description;
 	}
 
-	protected List<URI> getTriggers() {
+	public List<URI> getTriggers() {
 		return triggers;
 	}
 
@@ -43,7 +43,7 @@ public abstract class Event extends AbstractJsonModel {
 		this.triggers = triggers;
 	}
 
-	protected List<URI> getSensors() {
+	public List<URI> getSensors() {
 		return sensors;
 	}
 
@@ -59,7 +59,7 @@ public abstract class Event extends AbstractJsonModel {
 		this.type = type;
 	}
 
-	protected List <URI> getResults() {
+	public List <URI> getResults() {
 		return results;
 	}
 

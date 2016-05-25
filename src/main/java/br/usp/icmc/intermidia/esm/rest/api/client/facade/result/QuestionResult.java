@@ -20,7 +20,7 @@ public class QuestionResult extends Result {
 		this.answer = answer;
 	}
 
-	protected URI getQuestion() {
+	public URI getQuestion() {
 		return question;
 	}
 

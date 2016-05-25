@@ -2,6 +2,7 @@ package br.usp.icmc.intermidia.esm.rest.api.client;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.ActiveEvent;
@@ -125,6 +126,7 @@ public class App {
 		Program experiment = new Program();
 		experiment.setDescription("Esse é um experimento para testes.");
 		experiment.setTitle("Experimento Teste");
+		experiment.setUpdateDate(new Date());
 		ProgramRestFacade experimentFacade = new ProgramRestFacade();
 		URI experimentLocation = experimentFacade.post(experiment);
 
