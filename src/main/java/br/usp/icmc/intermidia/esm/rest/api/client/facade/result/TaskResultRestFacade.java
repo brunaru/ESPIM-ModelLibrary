@@ -17,16 +17,16 @@ public class TaskResultRestFacade extends ResultRestFacade<TaskResult> implement
 	}
 
 	@Override
-	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
+	public boolean putRelationship(URI objectLocation, URI relationshipLocation) {
 		String relationship = relationshipLocation.toString();
 		if (relationship.contains(PARTICIPANT)) {
 			return putParticipantRelationship(objectLocation, relationshipLocation);
 		} else if (relationship.contains(TASK)) {
 			TaskResult taskResult = get(objectLocation);
 			taskResult.setTask(relationshipLocation);
-			return put(taskResult, objectLocation);
+			return patch(taskResult, objectLocation);
 		} else {
-			return null;
+			return false;
 		}		
 	}
 

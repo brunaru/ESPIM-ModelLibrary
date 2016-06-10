@@ -24,7 +24,7 @@ public abstract class EventRestFacade<T extends Event> extends GenericRestFacade
 	}
 
 	@Override
-	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
+	public boolean putRelationship(URI objectLocation, URI relationshipLocation) {
 		String relationship = relationshipLocation.toString();
 		if (relationship.contains(TRIGGERS)) {
 			return putTriggerRelationship(objectLocation, relationshipLocation);
@@ -33,32 +33,32 @@ public abstract class EventRestFacade<T extends Event> extends GenericRestFacade
 		} else if (relationship.contains(RESULTS)) {
 			return putResultsRelationship(objectLocation, relationshipLocation);
 		} else {
-			return null;
+			return false;
 		}
 	}
 
-	protected URI putSensorRelationship(URI objectLocation, URI relationshipLocation) {
+	protected boolean putSensorRelationship(URI objectLocation, URI relationshipLocation) {
 		T event = get(objectLocation);
 		List<URI> sensors = getRelationshipLinks(event.getLinks().get(SENSORS), SENSORS);
-		sensors.add(relationshipLocation);
+		sensors.add(relationshipLocation);	
 		event.setSensors(sensors);
-		return put(event, objectLocation);
+		return patch(event, objectLocation);
 	}
 
-	protected URI putTriggerRelationship(URI objectLocation, URI relationshipLocation) {
+	protected boolean putTriggerRelationship(URI objectLocation, URI relationshipLocation) {
 		T event = get(objectLocation);
 		List<URI> triggers = getRelationshipLinks(event.getLinks().get(TRIGGERS), TRIGGERS);
 		triggers.add(relationshipLocation);
 		event.setTriggers(triggers);
-		return put(event, objectLocation);
+		return patch(event, objectLocation);
 	}
 
-	protected URI putResultsRelationship(URI objectLocation, URI relationshipLocation) {
+	protected boolean putResultsRelationship(URI objectLocation, URI relationshipLocation) {
 		T event = get(objectLocation);
 		List<URI> results = getRelationshipLinks(event.getLinks().get(RESULTS), RESULTS);
 		results.add(relationshipLocation);
 		event.setResults(results);
-		return put(event, objectLocation);
+		return patch(event, objectLocation);
 	}
 
 }

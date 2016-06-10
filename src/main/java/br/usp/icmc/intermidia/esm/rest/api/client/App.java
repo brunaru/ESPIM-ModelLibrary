@@ -2,7 +2,6 @@ package br.usp.icmc.intermidia.esm.rest.api.client;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.ActiveEvent;
@@ -13,10 +12,10 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.program.Program;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.program.ProgramRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.EventTrigger;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.EventTriggerRestFacade;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.ParticipantRestFacade;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Person;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Observer;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.ObserverRestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.ParticipantRestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Person;
 
 public class App {
 
@@ -38,6 +37,8 @@ public class App {
 		List<Program> pros2 = experimentFacade.findByParticipantsEmail("clau.silva271@gmail.com");
 		Observer o = researcherFacade.findByEmail("brunaru@icmc.usp.br");
 		Person p = participantFacade.findByEmail("brunaru7@gmail.com");
+		Program ptest = experimentFacade.get((long) 0);
+		//Person p2 = participantFacade.get((long) 22);
 		System.out.println("SUCESSO");
 	}
 
@@ -126,15 +127,21 @@ public class App {
 		Program experiment = new Program();
 		experiment.setDescription("Esse é um experimento para testes.");
 		experiment.setTitle("Experimento Teste");
-		experiment.setUpdateDate(new Date());
+		//experiment.setUpdateDate(new Date());
 		ProgramRestFacade experimentFacade = new ProgramRestFacade();
 		URI experimentLocation = experimentFacade.post(experiment);
 
 		experimentFacade.putRelationship(experimentLocation, participant1Location);
 		experimentFacade.putRelationship(experimentLocation, participant2Location);
 		experimentFacade.putRelationship(experimentLocation, participant3Location);
+		//participantFacade.postWithRelationShip(experimentLocation, "participants", participant1);
+		//participantFacade.postWithRelationShip(experimentLocation, "participants", participant2);
+		//participantFacade.postWithRelationShip(experimentLocation, "participants", participant3);
+		
 		experimentFacade.putRelationship(experimentLocation, researcherLocation);
+		//researcherFacade.postWithRelationShip(experimentLocation, "observers", researcher);
 		experimentFacade.putRelationship(experimentLocation, sampleLocation);
+		//activeSampleFacade.postWithRelationShip(experimentLocation, "active-events", sample);
 
 		// exemplo delete relacionamento
 		// experimentFacade.deleteRelationship(experimentLocation,

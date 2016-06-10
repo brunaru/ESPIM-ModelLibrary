@@ -16,8 +16,8 @@ public class SensorRestFacade extends GenericRestFacade<Sensor> implements RestF
 	}
 
 	@Override
-	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
-		return null;
+	public boolean putRelationship(URI objectLocation, URI relationshipLocation) {
+		return false;
 	}
 
 }

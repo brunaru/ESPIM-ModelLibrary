@@ -17,16 +17,16 @@ public class QuestionResultRestFacade extends ResultRestFacade<QuestionResult> i
 	}
 
 	@Override
-	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
+	public boolean putRelationship(URI objectLocation, URI relationshipLocation) {
 		String relationship = relationshipLocation.toString();
 		if (relationship.contains(PARTICIPANT)) {
 			return putParticipantRelationship(objectLocation, relationshipLocation);
 		} else if (relationship.contains(QUESTION)) {
 			QuestionResult questionResult = get(objectLocation);
 			questionResult.setQuestion(relationshipLocation);
-			return put(questionResult, objectLocation);
+			return patch(questionResult, objectLocation);
 		} else {
-			return null;
+			return false;
 		}		
 	}
 

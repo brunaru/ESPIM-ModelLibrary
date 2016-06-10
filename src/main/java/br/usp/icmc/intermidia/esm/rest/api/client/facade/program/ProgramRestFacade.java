@@ -32,7 +32,7 @@ public class ProgramRestFacade extends GenericRestFacade<Program> implements Res
 	}
 
 	@Override
-	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
+	public boolean putRelationship(URI objectLocation, URI relationshipLocation) {
 		String relationship = relationshipLocation.toString();
 		if (relationship.contains(PARTICIPANTS)) {
 			return putParticipantRelationship(objectLocation, relationshipLocation);
@@ -41,32 +41,32 @@ public class ProgramRestFacade extends GenericRestFacade<Program> implements Res
 		} else if (relationship.contains(EVENTS)) {
 			return putEventRelationship(objectLocation, relationshipLocation);
 		} else {
-			return null;
+			return false;
 		}
 	}
 
-	private URI putParticipantRelationship(URI programLocation, URI relationshipLocation) {
+	private boolean putParticipantRelationship(URI programLocation, URI relationshipLocation) {
 		Program program = get(programLocation);
 		List<URI> participants = getRelationshipLinks(program.getLinks().get(PARTICIPANTS), PARTICIPANTS);
 		participants.add(relationshipLocation);
 		program.setParticipants(participants);
-		return put(program, programLocation);
+		return patch(program, programLocation);
 	}
 
-	private URI putEventRelationship(URI programLocation, URI relationshipLocation) {
+	private boolean putEventRelationship(URI programLocation, URI relationshipLocation) {
 		Program program = get(programLocation);
 		List<URI> events = getRelationshipLinks(program.getLinks().get(EVENTS), EVENTS);
 		events.add(relationshipLocation);
 		program.setEvents(events);
-		return put(program, programLocation);
+		return patch(program, programLocation);
 	}
 
-	private URI putObserverRelationship(URI programLocation, URI relationshipLocation) {
+	private boolean putObserverRelationship(URI programLocation, URI relationshipLocation) {
 		Program program = get(programLocation);
 		List<URI> observers = getRelationshipLinks(program.getLinks().get(OBSERVERS), OBSERVERS);
 		observers.add(relationshipLocation);
 		program.setObservers(observers);
-		return put(program, programLocation);
+		return patch(program, programLocation);
 	}
 
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
-public class Program extends AbstractJsonModel {
+public class Program2 extends AbstractJsonModel {
 
 	private String title;
 

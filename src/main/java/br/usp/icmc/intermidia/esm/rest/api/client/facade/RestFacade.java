@@ -15,11 +15,11 @@ public interface RestFacade<T> {
 
 	public URI post(T object);
 
-	public URI put(T object, Long id);
+	public boolean put(T object, Long id);
 
-	public URI put(T object, URI location);
+	public boolean patch(T object, URI location);
 	
-	public URI putRelationship(URI objectLocation, URI relationshipLocation);
+	public boolean putRelationship(URI objectLocation, URI relationshipLocation);
 	
 	public List<URI> getRelationshipLinks(URI objectLocation, String relationshipName);
 	

@@ -17,16 +17,16 @@ public class SensorResultRestFacade extends ResultRestFacade<SensorResult> imple
 	}
 
 	@Override
-	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
+	public boolean putRelationship(URI objectLocation, URI relationshipLocation) {
 		String relationship = relationshipLocation.toString();
 		if (relationship.contains(PARTICIPANT)) {
 			return putParticipantRelationship(objectLocation, relationshipLocation);
 		} else if (relationship.contains(SENSOR)) {
 			SensorResult sensorResult = get(objectLocation);
 			sensorResult.setSensor(relationshipLocation);
-			return put(sensorResult, objectLocation);
+			return patch(sensorResult, objectLocation);
 		} else {
-			return null;
+			return false;
 		}
 	}
 

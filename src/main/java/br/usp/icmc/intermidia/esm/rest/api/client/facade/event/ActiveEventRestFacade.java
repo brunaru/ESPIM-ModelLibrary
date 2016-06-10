@@ -23,7 +23,7 @@ public class ActiveEventRestFacade extends EventRestFacade<ActiveEvent> implemen
 	}
 
 	@Override
-	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
+	public boolean putRelationship(URI objectLocation, URI relationshipLocation) {
 		String relationship = relationshipLocation.toString();
 		if (relationship.contains(INTERVENTIONS)) {
 			return putInterventionsRelationship(objectLocation, relationshipLocation);
@@ -34,11 +34,11 @@ public class ActiveEventRestFacade extends EventRestFacade<ActiveEvent> implemen
 		} else if (relationship.contains(RESULTS)) {
 			return putResultsRelationship(objectLocation, relationshipLocation);
 		} else {
-			return null;
+			return false;
 		}
 	}
 
-	private URI putInterventionsRelationship(URI objectLocation, URI relationshipLocation) {
+	private boolean putInterventionsRelationship(URI objectLocation, URI relationshipLocation) {
 		ActiveEvent event = get(objectLocation);
 		List<URI> interventions = new ArrayList<URI>();
 		interventions.addAll(getRelationshipLinks(event.getLinks().get(INTERVENTIONS), INTERVENTION_QUESTION));
@@ -46,7 +46,7 @@ public class ActiveEventRestFacade extends EventRestFacade<ActiveEvent> implemen
 		interventions.addAll(getRelationshipLinks(event.getLinks().get(INTERVENTIONS), INTERVENTION_MEDIA));	
 		interventions.add(relationshipLocation);
 		event.setInterventions(interventions);
-		return put(event, objectLocation);
+		return patch(event, objectLocation);
 	}
 
 }

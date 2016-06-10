@@ -17,16 +17,16 @@ public class MediaResultRestFacade extends ResultRestFacade<MediaResult> impleme
 	}
 
 	@Override
-	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
+	public boolean putRelationship(URI objectLocation, URI relationshipLocation) {
 		String relationship = relationshipLocation.toString();
 		if (relationship.contains(PARTICIPANT)) {
 			return putParticipantRelationship(objectLocation, relationshipLocation);
 		} else if (relationship.contains(MEDIA)) {
 			MediaResult mediaResult = get(objectLocation);
 			mediaResult.setMedia(relationshipLocation);
-			return put(mediaResult, objectLocation);
+			return patch(mediaResult, objectLocation);
 		} else {
-			return null;
+			return false;
 		}
 	}
 

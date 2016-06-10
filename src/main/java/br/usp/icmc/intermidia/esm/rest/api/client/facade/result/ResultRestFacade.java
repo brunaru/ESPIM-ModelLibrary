@@ -14,10 +14,10 @@ public abstract class ResultRestFacade<T extends Result> extends GenericRestFaca
 		super(resource, links);
 	}
 	
-	protected URI putParticipantRelationship(URI objectLocation, URI relationshipLocation) {
+	protected boolean putParticipantRelationship(URI objectLocation, URI relationshipLocation) {
 		T result = get(objectLocation);
 		result.setParticipant(relationshipLocation);
-		return put(result, objectLocation);
+		return patch(result, objectLocation);
 	}
 
 }

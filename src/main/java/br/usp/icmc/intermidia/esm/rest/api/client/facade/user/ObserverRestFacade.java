@@ -25,16 +25,16 @@ public class ObserverRestFacade extends GenericRestFacade<Observer> implements R
 	}
 
 	@Override
-	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
+	public boolean putRelationship(URI objectLocation, URI relationshipLocation) {
 		String relationship = relationshipLocation.toString();
 		if (relationship.contains(CONTACTS)) {
 			Observer observer = get(objectLocation);
 			List<URI> contacts = getRelationshipLinks(observer.getLinks().get(CONTACTS), CONTACTS);
 			contacts.add(relationshipLocation);
 			observer.setContacts(contacts);
-			return put(observer, objectLocation);
+			return patch(observer, objectLocation);
 		} else {
-			return null;
+			return false;
 		}
 	}
 

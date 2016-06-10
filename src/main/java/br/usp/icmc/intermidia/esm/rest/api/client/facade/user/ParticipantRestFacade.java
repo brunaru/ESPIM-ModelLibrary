@@ -22,8 +22,8 @@ public class ParticipantRestFacade extends GenericRestFacade<Person> implements 
 	}
 
 	@Override
-	public URI putRelationship(URI objectLocation, URI relationshipLocation) {
-		return null;
+	public boolean putRelationship(URI objectLocation, URI relationshipLocation) {
+		return false;
 	}
 
 }
