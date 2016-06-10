@@ -2,6 +2,7 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,8 +10,11 @@ import java.util.Map;
 
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -36,7 +40,8 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	public GenericRestFacade(String resourceName, String[] links) {
 		this.resourceName = resourceName;
 		this.restTemplate = new RestTemplate();
-		this.restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+		this.restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+		this.restTemplate.getMessageConverters().add(1, new MappingJackson2HttpMessageConverter());		
 		this.gson = new Gson();
 		this.linkNames = new ArrayList<String>();
 		for (String link : links) {
@@ -170,28 +175,22 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 			return false;
 		}
 	}
-	
-	public boolean postWithRelationShip(URI parentLocation, String relationshipName, T object) {		
-		try {
-			String location = parentLocation.toString() + "/" + relationshipName;
-			restTemplate.put(location, object);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
 
 	public boolean patch(T object, URI location) {
 		try {
 			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 			restTemplate.setRequestFactory(requestFactory);
-			HttpEntity<T> entity = new HttpEntity<T>(object);
+			HttpHeaders headers = new HttpHeaders();
+			MediaType mediaType = new MediaType("application", "json", Charset.forName("UTF-8"));
+			headers.setContentType(mediaType);
+			//headers.setContentType(MediaType.APPLICATION_JSON);
+			String json = gson.toJson(object);
+			HttpEntity<String> entity = new HttpEntity<String>(json, headers);
 			restTemplate.exchange(location, HttpMethod.PATCH, entity, String.class);
-			//restTemplate.put(location, object);
+			// restTemplate.put(location, object);
 			return true;
 		} catch (Exception e) {
-			//if (response.getStatus() != 200)
+			// if (response.getStatus() != 200)
 			e.printStackTrace();
 			return false;
 		}

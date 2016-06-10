@@ -37,7 +37,7 @@ public class App {
 		List<Program> pros2 = experimentFacade.findByParticipantsEmail("clau.silva271@gmail.com");
 		Observer o = researcherFacade.findByEmail("brunaru@icmc.usp.br");
 		Person p = participantFacade.findByEmail("brunaru7@gmail.com");
-		Program ptest = experimentFacade.get((long) 0);
+		Program ptest = experimentFacade.get((long) 1);
 		//Person p2 = participantFacade.get((long) 22);
 		System.out.println("SUCESSO");
 	}
