@@ -9,9 +9,9 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 public abstract class EventRestFacade<T extends Event> extends GenericRestFacade<T> implements RestFacade<T> {
 
 	/* Relationships */
-	protected static final String TRIGGERS = "triggers";
-	protected static final String SENSORS = "sensors";
-	protected static final String RESULTS = "results";
+	public static final String TRIGGERS = "triggers";
+	public static final String SENSORS = "sensors";
+	public static final String RESULTS = "results";
 
 	private static final String[] linkNames = { TRIGGERS, SENSORS, RESULTS };
 

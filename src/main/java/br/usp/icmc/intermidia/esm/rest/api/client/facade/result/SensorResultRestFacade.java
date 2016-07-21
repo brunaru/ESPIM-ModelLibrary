@@ -6,9 +6,9 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
 public class SensorResultRestFacade extends ResultRestFacade<SensorResult> implements RestFacade<SensorResult> {
 
-	private static final String RESOURCE = "sensor-results";
+	public static final String RESOURCE = "sensor-results";
 	/* Relationships */
-	private static final String SENSOR = "sensor";
+	public static final String SENSOR = "sensor";
 
 	private static final String[] linkNames = { SENSOR, PARTICIPANT };
 

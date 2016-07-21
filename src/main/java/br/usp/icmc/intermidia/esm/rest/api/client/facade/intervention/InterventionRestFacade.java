@@ -6,8 +6,7 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.GenericRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.Intervention;
 
-public abstract class InterventionRestFacade extends GenericRestFacade<Intervention>
-		implements RestFacade<Intervention> {
+public abstract class InterventionRestFacade<T extends Intervention> extends GenericRestFacade<T> implements RestFacade<T> {
 
 	private static final String[] linkNames = {};
 

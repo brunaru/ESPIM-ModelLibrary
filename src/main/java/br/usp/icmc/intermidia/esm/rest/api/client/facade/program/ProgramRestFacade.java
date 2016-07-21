@@ -9,11 +9,11 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
 public class ProgramRestFacade extends GenericRestFacade<Program> implements RestFacade<Program> {
 
-	private static final String RESOURCE = "programs";
+	public static final String RESOURCE = "programs";
 	/* Relationships */
-	private static final String PARTICIPANTS = "participants";
-	private static final String OBSERVERS = "observers";
-	private static final String EVENTS = "events";
+	public static final String PARTICIPANTS = "participants";
+	public static final String OBSERVERS = "observers";
+	public static final String EVENTS = "events";
 
 	private static final String[] linkNames = { PARTICIPANTS, OBSERVERS, EVENTS };
 

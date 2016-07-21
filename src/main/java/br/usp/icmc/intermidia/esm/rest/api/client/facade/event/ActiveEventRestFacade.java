@@ -8,13 +8,13 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
 public class ActiveEventRestFacade extends EventRestFacade<ActiveEvent> implements RestFacade<ActiveEvent> {
 
-	private static final String RESOURCE = "active-events";
+	public static final String RESOURCE = "active-events";
 	/* Relationships */
-	private static final String INTERVENTIONS = "interventions";
+	public static final String INTERVENTIONS = "interventions";
 	/* Intervention types */
-	private static final String INTERVENTION_MEDIA = "media-interventions";
-	private static final String INTERVENTION_QUESTION = "question-interventions";
-	private static final String INTERVENTION_TASK = "task-interventions";
+	public static final String INTERVENTION_MEDIA = "media-interventions";
+	public static final String INTERVENTION_QUESTION = "question-interventions";
+	public static final String INTERVENTION_TASK = "task-interventions";
 
 	private static final String[] linkNames = { INTERVENTIONS, TRIGGERS, SENSORS, RESULTS };
 

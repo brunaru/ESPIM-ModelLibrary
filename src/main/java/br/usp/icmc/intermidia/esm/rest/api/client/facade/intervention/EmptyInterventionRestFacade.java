@@ -2,9 +2,9 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
-public class EmptyInterventionRestFacade extends InterventionRestFacade implements RestFacade<Intervention> {
+public class EmptyInterventionRestFacade extends InterventionRestFacade<EmptyIntervention> implements RestFacade<EmptyIntervention> {
 
-	private static final String RESOURCE = "empty-interventions";
+	public static final String RESOURCE = "empty-interventions";
 
 	public EmptyInterventionRestFacade() {
 		super(RESOURCE);

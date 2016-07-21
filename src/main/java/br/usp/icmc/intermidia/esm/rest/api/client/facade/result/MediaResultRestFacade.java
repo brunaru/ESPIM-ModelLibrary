@@ -6,9 +6,9 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
 public class MediaResultRestFacade extends ResultRestFacade<MediaResult> implements RestFacade<MediaResult> {
 
-	private static final String RESOURCE = "media-results";
+	public static final String RESOURCE = "media-results";
 	/* Relationships */
-	private static final String MEDIA = "media";
+	public static final String MEDIA = "media";
 
 	private static final String[] linkNames = { MEDIA, PARTICIPANT };
 

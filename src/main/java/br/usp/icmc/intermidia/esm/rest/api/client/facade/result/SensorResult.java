@@ -13,7 +13,7 @@ public class SensorResult extends Result {
 		this.setType("sensor");
 	}
 
-	public URI getSensor() {
+	protected URI getSensor() {
 		return sensor;
 	}
 

@@ -6,9 +6,9 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
 public class QuestionResultRestFacade extends ResultRestFacade<QuestionResult> implements RestFacade<QuestionResult> {
 
-	private static final String RESOURCE = "question-results";
+	public static final String RESOURCE = "question-results";
 	/* Relationships */
-	private static final String QUESTION = "question";
+	public static final String QUESTION = "question";
 
 	private static final String[] linkNames = { QUESTION, PARTICIPANT };
 

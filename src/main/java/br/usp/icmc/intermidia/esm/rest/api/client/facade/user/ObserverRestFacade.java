@@ -9,9 +9,9 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
 public class ObserverRestFacade extends GenericRestFacade<Observer> implements RestFacade<Observer> {
 
-	private static final String RESOURCE = "observers";
+	public static final String RESOURCE = "observers";
 	/* Relationships */
-	private static final String CONTACTS = "contacts";
+	public static final String CONTACTS = "contacts";
 
 	private static final String[] linkNames = { CONTACTS };
 

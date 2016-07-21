@@ -8,7 +8,7 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
 public class ParticipantRestFacade extends GenericRestFacade<Person> implements RestFacade<Person> {
 
-	private static final String RESOURCE = "participants";
+	public static final String RESOURCE = "participants";
 
 	private static final String[] linkNames = {};
 

@@ -33,7 +33,7 @@ public class Program extends AbstractJsonModel {
 		this.description = description;
 	}
 
-	public List<URI> getObservers() {
+	protected List<URI> getObservers() {
 		return observers;
 	}
 
@@ -41,7 +41,7 @@ public class Program extends AbstractJsonModel {
 		this.observers = observers;
 	}
 
-	public List<URI> getParticipants() {
+	protected List<URI> getParticipants() {
 		return participants;
 	}
 
@@ -49,7 +49,7 @@ public class Program extends AbstractJsonModel {
 		this.participants = participants;
 	}
 
-	public List<URI> getEvents() {
+	protected List<URI> getEvents() {
 		return events;
 	}
 

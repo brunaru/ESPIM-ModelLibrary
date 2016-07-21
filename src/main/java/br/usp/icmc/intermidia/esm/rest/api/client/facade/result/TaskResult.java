@@ -13,7 +13,7 @@ public class TaskResult extends Result {
 		this.setType("task");
 	}
 
-	public URI getTask() {
+	protected URI getTask() {
 		return task;
 	}
 
