@@ -1,7 +1,6 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
 import java.net.URI;
-import java.util.Date;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
@@ -9,29 +8,29 @@ public abstract class Result extends AbstractJsonModel {
 	
 	private String type;
 	
-	private Date started;
+	private String started;
 	
-	private Date ended;
+	private String ended;
 	
 	private URI participant;
 
-	public Date getStarted() {
+	public String getStarted() {
 		return started;
 	}
 
-	public void setStarted(Date started) {
+	public void setStarted(String started) {
 		this.started = started;
 	}
 
-	public Date getEnded() {
+	public String getEnded() {
 		return ended;
 	}
 
-	public void setEnded(Date ended) {
+	public void setEnded(String ended) {
 		this.ended = ended;
 	}
 
-	public URI getParticipant() {
+	protected URI getParticipant() {
 		return participant;
 	}
 

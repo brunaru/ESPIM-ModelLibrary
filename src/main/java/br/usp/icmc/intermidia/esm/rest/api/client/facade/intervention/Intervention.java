@@ -11,8 +11,6 @@ public abstract class Intervention extends AbstractJsonModel {
 	private int orderPosition;
 	
 	private boolean obligatory;
-	
-	private String showCondition;
 
 	public String getStatment() {
 		return statment;
@@ -36,14 +34,6 @@ public abstract class Intervention extends AbstractJsonModel {
 
 	public void setOrderPosition(int orderPosition) {
 		this.orderPosition = orderPosition;
-	}
-
-	public String getShowCondition() {
-		return showCondition;
-	}
-
-	public void setShowCondition(String showCondition) {
-		this.showCondition = showCondition;
 	}
 
 	public String getType() {

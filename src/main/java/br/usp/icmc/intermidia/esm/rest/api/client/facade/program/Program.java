@@ -16,6 +16,15 @@ public class Program extends AbstractJsonModel {
 	private List<URI> participants;
 
 	private List<URI> events;
+	
+	/** When it starts: timestamp.  */
+	private String starts;
+	
+	/** When it ends: timestamp.  */
+	private String ends;
+	
+	/** When it was updated: timestamp.  */
+	private String updateDate;
 
 	public String getTitle() {
 		return title;
@@ -55,5 +64,29 @@ public class Program extends AbstractJsonModel {
 
 	protected void setEvents(List<URI> events) {
 		this.events = events;
+	}
+
+	public String getStarts() {
+		return starts;
+	}
+
+	public void setStarts(String starts) {
+		this.starts = starts;
+	}
+
+	public String getEnds() {
+		return ends;
+	}
+
+	public void setEnds(String ends) {
+		this.ends = ends;
+	}
+
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
 	}
 }

@@ -2,7 +2,10 @@ package br.usp.icmc.intermidia.esm.rest.api.client;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.ActiveEvent;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.ActiveEventRestFacade;
@@ -37,7 +40,7 @@ public class App {
 		List<Program> pros2 = experimentFacade.findByParticipantsEmail("clau.silva271@gmail.com");
 		Observer o = researcherFacade.findByEmail("brunaru@icmc.usp.br");
 		Person p = participantFacade.findByEmail("brunaru7@gmail.com");
-		Program ptest = experimentFacade.get((long) 1);
+		//Program ptest = experimentFacade.get((long) 1);
 		//Person p2 = participantFacade.get((long) 22);
 		System.out.println("SUCESSO");
 	}
@@ -72,7 +75,7 @@ public class App {
 		question1.setOrderPosition(1);
 		question1.setQuestionType(QuestionIntervention.QUESTION_TYPE_OPEN_TEXT);
 		question1.setOptions(null);
-		question1.setShowCondition(null);
+		question1.setConditions(null);
 
 		QuestionIntervention question2 = new QuestionIntervention();
 		question2.setStatment("Escolha uma sobremesa:");
@@ -85,30 +88,41 @@ public class App {
 		options2.add("Bolo");
 		options2.add("Mousse");
 		question2.setOptions(options2);
-		question2.setShowCondition(null);
-
+		Map<String, Integer> conditions = new HashMap<>();
+		conditions.put("Bolo", 4);
+		question2.setConditions(conditions);
+		
 		QuestionIntervention question3 = new QuestionIntervention();
-		question3.setStatment("Escolha um ou mais sabores:");
-		question3.setObligatory(false);
-		question3.setOrderPosition(2);
-		question3.setQuestionType(QuestionIntervention.QUESTION_TYPE_CHECKBOX);
+		question3.setStatment("Porque não escolheu bolo?");
+		question3.setObligatory(true);
+		question3.setOrderPosition(3);
+		question3.setQuestionType(QuestionIntervention.QUESTION_TYPE_OPEN_TEXT);
+		question3.setOptions(null);
+		question3.setConditions(null);
+
+		QuestionIntervention question4 = new QuestionIntervention();
+		question4.setStatment("Escolha um ou mais sabores:");
+		question4.setObligatory(false);
+		question4.setOrderPosition(4);
+		question4.setQuestionType(QuestionIntervention.QUESTION_TYPE_CHECKBOX);
 		List<String> options3 = new ArrayList<String>();
 		options3.add("Chocolate");
 		options3.add("Morango");
 		options3.add("Limão");
 		options3.add("Maracujá");
-		question3.setOptions(options3);
-		question3.setShowCondition(null);
+		question4.setOptions(options3);
+		question4.setConditions(null);
 
 		// POST questions
 		QuestionInterventionRestFacade questionFacade = new QuestionInterventionRestFacade();
 		URI question1Location = questionFacade.post(question1);
 		URI question2Location = questionFacade.post(question2);
 		URI question3Location = questionFacade.post(question3);
+		URI question4Location = questionFacade.post(question4);
 
 		EventTrigger trigger = new EventTrigger();
-		trigger.setTriggerType(EventTrigger.TYPE_MANUAL);
-		trigger.setTriggerCondition(null);
+		trigger.setTriggerType(EventTrigger.TYPE_TIME);
+		trigger.setTriggerCondition("0 0 20 ? * 1,2,3,4,5 *");
 		// POST trigger
 		EventTriggerRestFacade triggerFacade = new EventTriggerRestFacade();
 		URI triggerLocation = triggerFacade.post(trigger);
@@ -122,11 +136,14 @@ public class App {
 		activeSampleFacade.putRelationship(sampleLocation, question1Location);
 		activeSampleFacade.putRelationship(sampleLocation, question2Location);
 		activeSampleFacade.putRelationship(sampleLocation, question3Location);
+		activeSampleFacade.putRelationship(sampleLocation, question4Location);
 		activeSampleFacade.putRelationship(sampleLocation, triggerLocation);
 
 		Program experiment = new Program();
 		experiment.setDescription("Esse é um experimento para testes.");
 		experiment.setTitle("Experimento Teste");
+		Long time = new Date().getTime();
+		experiment.setUpdateDate(String.valueOf(time));
 		//experiment.setUpdateDate(new Date());
 		ProgramRestFacade experimentFacade = new ProgramRestFacade();
 		URI experimentLocation = experimentFacade.post(experiment);

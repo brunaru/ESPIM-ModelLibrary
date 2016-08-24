@@ -4,6 +4,8 @@ import java.net.URI;
 
 public class QuestionResult extends Result {
 
+	public static final String ANSWER_SEPARATOR = "_SEP_";
+
 	private URI question;
 	
 	private String answer;

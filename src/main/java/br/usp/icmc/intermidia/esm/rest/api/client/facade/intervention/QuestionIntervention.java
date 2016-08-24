@@ -1,6 +1,7 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
 
 import java.util.List;
+import java.util.Map;
 
 public class QuestionIntervention extends Intervention {
 	
@@ -14,6 +15,8 @@ public class QuestionIntervention extends Intervention {
 	private int questionType;
 	
 	private List<String> options;
+	
+	private Map<String, Integer> conditions;
 	
 	public QuestionIntervention() {
 		this.setType("question");
@@ -33,6 +36,14 @@ public class QuestionIntervention extends Intervention {
 
 	public void setQuestionType(int questionType) {
 		this.questionType = questionType;
+	}
+
+	public Map<String, Integer> getConditions() {
+		return conditions;
+	}
+
+	public void setConditions(Map<String, Integer> conditions) {
+		this.conditions = conditions;
 	}
 
 }
