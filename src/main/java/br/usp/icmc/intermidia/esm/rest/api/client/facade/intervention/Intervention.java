@@ -10,6 +10,8 @@ public abstract class Intervention extends AbstractJsonModel {
 	
 	private int orderPosition;
 	
+	private int next;
+	
 	private boolean obligatory;
 
 	public String getStatment() {
@@ -42,6 +44,14 @@ public abstract class Intervention extends AbstractJsonModel {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public int getNext() {
+		return next;
+	}
+
+	public void setNext(int next) {
+		this.next = next;
 	}
 
 }

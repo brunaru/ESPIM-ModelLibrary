@@ -15,6 +15,7 @@ public class ActiveEventRestFacade extends EventRestFacade<ActiveEvent> implemen
 	public static final String INTERVENTION_MEDIA = "media-interventions";
 	public static final String INTERVENTION_QUESTION = "question-interventions";
 	public static final String INTERVENTION_TASK = "task-interventions";
+	public static final String INTERVENTION_EMPTY = "empty-interventions";
 
 	private static final String[] linkNames = { INTERVENTIONS, TRIGGERS, SENSORS, RESULTS };
 
@@ -43,7 +44,8 @@ public class ActiveEventRestFacade extends EventRestFacade<ActiveEvent> implemen
 		List<URI> interventions = new ArrayList<URI>();
 		interventions.addAll(getRelationshipLinks(event.getLinks().get(INTERVENTIONS), INTERVENTION_QUESTION));
 		interventions.addAll(getRelationshipLinks(event.getLinks().get(INTERVENTIONS), INTERVENTION_TASK));
-		interventions.addAll(getRelationshipLinks(event.getLinks().get(INTERVENTIONS), INTERVENTION_MEDIA));	
+		interventions.addAll(getRelationshipLinks(event.getLinks().get(INTERVENTIONS), INTERVENTION_MEDIA));
+		interventions.addAll(getRelationshipLinks(event.getLinks().get(INTERVENTIONS), INTERVENTION_EMPTY));
 		interventions.add(relationshipLocation);
 		event.setInterventions(interventions);
 		return patch(event, objectLocation);
