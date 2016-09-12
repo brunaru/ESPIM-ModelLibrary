@@ -9,6 +9,7 @@ import java.util.Map;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.ActiveEvent;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.ActiveEventRestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.ComplexCondition;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.EmptyIntervention;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.EmptyInterventionRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.QuestionIntervention;
@@ -82,10 +83,11 @@ public class App {
 		question1.setObligatory(true);
 		question1.setOrderPosition(1);
 		question1.setNext(2);
+		question1.setFirst(true);
 		question1.setQuestionType(QuestionIntervention.QUESTION_TYPE_OPEN_TEXT);
 		question1.setOptions(null);
 		question1.setConditions(null);
-
+		
 		QuestionIntervention question2 = new QuestionIntervention();
 		question2.setStatment("Escolha uma sobremesa:");
 		question2.setObligatory(false);
@@ -101,6 +103,14 @@ public class App {
 		Map<String, Integer> conditions = new HashMap<>();
 		conditions.put("Bolo", 4);
 		question2.setConditions(conditions);
+		ComplexCondition c = new ComplexCondition();
+		c.setCondition("5s");
+		c.setType("timer");
+		c.setNext(3);
+		c.setValue("Mousse");
+		List<ComplexCondition> cs = new ArrayList<ComplexCondition>();
+		cs.add(c);
+		question2.setComplexConditions(cs);
 		
 		QuestionIntervention question3 = new QuestionIntervention();
 		question3.setStatment("Porque não escolheu bolo?");

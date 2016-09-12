@@ -18,6 +18,8 @@ public class QuestionIntervention extends Intervention {
 	
 	private Map<String, Integer> conditions;
 	
+	private List<ComplexCondition> complexConditions;
+	
 	public QuestionIntervention() {
 		this.setType("question");
 	}
@@ -44,6 +46,14 @@ public class QuestionIntervention extends Intervention {
 
 	public void setConditions(Map<String, Integer> conditions) {
 		this.conditions = conditions;
+	}
+
+	public List<ComplexCondition> getComplexConditions() {
+		return complexConditions;
+	}
+
+	public void setComplexConditions(List<ComplexCondition> complexConditions) {
+		this.complexConditions = complexConditions;
 	}
 
 }

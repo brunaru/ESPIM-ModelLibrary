@@ -10,6 +10,8 @@ public abstract class Intervention extends AbstractJsonModel {
 	
 	private int orderPosition;
 	
+	private boolean isFirst;
+	
 	private int next;
 	
 	private boolean obligatory;
@@ -52,6 +54,14 @@ public abstract class Intervention extends AbstractJsonModel {
 
 	public void setNext(int next) {
 		this.next = next;
+	}
+
+	public boolean isFirst() {
+		return isFirst;
+	}
+
+	public void setFirst(boolean isFirst) {
+		this.isFirst = isFirst;
 	}
 
 }
