@@ -104,10 +104,10 @@ public class App {
 		conditions.put("Bolo", 4);
 		question2.setConditions(conditions);
 		ComplexCondition c = new ComplexCondition();
-		c.setCondition("5s");
-		c.setType("timer");
-		c.setNext(3);
-		c.setValue("Mousse");
+		c.setCondition("");
+		c.setType("simple");
+		c.setNext(4);
+		c.setValue("Bolo");
 		List<ComplexCondition> cs = new ArrayList<ComplexCondition>();
 		cs.add(c);
 		question2.setComplexConditions(cs);
