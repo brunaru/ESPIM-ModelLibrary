@@ -65,3 +65,8 @@ $RECYCLE.BIN/
 target/classes/META-INF/maven/intermidia/esm-client/pom.properties
 target/classes/META-INF/MANIFEST.MF
 target/classes/META-INF/maven/intermidia/esm-client/pom.xml
+
+.settings/
+/.settings/
+.project
+.classpath
