@@ -37,7 +37,8 @@ public class App {
 		List<Program> programs = experimentFacade.getAll();
 		if (programs == null || programs.isEmpty()) {
 			populate();
-		}
+			populate2();
+		}	
 
 		//ObserverRestFacade researcherFacade = new ObserverRestFacade();
 		//ParticipantRestFacade participantFacade = new ParticipantRestFacade();
@@ -199,6 +200,118 @@ public class App {
 
 		// exemplo delete relacionamento
 		// experimentFacade.deleteRelationship(experimentLocation, participant2Location);
+	}
+	
+	private static void populate2() {
+		// GET researcher
+		ObserverRestFacade researcherFacade = new ObserverRestFacade();
+		Observer researcher = researcherFacade.findByEmail("brunaru@icmc.usp.br");
+		URI researcherLocation = researcher.getSelfLocation();
+
+		// GET participants
+		ParticipantRestFacade participantFacade = new ParticipantRestFacade();
+		Person participant3 = participantFacade.findByEmail("brunaru7@gmail.com");
+		Person participant4 = participantFacade.findByEmail("intermidia.icmc.usp.br@gmail.com");		
+		URI participant3Location = participant3.getSelfLocation();
+		URI participant4Location = participant4.getSelfLocation();
+
+		QuestionIntervention question1 = new QuestionIntervention();
+		question1.setStatment("Você está sozinho ou acompanhado?");
+		question1.setObligatory(true);
+		question1.setOrderPosition(1);
+		question1.setNext(2);
+		question1.setFirst(true);
+		question1.setQuestionType(QuestionIntervention.QUESTION_TYPE_RADIO);
+		List<String> options1 = new ArrayList<String>();
+		options1.add("Sozinho");
+		options1.add("Acompanhado");
+		question1.setOptions(options1);
+		Map<String, Integer> conditions1 = new HashMap<>();
+		conditions1.put("Sozinho", 2);
+		conditions1.put("Acompanhado", 3);
+		question1.setConditions(conditions1);
+		
+		TaskIntervention task = new TaskIntervention();
+		task.setStatment("Vamos jogar! Pressione o botão para iniciar o jogo.");
+		task.setObligatory(true);
+		task.setOrderPosition(2);
+		task.setNext(5);
+		task.setAppPackage("br.usp.icmc.intermidia.memorygame");
+		
+		EmptyIntervention message = new EmptyIntervention();
+		message.setStatment("Parabéns, você completou o jogo!");
+		message.setObligatory(false);
+		message.setOrderPosition(5);
+		message.setNext(0);
+
+		QuestionIntervention question3 = new QuestionIntervention();
+		question3.setStatment("Quem está com você neste momento?");
+		question3.setObligatory(false);
+		question3.setOrderPosition(3);
+		question3.setNext(4);
+		question3.setFirst(true);
+		question3.setQuestionType(QuestionIntervention.QUESTION_TYPE_OPEN_TEXT);
+		question3.setOptions(null);
+		question3.setConditions(null);
+		
+		QuestionIntervention question4 = new QuestionIntervention();
+		question4.setStatment("Como você está se sentindo?");
+		question4.setObligatory(false);
+		question4.setOrderPosition(4);
+		question4.setNext(0);
+		question4.setQuestionType(QuestionIntervention.QUESTION_TYPE_CHECKBOX);
+		List<String> options4 = new ArrayList<String>();
+		options4.add("Feliz");
+		options4.add("Ansioso");
+		options4.add("Triste");
+		options4.add("Tranquilo");
+		question4.setOptions(options4);
+		question4.setConditions(null);
+
+		// POST questions
+		QuestionInterventionRestFacade questionFacade = new QuestionInterventionRestFacade();
+		URI question1Location = questionFacade.post(question1);
+		URI question3Location = questionFacade.post(question3);
+		URI question4Location = questionFacade.post(question4);
+		// POST task
+		TaskInterventionRestFacade taskFacade = new TaskInterventionRestFacade();
+		URI taskLocation = taskFacade.post(task);
+		// POST message
+		EmptyInterventionRestFacade emptyFacade = new EmptyInterventionRestFacade();
+		URI messageLocation = emptyFacade.post(message);
+
+		EventTrigger trigger = new EventTrigger();
+		trigger.setTriggerType(EventTrigger.TYPE_TIME);
+		trigger.setTriggerCondition("0 0 19 ? * * *");
+		// POST trigger
+		EventTriggerRestFacade triggerFacade = new EventTriggerRestFacade();
+		URI triggerLocation = triggerFacade.post(trigger);
+
+		ActiveEvent sample = new ActiveEvent();
+		sample.setTitle("Atividade de jogo e humor");
+		sample.setDescription("Esta é uma atividade para avaliar a memória e o humor.");
+		// POST active-samples
+		ActiveEventRestFacade activeSampleFacade = new ActiveEventRestFacade();
+		URI sampleLocation = activeSampleFacade.post(sample);
+		activeSampleFacade.putRelationship(sampleLocation, question1Location);
+		activeSampleFacade.putRelationship(sampleLocation, question3Location);
+		activeSampleFacade.putRelationship(sampleLocation, question4Location);
+		activeSampleFacade.putRelationship(sampleLocation, taskLocation);
+		activeSampleFacade.putRelationship(sampleLocation, messageLocation);
+		activeSampleFacade.putRelationship(sampleLocation, triggerLocation);
+
+		Program experiment = new Program();
+		experiment.setDescription("Jogo da memória e questão sobre humor.");
+		experiment.setTitle("Atividade de memória-humor");
+		Long time = new Date().getTime();
+		experiment.setUpdateDate(String.valueOf(time));
+		ProgramRestFacade experimentFacade = new ProgramRestFacade();
+		URI experimentLocation = experimentFacade.post(experiment);
+
+		experimentFacade.putRelationship(experimentLocation, participant3Location);
+		experimentFacade.putRelationship(experimentLocation, participant4Location);		
+		experimentFacade.putRelationship(experimentLocation, researcherLocation);
+		experimentFacade.putRelationship(experimentLocation, sampleLocation);
 	}
 
 }
