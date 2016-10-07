@@ -1,7 +1,7 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
 
 public class MediaIntervention extends Intervention {
-	
+
 	public static final int MEDIA_TYPE_IMAGE = 0;
 	
 	public static final int MEDIA_TYPE_AUDIO = 1;

@@ -11,19 +11,27 @@ public class Sensor extends AbstractJsonModel {
 	public static final int SENSOR_TYPE_TASK = 1;
 	
 	/** Activity sensor. */
-	public static final int SENSOR_ACTIVITY = 1;
+	public static final String SENSOR_ACTIVITY = "activity";
+	/** Accelerometer sensor. */
+	public static final String SENSOR_ACCELEROMETER = "accelerometer";
+	/** Video sensor. */
+	public static final String SENSOR_CAMERA = "camera";
+	/** Light sensor. */
+	public static final String SENSOR_LIGHT = "light";
+	/** Audio sensor. */
+	public static final String SENSOR_MICROPHONE = "microphone";
 	
 	/** Interval or whole event. */
 	private int sensorType;
 	
 	/** ACITIVTY, LIGHT, AUDIO, ETC. */
-	private int sensor;
+	private String sensor;
 
-	public int getSensor() {
+	public String getSensor() {
 		return sensor;
 	}
 
-	public void setSensor(int sensor) {
+	public void setSensor(String sensor) {
 		this.sensor = sensor;
 	}
 

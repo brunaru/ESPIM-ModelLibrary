@@ -1,13 +1,12 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
 import java.net.URI;
-import java.sql.Blob;
 
 public class SensorResult extends Result {
 
 	private URI sensor;
 	
-	private Blob resultData;
+	private String urlForDataFile;
 	
 	public SensorResult() {
 		this.setType("sensor");
@@ -21,12 +20,12 @@ public class SensorResult extends Result {
 		this.sensor = sensor;
 	}
 
-	public Blob getResultData() {
-		return resultData;
+	public String getUrlForDataFile() {
+		return urlForDataFile;
 	}
 
-	public void setResultData(Blob resultData) {
-		this.resultData = resultData;
+	public void setUrlForDataFile(String urlForDataFile) {
+		this.urlForDataFile = urlForDataFile;
 	}
 	
 }

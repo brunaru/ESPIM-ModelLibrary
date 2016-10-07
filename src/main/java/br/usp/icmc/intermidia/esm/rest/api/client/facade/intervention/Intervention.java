@@ -1,12 +1,16 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
 
+import java.util.List;
+
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
 public abstract class Intervention extends AbstractJsonModel {
 	
 	private String type;
 	
-	private String statment;
+	private String statement;
+	
+	private List<MediaPresentation> medias;
 	
 	private int orderPosition;
 	
@@ -16,12 +20,12 @@ public abstract class Intervention extends AbstractJsonModel {
 	
 	private boolean obligatory;
 
-	public String getStatment() {
-		return statment;
+	public String getStatement() {
+		return statement;
 	}
 
-	public void setStatment(String statment) {
-		this.statment = statment;
+	public void setStatement(String statement) {
+		this.statement = statement;
 	}
 
 	public boolean isObligatory() {
@@ -62,6 +66,14 @@ public abstract class Intervention extends AbstractJsonModel {
 
 	public void setFirst(boolean first) {
 		this.first = first;
+	}
+
+	public List<MediaPresentation> getMedias() {
+		return medias;
+	}
+
+	public void setMedias(List<MediaPresentation> medias) {
+		this.medias = medias;
 	}
 
 }

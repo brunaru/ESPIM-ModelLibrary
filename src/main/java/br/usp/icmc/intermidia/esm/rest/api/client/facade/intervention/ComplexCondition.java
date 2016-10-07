@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class ComplexCondition implements Serializable {
 
+	private static final long serialVersionUID = 8177288453524037769L;
+
 	private String value;
 
 	private String type;

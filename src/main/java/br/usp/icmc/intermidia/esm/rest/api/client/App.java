@@ -12,6 +12,7 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.ActiveEventRestFa
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.ComplexCondition;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.EmptyIntervention;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.EmptyInterventionRestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.MediaPresentation;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.QuestionIntervention;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.QuestionInterventionRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.TaskIntervention;
@@ -80,7 +81,13 @@ public class App {
 		URI participant4Location = participantFacade.post(participant4);
 
 		QuestionIntervention question1 = new QuestionIntervention();
-		question1.setStatment("Qual o sobrenome da família de sua mãe?");
+		question1.setStatement("Qual o sobrenome da família de sua mãe?");
+		List<MediaPresentation> medias = new ArrayList<>();
+		MediaPresentation media = new MediaPresentation();
+		media.setMediaUrl("url");
+		media.setType(MediaPresentation.MEDIA_TYPE_AUDIO);
+		medias.add(media);
+		question1.setMedias(medias);
 		question1.setObligatory(true);
 		question1.setOrderPosition(1);
 		question1.setNext(2);
@@ -90,7 +97,13 @@ public class App {
 		question1.setConditions(null);
 		
 		QuestionIntervention question2 = new QuestionIntervention();
-		question2.setStatment("Escolha uma sobremesa:");
+		question2.setStatement("Escolha uma sobremesa:");
+		List<MediaPresentation> medias2 = new ArrayList<>();
+		MediaPresentation media2 = new MediaPresentation();
+		media2.setMediaUrl("url");
+		media2.setType(MediaPresentation.MEDIA_TYPE_VIDEO);
+		medias2.add(media2);
+		question2.setMedias(medias2);
 		question2.setObligatory(false);
 		question2.setOrderPosition(2);
 		question2.setNext(3);
@@ -114,7 +127,7 @@ public class App {
 		question2.setComplexConditions(cs);
 		
 		QuestionIntervention question3 = new QuestionIntervention();
-		question3.setStatment("Porque não escolheu bolo?");
+		question3.setStatement("Porque não escolheu bolo?");
 		question3.setObligatory(true);
 		question3.setOrderPosition(3);
 		question3.setNext(4);
@@ -123,20 +136,20 @@ public class App {
 		question3.setConditions(null);
 		
 		TaskIntervention task = new TaskIntervention();
-		task.setStatment("Jogue por 3 minutos. Pressione o botão para iniciar o jogo.");
+		task.setStatement("Jogue por 3 minutos. Pressione o botão para iniciar o jogo.");
 		task.setObligatory(false);
 		task.setOrderPosition(4);
 		task.setNext(5);
 		task.setAppPackage("br.usp.icmc.intermidia.memorygame");
 		
 		EmptyIntervention message = new EmptyIntervention();
-		message.setStatment("Parabéns por completar a tarefa!");
+		message.setStatement("Parabéns por completar a tarefa!");
 		message.setObligatory(false);
 		message.setOrderPosition(5);
 		message.setNext(6);
 
 		QuestionIntervention question4 = new QuestionIntervention();
-		question4.setStatment("Escolha um ou mais sabores:");
+		question4.setStatement("Escolha um ou mais sabores:");
 		question4.setObligatory(false);
 		question4.setOrderPosition(6);
 		question4.setNext(0);
@@ -216,7 +229,7 @@ public class App {
 		URI participant4Location = participant4.getSelfLocation();
 
 		QuestionIntervention question1 = new QuestionIntervention();
-		question1.setStatment("Você está sozinho ou acompanhado?");
+		question1.setStatement("Você está sozinho ou acompanhado?");
 		question1.setObligatory(true);
 		question1.setOrderPosition(1);
 		question1.setNext(2);
@@ -232,20 +245,20 @@ public class App {
 		question1.setConditions(conditions1);
 		
 		TaskIntervention task = new TaskIntervention();
-		task.setStatment("Vamos jogar! Pressione o botão para iniciar o jogo.");
+		task.setStatement("Vamos jogar! Pressione o botão para iniciar o jogo.");
 		task.setObligatory(true);
 		task.setOrderPosition(2);
 		task.setNext(5);
 		task.setAppPackage("br.usp.icmc.intermidia.memorygame");
 		
 		EmptyIntervention message = new EmptyIntervention();
-		message.setStatment("Parabéns, você completou o jogo!");
+		message.setStatement("Parabéns, você completou o jogo!");
 		message.setObligatory(false);
 		message.setOrderPosition(5);
 		message.setNext(0);
 
 		QuestionIntervention question3 = new QuestionIntervention();
-		question3.setStatment("Quem está com você neste momento?");
+		question3.setStatement("Quem está com você neste momento?");
 		question3.setObligatory(false);
 		question3.setOrderPosition(3);
 		question3.setNext(4);
@@ -255,7 +268,7 @@ public class App {
 		question3.setConditions(null);
 		
 		QuestionIntervention question4 = new QuestionIntervention();
-		question4.setStatment("Como você está se sentindo?");
+		question4.setStatement("Como você está se sentindo?");
 		question4.setObligatory(false);
 		question4.setOrderPosition(4);
 		question4.setNext(0);

@@ -1,13 +1,12 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
 import java.net.URI;
-import java.sql.Blob;
 
 public class TaskResult extends Result {
 
 	private URI task;
 	
-	private Blob resultData;
+	private String urlForDataFile;
 	
 	public TaskResult() {
 		this.setType("task");
@@ -21,12 +20,12 @@ public class TaskResult extends Result {
 		this.task = task;
 	}
 
-	public Blob getResultData() {
-		return resultData;
+	public String getUrlForDataFile() {
+		return urlForDataFile;
 	}
 
-	public void setResultData(Blob resultData) {
-		this.resultData = resultData;
+	public void setUrlForDataFile(String urlForDataFile) {
+		this.urlForDataFile = urlForDataFile;
 	}
 	
 }
