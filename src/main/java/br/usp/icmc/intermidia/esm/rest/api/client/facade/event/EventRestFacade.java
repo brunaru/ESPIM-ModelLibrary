@@ -12,6 +12,10 @@ public abstract class EventRestFacade<T extends Event> extends GenericRestFacade
 	public static final String TRIGGERS = "triggers";
 	public static final String SENSORS = "sensors";
 	public static final String RESULTS = "results";
+	public static final String RESULTS_QUESTION = "question-results";
+	public static final String RESULTS_SENSOR = "sensor-results";
+	public static final String RESULTS_TASK = "task-results";
+	public static final String RESULTS_MEDIA = "media-results";
 
 	private static final String[] linkNames = { TRIGGERS, SENSORS, RESULTS };
 
@@ -55,7 +59,10 @@ public abstract class EventRestFacade<T extends Event> extends GenericRestFacade
 
 	protected boolean putResultsRelationship(URI objectLocation, URI relationshipLocation) {
 		T event = get(objectLocation);
-		List<URI> results = getRelationshipLinks(event.getLinks().get(RESULTS), RESULTS);
+		List<URI> results = getRelationshipLinks(event.getLinks().get(RESULTS), RESULTS_QUESTION);
+		results.addAll(getRelationshipLinks(event.getLinks().get(RESULTS), RESULTS_SENSOR));
+		results.addAll(getRelationshipLinks(event.getLinks().get(RESULTS), RESULTS_TASK));
+		results.addAll(getRelationshipLinks(event.getLinks().get(RESULTS), RESULTS_MEDIA));
 		results.add(relationshipLocation);
 		event.setResults(results);
 		return patch(event, objectLocation);
