@@ -12,6 +12,8 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.ActiveEventRestFa
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.ComplexCondition;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.EmptyIntervention;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.EmptyInterventionRestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.MediaIntervention;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.MediaInterventionRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.MediaPresentation;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.QuestionIntervention;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.QuestionInterventionRestFacade;
@@ -81,10 +83,10 @@ public class App {
 		URI participant4Location = participantFacade.post(participant4);
 
 		QuestionIntervention question1 = new QuestionIntervention();
-		question1.setStatement("Qual o sobrenome da família de sua mãe?");
+		question1.setStatement("Quais os nomes das pessoas com as quais você conversou hoje?");
 		List<MediaPresentation> medias = new ArrayList<>();
 		MediaPresentation media = new MediaPresentation();
-		media.setMediaUrl("url");
+		media.setMediaUrl("http://www.w3schools.com/tags/horse.mp3");
 		media.setType(MediaPresentation.MEDIA_TYPE_AUDIO);
 		medias.add(media);
 		question1.setMedias(medias);
@@ -97,10 +99,10 @@ public class App {
 		question1.setConditions(null);
 		
 		QuestionIntervention question2 = new QuestionIntervention();
-		question2.setStatement("Escolha uma sobremesa:");
+		question2.setStatement("O vídeo a seguir apresenta receitas de doces. Escolha um doce:");
 		List<MediaPresentation> medias2 = new ArrayList<>();
 		MediaPresentation media2 = new MediaPresentation();
-		media2.setMediaUrl("url");
+		media2.setMediaUrl("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
 		media2.setType(MediaPresentation.MEDIA_TYPE_VIDEO);
 		medias2.add(media2);
 		question2.setMedias(medias2);
@@ -152,7 +154,7 @@ public class App {
 		question4.setStatement("Escolha um ou mais sabores:");
 		question4.setObligatory(false);
 		question4.setOrderPosition(6);
-		question4.setNext(0);
+		question4.setNext(7);
 		question4.setQuestionType(QuestionIntervention.QUESTION_TYPE_CHECKBOX);
 		List<String> options4 = new ArrayList<String>();
 		options4.add("Chocolate");
@@ -161,6 +163,21 @@ public class App {
 		options4.add("Maracujá");
 		question4.setOptions(options4);
 		question4.setConditions(null);
+		
+		MediaIntervention mediaIntervention1 = new MediaIntervention();
+		mediaIntervention1.setStatement("Por favor, tire uma foto de sua refeição.");
+		mediaIntervention1.setObligatory(false);
+		mediaIntervention1.setOrderPosition(7);
+		mediaIntervention1.setNext(8);
+		mediaIntervention1.setMediaType(MediaIntervention.MEDIA_TYPE_IMAGE);
+		
+		MediaIntervention mediaIntervention2 = new MediaIntervention();
+		mediaIntervention2.setStatement("Por favor, grave um vídeo relatando quais atividades você realizou hoje.");
+		mediaIntervention2.setObligatory(false);
+		mediaIntervention2.setOrderPosition(8);
+		mediaIntervention2.setNext(0);
+		mediaIntervention2.setMediaType(MediaIntervention.MEDIA_TYPE_VIDEO);
+		
 
 		// POST questions
 		QuestionInterventionRestFacade questionFacade = new QuestionInterventionRestFacade();
@@ -174,6 +191,10 @@ public class App {
 		// POST message
 		EmptyInterventionRestFacade emptyFacade = new EmptyInterventionRestFacade();
 		URI messageLocation = emptyFacade.post(message);
+		// POST media
+		MediaInterventionRestFacade mediaFacade = new MediaInterventionRestFacade();
+		URI media1Location = mediaFacade.post(mediaIntervention1);
+		URI media2Location = mediaFacade.post(mediaIntervention2);
 
 		EventTrigger trigger = new EventTrigger();
 		trigger.setTriggerType(EventTrigger.TYPE_TIME);
@@ -195,6 +216,8 @@ public class App {
 		activeSampleFacade.putRelationship(sampleLocation, taskLocation);
 		activeSampleFacade.putRelationship(sampleLocation, messageLocation);
 		activeSampleFacade.putRelationship(sampleLocation, triggerLocation);
+		activeSampleFacade.putRelationship(sampleLocation, media1Location);
+		activeSampleFacade.putRelationship(sampleLocation, media2Location);
 
 		Program experiment = new Program();
 		experiment.setDescription("Esse é um experimento para testes.");

@@ -2,24 +2,24 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
 
 public class MediaIntervention extends Intervention {
 
-	public static final int MEDIA_TYPE_IMAGE = 0;
+public static final String MEDIA_TYPE_IMAGE = "image";
 	
-	public static final int MEDIA_TYPE_AUDIO = 1;
+	public static final String MEDIA_TYPE_AUDIO = "audio";
 	
-	public static final int MEDIA_TYPE_VIDEO = 2;
+	public static final String MEDIA_TYPE_VIDEO = "video";
 
 	/** IMAGE, VIDEO or AUDIO. */
-	private int mediaType;
+	private String mediaType;
 	
 	public MediaIntervention() {
 		this.setType("media");
 	}
 
-	public int getMediaType() {
+	public String getMediaType() {
 		return mediaType;
 	}
 
-	public void setMediaType(int mediaType) {
+	public void setMediaType(String mediaType) {
 		this.mediaType = mediaType;
 	}
 	
