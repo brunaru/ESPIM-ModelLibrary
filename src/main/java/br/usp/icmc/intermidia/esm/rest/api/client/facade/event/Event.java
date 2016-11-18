@@ -19,6 +19,10 @@ public abstract class Event extends AbstractJsonModel {
 	
 	private List <URI> results;
 	
+	private boolean active;
+	
+	private String group;
+	
 	public String getTitle() {
 		return title;
 	}
@@ -65,6 +69,22 @@ public abstract class Event extends AbstractJsonModel {
 
 	protected void setResults(List <URI> results) {
 		this.results = results;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getGroup() {
+		return group;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
 	}
 
 }

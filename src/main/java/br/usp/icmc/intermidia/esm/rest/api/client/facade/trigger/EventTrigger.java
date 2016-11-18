@@ -17,6 +17,8 @@ public class EventTrigger extends AbstractJsonModel {
 	private String triggerType;
 	
 	private String triggerCondition;
+	
+	private String priority;
 
 	public String getTriggerCondition() {
 		return triggerCondition;
@@ -32,6 +34,14 @@ public class EventTrigger extends AbstractJsonModel {
 
 	public void setTriggerType(String triggerType) {
 		this.triggerType = triggerType;
+	}
+
+	public String getPriority() {
+		return priority;
+	}
+
+	public void setPriority(String priority) {
+		this.priority = priority;
 	}
 
 }
