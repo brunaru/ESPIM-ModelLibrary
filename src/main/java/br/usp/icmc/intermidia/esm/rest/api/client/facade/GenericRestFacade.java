@@ -113,9 +113,9 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		return objects;
 	}
 
-	public T findByEmail(String email, String searchString, String findStatment) {
+	public T findByEmail(String email, String searchString, String findStatment, String resource) {
 		try {
-			List<T> objs = findMultipleByEmail(email, searchString, findStatment);
+			List<T> objs = findMultipleByEmail(email, searchString, findStatment, resource);
 			if (objs == null || objs.isEmpty()) {
 				return null;
 			}
@@ -126,7 +126,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		}
 	}
 
-	public List<T> findMultipleByEmail(String email, String searchString, String findStatment) {
+	public List<T> findMultipleByEmail(String email, String searchString, String findStatment, String resource) {
 		try {
 			String json = restTemplate.getForObject(searchString, String.class);
 			List<T> objs = new ArrayList<T>();
@@ -137,7 +137,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 				json = json.substring(json.indexOf("\"self\""));
 				String url = json.substring(json.indexOf(Constants.HTTP_STRING), (json.indexOf("}")));
 				url = url.substring(0, url.lastIndexOf("\""));
-				if (!url.contains(findStatment)) {
+				if (!url.contains(findStatment) && url.contains(resource)) {
 					URI location = new URI(url);
 					T obj = get(location);
 					if (obj != null) {

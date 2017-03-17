@@ -23,12 +23,12 @@ public class ProgramRestFacade extends GenericRestFacade<Program> implements Res
 	
 	public List<Program> findByParticipantsEmail(String email) {
 		String s = Constants.REST_API_ADDRESS + RESOURCE + "/" + "search/findByParticipantsEmail?email=" + email;
-		return findMultipleByEmail(email, s, "findByParticipantsEmail");
+		return findMultipleByEmail(email, s, "findByParticipantsEmail", RESOURCE);
 	}
 
 	public List<Program> findByObserversEmail(String email) {
 		String s = Constants.REST_API_ADDRESS + RESOURCE + "/" + "search/findByObserversEmail?email=" + email;
-		return findMultipleByEmail(email, s, "findByObserversEmail");
+		return findMultipleByEmail(email, s, "findByObserversEmail", RESOURCE);
 	}
 
 	@Override

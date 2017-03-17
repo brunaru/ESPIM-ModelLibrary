@@ -21,7 +21,7 @@ public class ObserverRestFacade extends GenericRestFacade<Observer> implements R
 
 	public Observer findByEmail(String email) {
 		String s = Constants.REST_API_ADDRESS + RESOURCE + "/" + "search/findByEmail?email=" + email;
-		return findByEmail(email, s, "findByEmail");
+		return findByEmail(email, s, "findByEmail", RESOURCE);
 	}
 
 	@Override

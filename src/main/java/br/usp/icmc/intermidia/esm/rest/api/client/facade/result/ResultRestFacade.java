@@ -10,6 +10,8 @@ public abstract class ResultRestFacade<T extends Result> extends GenericRestFaca
 	/* Relationships */
 	public static final String PARTICIPANT = "participant";
 	
+	public static final String OBSERVER = "observer";
+	
 	public ResultRestFacade(String resource, String[] links) {
 		super(resource, links);
 	}
