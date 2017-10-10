@@ -1,23 +1,13 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
-import java.net.URI;
-
 public class TaskResult extends Result {
 
-	private URI task;
+	private long task;
 	
 	private String urlForDataFile;
 	
 	public TaskResult() {
 		this.setType("task");
-	}
-
-	protected URI getTask() {
-		return task;
-	}
-
-	protected void setTask(URI task) {
-		this.task = task;
 	}
 
 	public String getUrlForDataFile() {
@@ -26,6 +16,14 @@ public class TaskResult extends Result {
 
 	public void setUrlForDataFile(String urlForDataFile) {
 		this.urlForDataFile = urlForDataFile;
+	}
+
+	public long getTask() {
+		return task;
+	}
+
+	public void setTask(long task) {
+		this.task = task;
 	}
 	
 }

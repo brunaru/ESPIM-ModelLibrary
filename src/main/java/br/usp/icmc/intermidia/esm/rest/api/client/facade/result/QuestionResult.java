@@ -1,12 +1,10 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
-import java.net.URI;
-
 public class QuestionResult extends Result {
 
 	public static final String ANSWER_SEPARATOR = "_SEP_";
 
-	private URI question;
+	private long question;
 	
 	private String answer;
 	
@@ -22,11 +20,11 @@ public class QuestionResult extends Result {
 		this.answer = answer;
 	}
 
-	protected URI getQuestion() {
+	public long getQuestion() {
 		return question;
 	}
 
-	protected void setQuestion(URI question) {
+	public void setQuestion(long question) {
 		this.question = question;
 	}
 

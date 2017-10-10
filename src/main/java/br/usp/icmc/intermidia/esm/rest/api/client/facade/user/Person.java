@@ -1,6 +1,6 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.user;
 
-import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
@@ -11,7 +11,7 @@ public class Person extends AbstractJsonModel {
 
 	private String email;
 
-	private List<URI> contacts;
+	private List<Person> contacts = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -29,12 +29,11 @@ public class Person extends AbstractJsonModel {
 		this.email = email;
 	}
 
-	protected List<URI> getContacts() {
+	public List<Person> getContacts() {
 		return contacts;
 	}
 
-	protected void setContacts(List<URI> contacts) {
+	public void setContacts(List<Person> contacts) {
 		this.contacts = contacts;
 	}
-
 }

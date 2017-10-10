@@ -8,22 +8,14 @@ public interface RestFacade<T> {
 	public T get(Long id);
 
 	public T get(URI location);
-	
-	public void setLinksMap(T object, String json);
 
 	public List<T> getAll();
 
-	public URI post(T object);
+	public String post(T object, String url);
 
 	public boolean put(T object, Long id);
 
 	public boolean patch(T object, URI location);
-	
-	public boolean putRelationship(URI objectLocation, URI relationshipLocation);
-	
-	public List<URI> getRelationshipLinks(URI objectLocation, String relationshipName);
-	
-	public boolean deleteRelationship(URI objectLocation, URI relationshipLocation);
 
 	public boolean delete(Long id);
 

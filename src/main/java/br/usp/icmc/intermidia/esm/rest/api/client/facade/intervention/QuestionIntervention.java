@@ -1,5 +1,7 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,11 +16,11 @@ public class QuestionIntervention extends Intervention {
 	/** OPEN TEXT, RADIO, CHECKBOX, LIKERT or SEMANTIC DIFFERENTIAL. */
 	private int questionType;
 	
-	private List<String> options;
+	private List<String> options = new ArrayList<>();
 	
-	private Map<String, Integer> conditions;
+	private Map<String, Integer> conditions = new HashMap<>();
 	
-	private List<ComplexCondition> complexConditions;
+	private List<ComplexCondition> complexConditions = new ArrayList<>();
 	
 	public QuestionIntervention() {
 		this.setType("question");

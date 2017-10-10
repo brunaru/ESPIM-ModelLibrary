@@ -1,7 +1,5 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
-import java.net.URI;
-
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.GenericRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
 
@@ -12,14 +10,8 @@ public abstract class ResultRestFacade<T extends Result> extends GenericRestFaca
 	
 	public static final String OBSERVER = "observer";
 	
-	public ResultRestFacade(String resource, String[] links) {
-		super(resource, links);
-	}
-	
-	protected boolean putParticipantRelationship(URI objectLocation, URI relationshipLocation) {
-		T result = get(objectLocation);
-		result.setParticipant(relationshipLocation);
-		return patch(result, objectLocation);
+	public ResultRestFacade(String resource) {
+		super(resource);
 	}
 
 }

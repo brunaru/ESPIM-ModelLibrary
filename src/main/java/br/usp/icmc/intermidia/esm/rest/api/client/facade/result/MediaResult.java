@@ -1,23 +1,13 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
-import java.net.URI;
-
 public class MediaResult extends Result {
 
-	private URI media;
+	private long media;
 	
 	private String urlForDataFile;
 
 	public MediaResult() {
 		this.setType("media");
-	}
-
-	protected URI getMedia() {
-		return media;
-	}
-
-	protected void setMedia(URI media) {
-		this.media = media;
 	}
 
 	public String getUrlForDataFile() {
@@ -26,6 +16,14 @@ public class MediaResult extends Result {
 
 	public void setUrlForDataFile(String urlForDataFile) {
 		this.urlForDataFile = urlForDataFile;
+	}
+
+	public long getMedia() {
+		return media;
+	}
+
+	public void setMedia(long media) {
+		this.media = media;
 	}
 	
 }

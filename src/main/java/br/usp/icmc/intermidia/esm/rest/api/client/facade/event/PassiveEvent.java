@@ -4,6 +4,5 @@ public class PassiveEvent extends Event {
 	
 	public PassiveEvent() {
 		this.setType("passive");
-	}
-	
+	}	
 }

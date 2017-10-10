@@ -1,23 +1,13 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
-import java.net.URI;
-
 public class SensorResult extends Result {
 
-	private URI sensor;
+	private long sensor;
 	
 	private String urlForDataFile;
 	
 	public SensorResult() {
 		this.setType("sensor");
-	}
-
-	protected URI getSensor() {
-		return sensor;
-	}
-
-	protected void setSensor(URI sensor) {
-		this.sensor = sensor;
 	}
 
 	public String getUrlForDataFile() {
@@ -26,6 +16,14 @@ public class SensorResult extends Result {
 
 	public void setUrlForDataFile(String urlForDataFile) {
 		this.urlForDataFile = urlForDataFile;
+	}
+
+	public long getSensor() {
+		return sensor;
+	}
+
+	public void setSensor(long sensor) {
+		this.sensor = sensor;
 	}
 	
 }

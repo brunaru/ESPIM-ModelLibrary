@@ -1,20 +1,21 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.event;
-import java.net.URI;
 import java.util.List;
+
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.Intervention;
 
 public class ActiveEvent extends Event {
 	
-	private List<URI> interventions;
+	private List<Intervention> interventions;
 	
 	public ActiveEvent() {
 		this.setType("active");
 	}
 
-	protected List<URI> getInterventions() {
+	public List<Intervention> getInterventions() {
 		return interventions;
 	}
 
-	protected void setInterventions(List<URI> interventions) {
+	public void setInterventions(List<Intervention> interventions) {
 		this.interventions = interventions;
 	}
 	

@@ -1,28 +1,36 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.event;
 
-import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.sensor.Sensor;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.EventTrigger;
+
+@JsonTypeInfo(
+	    use = JsonTypeInfo.Id.NAME,
+	    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+	    property = "type")
+@JsonSubTypes({ 
+	@Type(value = ActiveEvent.class, name = "active"), 
+	@Type(value = PassiveEvent.class, name = "passive"), 
+	})
 public abstract class Event extends AbstractJsonModel {
-	
+
 	private String type;
-	
+
 	private String title;
-	
+
 	private String description;
 
-	private List<URI> triggers;
-	
-	private List <URI> sensors;
-	
-	private List <URI> results;
-	
-	private boolean active;
-	
-	private String group;
-	
+	private List<EventTrigger> triggers;
+
+	private List<Sensor> sensors = new ArrayList<>();
+
 	public String getTitle() {
 		return title;
 	}
@@ -39,22 +47,6 @@ public abstract class Event extends AbstractJsonModel {
 		this.description = description;
 	}
 
-	protected List<URI> getTriggers() {
-		return triggers;
-	}
-
-	protected void setTriggers(List<URI> triggers) {
-		this.triggers = triggers;
-	}
-
-	protected List<URI> getSensors() {
-		return sensors;
-	}
-
-	protected void setSensors(List<URI> sensors) {
-		this.sensors = sensors;
-	}
-
 	public String getType() {
 		return type;
 	}
@@ -63,28 +55,19 @@ public abstract class Event extends AbstractJsonModel {
 		this.type = type;
 	}
 
-	protected List <URI> getResults() {
-		return results;
+	public List<Sensor> getSensors() {
+		return sensors;
 	}
 
-	protected void setResults(List <URI> results) {
-		this.results = results;
+	public void setSensors(List<Sensor> sensors) {
+		this.sensors = sensors;
 	}
 
-	public boolean isActive() {
-		return active;
+	public List<EventTrigger> getTriggers() {
+		return triggers;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setTriggers(List<EventTrigger> triggers) {
+		this.triggers = triggers;
 	}
-
-	public String getGroup() {
-		return group;
-	}
-
-	public void setGroup(String group) {
-		this.group = group;
-	}
-
 }
