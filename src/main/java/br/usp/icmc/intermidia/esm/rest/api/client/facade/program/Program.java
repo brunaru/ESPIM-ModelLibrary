@@ -1,9 +1,11 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.program;
 
-import java.net.URI;
 import java.util.List;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.Event;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Observer;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Person;
 
 public class Program extends AbstractJsonModel {
 
@@ -11,17 +13,17 @@ public class Program extends AbstractJsonModel {
 
 	private String description;
 
-	private List<URI> observers;
+	private List<Observer> observers;
 
-	private List<URI> participants;
+	private List<Person> participants;
 
-	private List<URI> events;
+	private List<Event> events;
 	
 	/** When it starts: timestamp.  */
-	private String starts;
+	private String starts = "";
 	
 	/** When it ends: timestamp.  */
-	private String ends;
+	private String ends = "";
 	
 	/** When it was updated: timestamp.  */
 	private String updateDate;
@@ -40,30 +42,6 @@ public class Program extends AbstractJsonModel {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	protected List<URI> getObservers() {
-		return observers;
-	}
-
-	protected void setObservers(List<URI> observers) {
-		this.observers = observers;
-	}
-
-	protected List<URI> getParticipants() {
-		return participants;
-	}
-
-	protected void setParticipants(List<URI> participants) {
-		this.participants = participants;
-	}
-
-	protected List<URI> getEvents() {
-		return events;
-	}
-
-	protected void setEvents(List<URI> events) {
-		this.events = events;
 	}
 
 	public String getStarts() {
@@ -88,5 +66,29 @@ public class Program extends AbstractJsonModel {
 
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public List<Observer> getObservers() {
+		return observers;
+	}
+
+	public void setObservers(List<Observer> observers) {
+		this.observers = observers;
+	}
+
+	public List<Person> getParticipants() {
+		return participants;
+	}
+
+	public void setParticipants(List<Person> participants) {
+		this.participants = participants;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 }

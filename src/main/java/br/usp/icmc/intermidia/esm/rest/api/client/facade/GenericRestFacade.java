@@ -1,12 +1,9 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.http.HttpEntity;
@@ -18,10 +15,8 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 
 /**
  * @author Brunaru
@@ -30,30 +25,38 @@ import com.google.gson.JsonParser;
  */
 public abstract class GenericRestFacade<T extends AbstractJsonModel> implements RestFacade<T> {
 
-	private final Gson gson;
+	private final ObjectMapper mapper;
 	private final RestTemplate restTemplate;
 	private final Class<T> genericType;
-	private final List<String> linkNames;
-	private final String resourceName;
+	protected final String resourceName;
 
 	@SuppressWarnings("unchecked")
-	public GenericRestFacade(String resourceName, String[] links) {
+	public GenericRestFacade(String resourceName) {
 		this.resourceName = resourceName;
 		this.restTemplate = new RestTemplate();
 		this.restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
-		this.restTemplate.getMessageConverters().add(1, new MappingJackson2HttpMessageConverter());		
-		this.gson = new Gson();
-		this.linkNames = new ArrayList<String>();
-		for (String link : links) {
-			this.linkNames.add(link);
-		}
-		this.linkNames.add("self");
+		this.restTemplate.getMessageConverters().add(1, new MappingJackson2HttpMessageConverter());
+		mapper = new ObjectMapper();
 		this.genericType = (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), GenericRestFacade.class);
 	}
 
-	public T get(Long id) {		
+	public T get(Long id) {
 		try {
-			String s = Constants.REST_API_ADDRESS + resourceName + "/" + id;
+			String s = Constants.REST_API_ADDRESS + resourceName + "/" + id + "/";
+			URI location = new URI(s);
+			return get(location);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public T get(Long id, boolean verbose) {
+		if (!verbose) {
+			return get(id);
+		}
+		try {
+			String s = Constants.REST_API_ADDRESS + resourceName + "/" + id + "/?verbose=true";
 			URI location = new URI(s);
 			return get(location);
 		} catch (Exception e) {
@@ -65,8 +68,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	public T get(URI location) {
 		try {
 			String json = restTemplate.getForObject(location, String.class);
-			T object = gson.fromJson(json, genericType);
-			setLinksMap(object, json);
+			T object = mapper.readValue(json, genericType);
 			return object;
 		} catch (Exception e) {
 			// 404
@@ -75,38 +77,13 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		}
 	}
 
-	public void setLinksMap(T object, String json) {
-		try {
-			JsonParser jsonParser = new JsonParser();
-			JsonElement obj = jsonParser.parse(json);
-			Map<String, URI> links = new HashMap<String, URI>();
-			for (String linkName : linkNames) {
-				JsonElement jElement = obj.getAsJsonObject().get("_links").getAsJsonObject().get(linkName).getAsJsonObject().get("href");
-				URI location = gson.fromJson(jElement, URI.class);
-				links.put(linkName, location);
-				if (linkName.equalsIgnoreCase("self")) {
-					object.setSelfLocation(location);
-				}
-			}
-			object.setLinks(links);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	public List<T> getAll() {
 		List<T> objects = new ArrayList<T>();
 		try {
-			String json = restTemplate.getForObject(Constants.REST_API_ADDRESS + resourceName, String.class);
+			String json = restTemplate.getForObject(Constants.REST_API_ADDRESS + resourceName + "/?verbose=true", String.class);
 			if (json != null) {
-				JsonParser jsonParser = new JsonParser();
-				JsonArray jsonArray = jsonParser.parse(json).getAsJsonObject().get("_embedded").getAsJsonObject().getAsJsonArray(resourceName);
-				for (JsonElement obj : jsonArray) {
-					T object = gson.fromJson(obj, genericType);
-					setLinksMap(object, obj.toString());
-					objects.add(object);
-				}
-			}			
+				objects = mapper.readValue(json, TypeFactory.defaultInstance().constructCollectionType(List.class, genericType));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -127,46 +104,68 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	}
 
 	public List<T> findMultipleByEmail(String email, String searchString, String findStatment, String resource) {
+		List<T> objects = new ArrayList<T>();
+		String json = null;
 		try {
-			String json = restTemplate.getForObject(searchString, String.class);
-			List<T> objs = new ArrayList<T>();
-			if (json == null) {
-				return objs;
+			json = restTemplate.getForObject(searchString, String.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return objects;
+		}
+		try {
+			T object = mapper.readValue(json, genericType);
+			objects.add(object);
+		} catch (Exception e1) {
+			try {
+				objects = mapper.readValue(json, TypeFactory.defaultInstance().constructCollectionType(List.class, genericType));
+			} catch (Exception e2) {
+				e1.printStackTrace();
+				e2.printStackTrace();
 			}
-			while (json.contains("self")) {
-				json = json.substring(json.indexOf("\"self\""));
-				String url = json.substring(json.indexOf(Constants.HTTP_STRING), (json.indexOf("}")));
-				url = url.substring(0, url.lastIndexOf("\""));
-				if (!url.contains(findStatment) && url.contains(resource)) {
-					URI location = new URI(url);
-					T obj = get(location);
-					if (obj != null) {
-						objs.add(obj);
-					}
-				}
-				json = json.substring(5);
-			}
-			return objs;
+		}
+		return objects;
+	}
+
+	public String post(T object, String url) {
+		try {
+			String json = mapper.writeValueAsString(object);
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			HttpEntity<String> entity = new HttpEntity<String>(json, headers);
+			String answer = restTemplate.postForObject(url, entity, String.class);
+			return answer;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	public URI post(T object) {
-		try {
-			URI location = restTemplate.postForLocation(Constants.REST_API_ADDRESS + resourceName, object);
-			return location;
-		} catch (Exception e) {
-			// if (response.getStatus() != 201)
-			e.printStackTrace();
-			return null;
+	public String post(T object, boolean verbose) {
+		if (!verbose) {
+			return post(object, Constants.REST_API_ADDRESS + resourceName + "/");
+		} else {
+			return post(object, Constants.REST_API_ADDRESS + resourceName + "/?verbose=true");
 		}
 	}
 
-	public boolean put(T object, Long id) {		
+	public boolean put(T object, Long id) {
 		try {
-			String s = Constants.REST_API_ADDRESS + resourceName + "/" + id;
+			String s = Constants.REST_API_ADDRESS + resourceName + "/" + id + "/";
+			URI location = new URI(s);
+			restTemplate.put(location, object);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean put(T object, Long id, boolean verbose) {
+		if (!verbose) {
+			return put(object, id);
+		}
+		try {
+			String s = Constants.REST_API_ADDRESS + resourceName + "/" + id + "/?verbose=true";
 			URI location = new URI(s);
 			restTemplate.put(location, object);
 			return true;
@@ -183,51 +182,40 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 			HttpHeaders headers = new HttpHeaders();
 			MediaType mediaType = new MediaType("application", "json", Charset.forName("UTF-8"));
 			headers.setContentType(mediaType);
-			//headers.setContentType(MediaType.APPLICATION_JSON);
-			String json = gson.toJson(object);
+			// headers.setContentType(MediaType.APPLICATION_JSON);
+			String json = mapper.writeValueAsString(object);
 			HttpEntity<String> entity = new HttpEntity<String>(json, headers);
 			restTemplate.exchange(location, HttpMethod.PATCH, entity, String.class);
 			// restTemplate.put(location, object);
 			return true;
 		} catch (Exception e) {
-			// if (response.getStatus() != 200)
 			e.printStackTrace();
 			return false;
 		}
 	}
 
-	public List<URI> getRelationshipLinks(URI relationshipLocation, String relationshipName) {
-		List<URI> relationships = new ArrayList<URI>();
-		if (relationshipLocation != null) {
-			String json = restTemplate.getForObject(relationshipLocation, String.class);
-			JsonParser jsonParser = new JsonParser();
-			JsonArray jsonArray = jsonParser.parse(json).getAsJsonObject().get("_embedded").getAsJsonObject().getAsJsonArray(relationshipName);
-			if (jsonArray == null) {
-				return relationships;
-			}
-			for (JsonElement obj : jsonArray) {
-				JsonElement pLink = obj.getAsJsonObject().get("_links").getAsJsonObject().get("self").getAsJsonObject().get("href");
-				URI pURI = gson.fromJson(pLink, URI.class);
-				relationships.add(pURI);
-			}
-		}
-		return relationships;
-	}
-
-	public boolean deleteRelationship(URI objectLocation, URI relationshipLocation) {
+	public String getAsJson(T object) {
+		String json = null;
 		try {
-			URI relative = new URI(Constants.REST_API_ADDRESS);
-			URI relationship = relative.relativize(relationshipLocation);
-			String location = objectLocation + "/" + relationship;
-			return delete(new URI(location));
-		} catch (URISyntaxException e) {
+			json = mapper.writeValueAsString(object);
+		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		}
+		return json;
+	}
+
+	public T getAsObject(String json) {
+		T object = null;
+		try {
+			object = mapper.readValue(json, genericType);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return object;
 	}
 
 	public boolean delete(Long id) {
-		String s = Constants.REST_API_ADDRESS + resourceName + "/" + id;
+		String s = Constants.REST_API_ADDRESS + resourceName + "/" + id + "/";
 		try {
 			URI location = new URI(s);
 			return delete(location);
@@ -242,13 +230,8 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 			restTemplate.delete(location);
 			return true;
 		} catch (Exception e) {
-			// if (response.getStatus() != 200 && response.getStatus() != 204)
+			e.printStackTrace();
 			return false;
 		}
 	}
-
-	//protected void error(Response response) {
-		//System.out.println("Failed : HTTP error code : " + response.getStatus());
-	//}
-
 }
