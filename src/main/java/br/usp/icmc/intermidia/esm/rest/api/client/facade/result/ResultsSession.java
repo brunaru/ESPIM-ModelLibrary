@@ -14,7 +14,7 @@ public class ResultsSession extends AbstractJsonModel {
 	
 	String ended = "";
 	
-	List<Long> results;
+	List<Result> results;
 
 	public long getParticipant() {
 		return participant;
@@ -32,11 +32,11 @@ public class ResultsSession extends AbstractJsonModel {
 		this.event = event;
 	}
 
-	public List<Long> getResults() {
+	public List<Result> getResults() {
 		return results;
 	}
 
-	public void setResults(List<Long> results) {
+	public void setResults(List<Result> results) {
 		this.results = results;
 	}
 

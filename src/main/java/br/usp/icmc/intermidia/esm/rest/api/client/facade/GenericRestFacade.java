@@ -148,11 +148,13 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		}
 	}
 
-	public boolean put(T object, Long id) {
+	public boolean put(T object, String url) {
 		try {
-			String s = Constants.REST_API_ADDRESS + resourceName + "/" + id + "/";
-			URI location = new URI(s);
-			restTemplate.put(location, object);
+			String json = mapper.writeValueAsString(object);
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			HttpEntity<String> entity = new HttpEntity<String>(json, headers);			
+			restTemplate.put(url, entity);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -162,13 +164,10 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 
 	public boolean put(T object, Long id, boolean verbose) {
 		if (!verbose) {
-			return put(object, id);
+			return put(object, Constants.REST_API_ADDRESS + resourceName + "/" + id + "/");
 		}
 		try {
-			String s = Constants.REST_API_ADDRESS + resourceName + "/" + id + "/?verbose=true";
-			URI location = new URI(s);
-			restTemplate.put(location, object);
-			return true;
+			return put(object, Constants.REST_API_ADDRESS + resourceName + "/" + id + "/?verbose=true");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

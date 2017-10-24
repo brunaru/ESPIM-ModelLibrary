@@ -1,9 +1,13 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.sensor;
 
+import java.io.Serializable;
+
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
-public class Sensor extends AbstractJsonModel {
+public class Sensor extends AbstractJsonModel implements Serializable {
 	
+	private static final long serialVersionUID = -486477498654571055L;
+
 	/** Used for capturing sensors during an interval. */
 	public static final int SENSOR_TYPE_INTERVAL = 0;
 	

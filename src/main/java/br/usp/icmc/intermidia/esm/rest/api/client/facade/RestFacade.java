@@ -13,7 +13,7 @@ public interface RestFacade<T> {
 
 	public String post(T object, String url);
 
-	public boolean put(T object, Long id);
+	public boolean put(T object, String url);
 
 	public boolean patch(T object, URI location);
 

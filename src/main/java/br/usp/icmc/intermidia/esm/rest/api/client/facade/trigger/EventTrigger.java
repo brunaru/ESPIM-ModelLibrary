@@ -1,9 +1,13 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger;
 
+import java.io.Serializable;
+
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
-public class EventTrigger extends AbstractJsonModel {
+public class EventTrigger extends AbstractJsonModel implements Serializable {
 	
+	private static final long serialVersionUID = 7574319349635160297L;
+
 	/** Time type trigger. */
 	public static final String TYPE_TIME = "time";
 	
