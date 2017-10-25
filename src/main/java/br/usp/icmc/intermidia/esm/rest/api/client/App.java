@@ -36,19 +36,18 @@ public class App {
 	static void testExperiment() {
 
 		ProgramRestFacade experimentFacade = new ProgramRestFacade();
-		ObserverRestFacade of = new ObserverRestFacade();
-		List<Observer> observers = of.getAll();
-		Observer observer = of.findByEmail("brunaru@icmc.usp.br");
+		//ObserverRestFacade of = new ObserverRestFacade();
+		//List<Observer> observers = of.getAll();
+		//Observer observer = of.findByEmail("brunaru@icmc.usp.br");
 		//List<Program> programs = experimentFacade.getAll();
 		List<Program> programs = experimentFacade.findByParticipantsEmail("diana.interm@gmail.com");
-		programs = experimentFacade.findByObserversEmail("brunaru@icmc.usp.br");
-		
-		populateResults();
+		//programs = experimentFacade.findByObserversEmail("brunaru@icmc.usp.br");
 		
 		if (programs == null || programs.isEmpty()) {
 			populate();
 			//populate2();
 		}
+		populateResults();
 		System.out.println("SUCESSO");
 	}
 
@@ -215,7 +214,7 @@ public class App {
 		results.add(qr);
 		ResultsSession rs = new ResultsSession();
 		rs.setId((long) 1);
-		rs.setParticipant(8);
+		rs.setParticipant(4);
 		rs.setEvent(1);
 		rs.setResults(results);		
 		ResultsSessionRestFacade rsf = new ResultsSessionRestFacade();
