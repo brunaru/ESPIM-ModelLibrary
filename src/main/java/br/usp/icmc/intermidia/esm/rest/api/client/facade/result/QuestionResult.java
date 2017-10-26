@@ -2,6 +2,8 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
 public class QuestionResult extends Result {
 
+	private static final long serialVersionUID = -7546755303034829519L;
+
 	public static final String ANSWER_SEPARATOR = "_SEP_";
 
 	private long question;

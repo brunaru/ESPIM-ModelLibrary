@@ -1,10 +1,8 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
 
-import java.io.Serializable;
-
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
-public class MediaPresentation extends AbstractJsonModel implements Serializable {
+public class MediaPresentation extends AbstractJsonModel {
 
 	private static final long serialVersionUID = 4415484299559806642L;
 

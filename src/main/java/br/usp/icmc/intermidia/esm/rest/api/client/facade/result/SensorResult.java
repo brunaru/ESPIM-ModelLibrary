@@ -2,6 +2,8 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
 public class SensorResult extends Result {
 
+	private static final long serialVersionUID = 4967467744192534699L;
+
 	private long sensor;
 	
 	private String urlForDataFile;

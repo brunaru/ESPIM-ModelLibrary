@@ -2,6 +2,8 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
 public class MediaResult extends Result {
 
+	private static final long serialVersionUID = -8009203369253116532L;
+
 	private long media;
 	
 	private String urlForDataFile;

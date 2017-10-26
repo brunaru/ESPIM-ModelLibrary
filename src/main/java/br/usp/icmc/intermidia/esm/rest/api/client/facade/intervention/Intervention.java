@@ -22,6 +22,8 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 	})
 public abstract class Intervention extends AbstractJsonModel {
 	
+	private static final long serialVersionUID = 8797675110955555513L;
+
 	private String type;
 	
 	private String statement;

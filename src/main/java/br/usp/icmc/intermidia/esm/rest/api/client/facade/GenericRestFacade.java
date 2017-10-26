@@ -90,9 +90,9 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		return objects;
 	}
 
-	public T findByEmail(String email, String searchString, String findStatment, String resource) {
+	public T findByValue(String value, String findString, String resource) {
 		try {
-			List<T> objs = findMultipleByEmail(email, searchString, findStatment, resource);
+			List<T> objs = findMultipleByValue(value, findString, resource);
 			if (objs == null || objs.isEmpty()) {
 				return null;
 			}
@@ -103,7 +103,8 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		}
 	}
 
-	public List<T> findMultipleByEmail(String email, String searchString, String findStatment, String resource) {
+	public List<T> findMultipleByValue(String value, String findString, String resource) {
+		String searchString = Constants.REST_API_ADDRESS + resource + "/" + findString + value;
 		List<T> objects = new ArrayList<T>();
 		String json = null;
 		try {

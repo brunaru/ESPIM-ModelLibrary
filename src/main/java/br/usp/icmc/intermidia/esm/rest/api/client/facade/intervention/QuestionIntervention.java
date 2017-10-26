@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public class QuestionIntervention extends Intervention {
+
+	private static final long serialVersionUID = 4862690165851605678L;
 	
 	public static final int QUESTION_TYPE_OPEN_TEXT = 0;	
 	public static final int QUESTION_TYPE_RADIO = 1;	

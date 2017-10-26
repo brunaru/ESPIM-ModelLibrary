@@ -1,10 +1,8 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger;
 
-import java.io.Serializable;
-
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
-public class EventTrigger extends AbstractJsonModel implements Serializable {
+public class EventTrigger extends AbstractJsonModel {
 	
 	private static final long serialVersionUID = 7574319349635160297L;
 

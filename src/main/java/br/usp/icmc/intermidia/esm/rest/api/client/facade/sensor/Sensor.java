@@ -1,10 +1,8 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.sensor;
 
-import java.io.Serializable;
-
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
-public class Sensor extends AbstractJsonModel implements Serializable {
+public class Sensor extends AbstractJsonModel {
 	
 	private static final long serialVersionUID = -486477498654571055L;
 

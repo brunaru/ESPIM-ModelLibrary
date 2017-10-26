@@ -2,6 +2,8 @@ package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
 public class TaskResult extends Result {
 
+	private static final long serialVersionUID = -3983919465067047158L;
+
 	private long task;
 	
 	private String urlForDataFile;

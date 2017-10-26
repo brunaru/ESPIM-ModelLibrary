@@ -6,10 +6,16 @@ import java.util.List;
 public interface RestFacade<T> {
 	
 	public T get(Long id);
+	
+	public T get(Long id, boolean verbose);
 
 	public T get(URI location);
 
 	public List<T> getAll();
+	
+	public T findByValue(String value, String findString, String resource);
+	
+	public List<T> findMultipleByValue(String value, String findString, String resource);
 
 	public String post(T object, String url);
 

@@ -4,6 +4,8 @@ import java.util.List;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.Intervention;
 
 public class ActiveEvent extends Event {
+
+	private static final long serialVersionUID = -9214640068659813462L;
 	
 	private List<Intervention> interventions;
 	

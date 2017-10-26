@@ -1,10 +1,8 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
 
-import java.io.Serializable;
-
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
-public class ComplexCondition extends AbstractJsonModel implements Serializable {
+public class ComplexCondition extends AbstractJsonModel {
 
 	private static final long serialVersionUID = 8177288453524037769L;
 

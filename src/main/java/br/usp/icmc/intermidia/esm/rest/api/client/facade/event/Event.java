@@ -21,6 +21,8 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.EventTrigger;
 	})
 public abstract class Event extends AbstractJsonModel {
 
+	private static final long serialVersionUID = -1253060715558756735L;
+
 	private String type;
 
 	private String title;

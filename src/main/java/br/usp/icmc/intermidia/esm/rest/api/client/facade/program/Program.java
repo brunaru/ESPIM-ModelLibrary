@@ -9,6 +9,8 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Person;
 
 public class Program extends AbstractJsonModel {
 
+	private static final long serialVersionUID = 6627841709629362555L;
+
 	private String title;
 
 	private String description;

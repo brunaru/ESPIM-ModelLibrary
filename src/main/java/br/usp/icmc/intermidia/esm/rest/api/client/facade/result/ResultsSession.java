@@ -6,6 +6,8 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
 public class ResultsSession extends AbstractJsonModel {
 	
+	private static final long serialVersionUID = 2043151425202057046L;
+
 	long participant;
 	
 	long event;

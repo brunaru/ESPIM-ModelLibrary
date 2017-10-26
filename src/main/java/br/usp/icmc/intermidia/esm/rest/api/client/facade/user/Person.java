@@ -1,12 +1,11 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.user;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
-public class Person extends AbstractJsonModel implements Serializable {
+public class Person extends AbstractJsonModel {
 
 	private static final long serialVersionUID = 5049047871237123233L;
 
