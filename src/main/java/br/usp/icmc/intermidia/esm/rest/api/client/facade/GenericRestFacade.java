@@ -127,7 +127,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		return objects;
 	}
 
-	public String post(T object, String url) {
+	private String post(T object, String url) {
 		try {
 			String json = mapper.writeValueAsString(object);
 			HttpHeaders headers = new HttpHeaders();
