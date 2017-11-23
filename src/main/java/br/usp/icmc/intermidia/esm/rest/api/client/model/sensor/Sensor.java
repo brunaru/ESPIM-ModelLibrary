@@ -1,6 +1,6 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.sensor;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.sensor;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
 
 public class Sensor extends AbstractJsonModel {
 	

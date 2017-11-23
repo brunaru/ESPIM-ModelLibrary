@@ -1,4 +1,4 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.result;
 
 public class SensorResult extends Result {
 

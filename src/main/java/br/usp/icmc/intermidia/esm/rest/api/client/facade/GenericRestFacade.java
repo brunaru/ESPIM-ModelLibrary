@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

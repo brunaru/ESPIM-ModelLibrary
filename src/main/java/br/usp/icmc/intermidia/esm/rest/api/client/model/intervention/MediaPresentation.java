@@ -1,6 +1,6 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.intervention;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
 
 public class MediaPresentation extends AbstractJsonModel {
 

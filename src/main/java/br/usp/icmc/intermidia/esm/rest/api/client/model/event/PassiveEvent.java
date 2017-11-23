@@ -1,4 +1,4 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.event;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.event;
 
 public class PassiveEvent extends Event {
 

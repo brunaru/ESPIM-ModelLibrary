@@ -1,4 +1,4 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.intervention;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
 
 
 @JsonTypeInfo(
@@ -18,7 +18,7 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 	@Type(value = QuestionIntervention.class, name = "question"),
 	@Type(value = TaskIntervention.class, name = "task"),
 	@Type(value = EmptyIntervention.class, name = "empty"),
-	@Type(value = MediaIntervention.class, name = "media"), 
+	@Type(value = MediaIntervention.class, name = "media"),
 	})
 public abstract class Intervention extends AbstractJsonModel {
 	

@@ -1,23 +1,22 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.event;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.event;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.sensor.Sensor;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.trigger.EventTrigger;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.sensor.Sensor;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.EventTrigger;
 
 @JsonTypeInfo(
 	    use = JsonTypeInfo.Id.NAME,
 	    include = JsonTypeInfo.As.EXISTING_PROPERTY,
 	    property = "type")
 @JsonSubTypes({ 
-	@Type(value = ActiveEvent.class, name = "active"), 
-	@Type(value = PassiveEvent.class, name = "passive"), 
+	@Type(value = ActiveEvent.class, name = "active"),
+	@Type(value = PassiveEvent.class, name = "passive"),
 	})
 public abstract class Event extends AbstractJsonModel {
 

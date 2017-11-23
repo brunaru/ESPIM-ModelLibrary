@@ -1,7 +1,7 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.event;
-import java.util.List;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.event;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.Intervention;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.Intervention;
+import java.util.List;
 
 public class ActiveEvent extends Event {
 

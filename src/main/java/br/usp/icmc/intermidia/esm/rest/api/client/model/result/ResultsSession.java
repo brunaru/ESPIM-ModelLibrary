@@ -1,8 +1,8 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.result;
+
+import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
 
 import java.util.List;
-
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
 public class ResultsSession extends AbstractJsonModel {
 	

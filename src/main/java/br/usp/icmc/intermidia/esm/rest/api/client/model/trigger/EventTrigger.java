@@ -1,6 +1,6 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.trigger;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
 
 public class EventTrigger extends AbstractJsonModel {
 	

@@ -1,9 +1,9 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.user;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.user;
+
+import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 
 public class Person extends AbstractJsonModel {
 

@@ -1,11 +1,11 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.program;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.program;
 
 import java.util.List;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.Event;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Observer;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Person;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.event.Event;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.user.Observer;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.user.Person;
 
 public class Program extends AbstractJsonModel {
 

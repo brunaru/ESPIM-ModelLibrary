@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.GenericRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.program.Program;
 
 public class ProgramRestFacade extends GenericRestFacade<Program> implements RestFacade<Program> {
 

@@ -1,6 +1,7 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.RestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.result.QuestionResult;
 
 public class QuestionResultRestFacade extends ResultRestFacade<QuestionResult> implements RestFacade<QuestionResult> {
 

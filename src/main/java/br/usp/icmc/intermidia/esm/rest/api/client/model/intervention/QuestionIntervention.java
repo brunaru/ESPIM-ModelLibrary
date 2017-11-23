@@ -1,4 +1,4 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.intervention;
 
 import java.util.ArrayList;
 import java.util.HashMap;

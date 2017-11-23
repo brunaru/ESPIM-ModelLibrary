@@ -6,25 +6,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.ActiveEvent;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.event.Event;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.ComplexCondition;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.EmptyIntervention;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.Intervention;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.MediaIntervention;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.MediaPresentation;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.QuestionIntervention;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention.TaskIntervention;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.program.Program;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.event.ActiveEvent;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.event.Event;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.ComplexCondition;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.EmptyIntervention;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.Intervention;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.MediaIntervention;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.MediaPresentation;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.QuestionIntervention;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.TaskIntervention;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.program.Program;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.program.ProgramRestFacade;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.result.QuestionResult;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.result.Result;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.result.ResultsSession;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.result.QuestionResult;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.result.Result;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.result.ResultsSession;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.result.ResultsSessionRestFacade;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.trigger.EventTrigger;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Observer;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.ObserverRestFacade;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.user.Person;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.trigger.EventTrigger;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.user.Observer;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.user.Person;
 
 public class App {
 

@@ -1,4 +1,4 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.user;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.user;
 
 public class Observer extends Person {
 

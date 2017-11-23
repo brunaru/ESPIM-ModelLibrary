@@ -1,10 +1,10 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.result;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.result;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
 
 @JsonTypeInfo(
 	    use = JsonTypeInfo.Id.NAME,
@@ -14,7 +14,7 @@ import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
 	@Type(value = QuestionResult.class, name = "question"),
 	@Type(value = TaskResult.class, name = "task"),
 	@Type(value = SensorResult.class, name = "sensor"),
-	@Type(value = MediaResult.class, name = "media"), 
+	@Type(value = MediaResult.class, name = "media"),
 	})
 public abstract class Result extends AbstractJsonModel {
 	

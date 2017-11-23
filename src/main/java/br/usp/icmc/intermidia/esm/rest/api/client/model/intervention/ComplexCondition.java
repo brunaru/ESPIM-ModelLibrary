@@ -1,6 +1,6 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade.intervention;
+package br.usp.icmc.intermidia.esm.rest.api.client.model.intervention;
 
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
 
 public class ComplexCondition extends AbstractJsonModel {
 
@@ -13,6 +13,8 @@ public class ComplexCondition extends AbstractJsonModel {
 	private String condition;
 
 	private int next;
+
+	private String action;
 
 	public String getType() {
 		return type;
@@ -44,6 +46,14 @@ public class ComplexCondition extends AbstractJsonModel {
 
 	public void setNext(int next) {
 		this.next = next;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
 	}
 
 }

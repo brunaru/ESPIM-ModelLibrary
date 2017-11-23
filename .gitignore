@@ -70,3 +70,10 @@ target/classes/META-INF/maven/intermidia/esm-client/pom.xml
 /.settings/
 .project
 .classpath
+.idea/vcs.xml
+.idea/modules.xml
+.idea/libraries/target.xml
+.idea/misc.xml
+.idea/workspace.xml
+src/main/main.iml
+.idea/uiDesigner.xml

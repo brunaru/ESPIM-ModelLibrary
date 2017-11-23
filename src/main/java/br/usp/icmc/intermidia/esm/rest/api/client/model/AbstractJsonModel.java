@@ -1,4 +1,4 @@
-package br.usp.icmc.intermidia.esm.rest.api.client.facade;
+package br.usp.icmc.intermidia.esm.rest.api.client.model;
 
 import java.io.Serializable;
 
