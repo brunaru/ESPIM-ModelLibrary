@@ -43,7 +43,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 
 	public T get(Long id) {
 		try {
-			String s = Constants.REST_API_ADDRESS + resourceName + "/" + id + "/";
+			String s = ApiAddress.getRestApiAddress() + resourceName + "/" + id + "/";
 			URI location = new URI(s);
 			return get(location);
 		} catch (Exception e) {
@@ -57,7 +57,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 			return get(id);
 		}
 		try {
-			String s = Constants.REST_API_ADDRESS + resourceName + "/" + id + "/?verbose=true";
+			String s = ApiAddress.getRestApiAddress() + resourceName + "/" + id + "/?verbose=true";
 			URI location = new URI(s);
 			return get(location);
 		} catch (Exception e) {
@@ -81,7 +81,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	public List<T> getAll() {
 		List<T> objects = new ArrayList<T>();
 		try {
-			String json = restTemplate.getForObject(Constants.REST_API_ADDRESS + resourceName + "/?verbose=true", String.class);
+			String json = restTemplate.getForObject(ApiAddress.getRestApiAddress() + resourceName + "/?verbose=true", String.class);
 			if (json != null) {
 				objects = mapper.readValue(json, TypeFactory.defaultInstance().constructCollectionType(List.class, genericType));
 			}
@@ -105,7 +105,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	}
 
 	public List<T> findMultipleByValue(String value, String findString, String resource) {
-		String searchString = Constants.REST_API_ADDRESS + resource + "/" + findString + value;
+		String searchString = ApiAddress.getRestApiAddress() + resource + "/" + findString + value;
 		List<T> objects = new ArrayList<T>();
 		String json = null;
 		try {
@@ -144,9 +144,9 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 
 	public String post(T object, boolean verbose) {
 		if (!verbose) {
-			return post(object, Constants.REST_API_ADDRESS + resourceName + "/");
+			return post(object, ApiAddress.getRestApiAddress() + resourceName + "/");
 		} else {
-			return post(object, Constants.REST_API_ADDRESS + resourceName + "/?verbose=true");
+			return post(object, ApiAddress.getRestApiAddress() + resourceName + "/?verbose=true");
 		}
 	}
 
@@ -166,10 +166,10 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 
 	public boolean put(T object, Long id, boolean verbose) {
 		if (!verbose) {
-			return put(object, Constants.REST_API_ADDRESS + resourceName + "/" + id + "/");
+			return put(object, ApiAddress.getRestApiAddress() + resourceName + "/" + id + "/");
 		}
 		try {
-			return put(object, Constants.REST_API_ADDRESS + resourceName + "/" + id + "/?verbose=true");
+			return put(object, ApiAddress.getRestApiAddress() + resourceName + "/" + id + "/?verbose=true");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -216,7 +216,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	}
 
 	public boolean delete(Long id) {
-		String s = Constants.REST_API_ADDRESS + resourceName + "/" + id + "/";
+		String s = ApiAddress.getRestApiAddress() + resourceName + "/" + id + "/";
 		try {
 			URI location = new URI(s);
 			return delete(location);

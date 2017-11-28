@@ -15,6 +15,7 @@ import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
 	@Type(value = TaskResult.class, name = "task"),
 	@Type(value = SensorResult.class, name = "sensor"),
 	@Type(value = MediaResult.class, name = "media"),
+	@Type(value = EmptyResult.class, name = "empty"),
 	})
 public abstract class Result extends AbstractJsonModel {
 	
