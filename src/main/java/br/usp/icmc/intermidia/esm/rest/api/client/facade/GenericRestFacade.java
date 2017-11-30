@@ -39,7 +39,6 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		this.restTemplate.getMessageConverters().add(1, new MappingJackson2HttpMessageConverter());
 		mapper = new ObjectMapper();
 		this.genericType = (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), GenericRestFacade.class);
-		new ApiAddress();
 	}
 
 	public T get(Long id) {

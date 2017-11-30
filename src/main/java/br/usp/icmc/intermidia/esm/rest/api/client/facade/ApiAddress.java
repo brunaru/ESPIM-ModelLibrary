@@ -6,15 +6,7 @@ public class ApiAddress {
 	/** Default value. */
 	private static final String REST_API_ADDRESS = "http://esm-rest-service.herokuapp.com/";
 	
-	private static String restApiAddress;
-	
-	public ApiAddress() {
-		setRestApiAddress(REST_API_ADDRESS);
-	}
-	
-	public ApiAddress(String address) {
-		setRestApiAddress(address);
-	}
+	private static String restApiAddress = REST_API_ADDRESS;
 
 	public static String getRestApiAddress() {
 		return restApiAddress;
