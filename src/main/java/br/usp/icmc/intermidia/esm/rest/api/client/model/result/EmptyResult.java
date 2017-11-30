@@ -4,18 +4,18 @@ public class EmptyResult extends Result {
 
 	private static final long serialVersionUID = 1796083789567394303L;
 	
-	private long emptyIntervention;
+	private long empty;
 	
 	public EmptyResult() {
 		this.setType("empty");
 	}
 
-	public long getEmptyIntervention() {
-		return emptyIntervention;
+	public long getEmpty() {
+		return empty;
 	}
 
-	public void setEmptyIntervention(long emptyIntervention) {
-		this.emptyIntervention = emptyIntervention;
+	public void setEmpty(long empty) {
+		this.empty = empty;
 	}
 
 }
