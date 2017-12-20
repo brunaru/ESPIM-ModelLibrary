@@ -42,11 +42,11 @@ public class App {
 		List<Program> programs = experimentFacade.findByParticipantsEmail("diana.interm@gmail.com");
 		//programs = experimentFacade.findByObserversEmail("brunaru@icmc.usp.br");
 		
-		if (programs == null || programs.isEmpty()) {
+		//if (programs == null || programs.isEmpty()) {
 			populate();
 			//populate2();
-		}
-		populateResults();
+		//}
+		//populateResults();
 		System.out.println("SUCESSO");
 	}
 
@@ -180,7 +180,15 @@ public class App {
 		EventTrigger trigger = new EventTrigger();
 		trigger.setTriggerType(EventTrigger.TYPE_TIME);
 		trigger.setTriggerCondition("0 0 20 ? * 1,2,3,4,5 *");
+		trigger.setTimeOut(60);
+		trigger.setPriority("NC");
 		List<EventTrigger> triggers = new ArrayList<>();
+		EventTrigger trigger2 = new EventTrigger();
+		trigger2.setTriggerType(EventTrigger.TYPE_MANUAL);
+		trigger2.setTriggerCondition(EventTrigger.TYPE_MANUAL);
+		trigger2.setPriority("NC");
+		triggers.add(trigger);
+		triggers.add(trigger2);
 
 		ActiveEvent sample = new ActiveEvent();
 		sample.setTitle("Questões");

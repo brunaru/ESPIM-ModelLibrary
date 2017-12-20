@@ -2,9 +2,6 @@ package br.usp.icmc.intermidia.esm.rest.api.client.model.user;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Person extends AbstractJsonModel {
 
 	private static final long serialVersionUID = 5049047871237123233L;
@@ -12,12 +9,6 @@ public class Person extends AbstractJsonModel {
 	private String name;
 
 	private String email;
-
-	private List<Person> contacts;
-	
-	public Person() {
-		contacts = new ArrayList<>();
-	}
 
 	public String getName() {
 		return name;
@@ -35,11 +26,4 @@ public class Person extends AbstractJsonModel {
 		this.email = email;
 	}
 
-	public List<Person> getContacts() {
-		return contacts;
-	}
-
-	public void setContacts(List<Person> contacts) {
-		this.contacts = contacts;
-	}
 }

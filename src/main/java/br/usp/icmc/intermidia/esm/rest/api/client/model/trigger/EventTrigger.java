@@ -21,6 +21,8 @@ public class EventTrigger extends AbstractJsonModel {
 	private String triggerCondition;
 	
 	private String priority;
+	
+	private int timeOut;
 
 	public String getTriggerCondition() {
 		return triggerCondition;
@@ -44,6 +46,14 @@ public class EventTrigger extends AbstractJsonModel {
 
 	public void setPriority(String priority) {
 		this.priority = priority;
+	}
+
+	public int getTimeOut() {
+		return timeOut;
+	}
+
+	public void setTimeOut(int timeOut) {
+		this.timeOut = timeOut;
 	}
 
 }
