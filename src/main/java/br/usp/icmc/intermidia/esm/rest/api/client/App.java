@@ -133,6 +133,10 @@ public class App {
 		task.setOrderPosition(4);
 		task.setNext(5);
 		task.setAppPackage("br.usp.icmc.intermidia.memorygame");
+		Map<String, String> parameters = new HashMap<>();
+		parameters.put("CHAVE1", "VALOR1");
+		parameters.put("CHAVE2", "VALOR2");		
+		task.setParameters(parameters);
 		
 		EmptyIntervention message = new EmptyIntervention();
 		message.setStatement("Parabéns por completar a tarefa!");
