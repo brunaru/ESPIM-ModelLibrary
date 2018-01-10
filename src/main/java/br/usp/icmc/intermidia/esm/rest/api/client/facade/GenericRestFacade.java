@@ -131,6 +131,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	private String post(T object, String url) {
 		try {
 			String json = mapper.writeValueAsString(object);
+			json = json.replaceAll("\"id\":0,", "");
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			HttpEntity<String> entity = new HttpEntity<String>(json, headers);

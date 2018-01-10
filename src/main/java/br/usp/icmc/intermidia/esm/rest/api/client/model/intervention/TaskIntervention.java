@@ -2,6 +2,7 @@ package br.usp.icmc.intermidia.esm.rest.api.client.model.intervention;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class TaskIntervention extends Intervention {
 	
@@ -29,8 +30,11 @@ public class TaskIntervention extends Intervention {
 		return parameters;
 	}
 
-	public void setParameters(Map<String, String> parameters) {
-		this.parameters = parameters;
+	@SuppressWarnings("unchecked")
+	public void setParameters(Object values) {
+		if (values instanceof Map<?, ?>) {
+			this.parameters = (Map<String, String>) values;
+		}
 	}
 
 }

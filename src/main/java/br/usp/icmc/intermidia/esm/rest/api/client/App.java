@@ -42,10 +42,10 @@ public class App {
 		List<Program> programs = experimentFacade.findByParticipantsEmail("diana.interm@gmail.com");
 		//programs = experimentFacade.findByObserversEmail("brunaru@icmc.usp.br");
 		
-		//if (programs == null || programs.isEmpty()) {
-			populate();
+		if (programs == null || programs.isEmpty()) {
+			//populate();
 			//populate2();
-		//}
+		}
 		//populateResults();
 		System.out.println("SUCESSO");
 	}
@@ -184,13 +184,14 @@ public class App {
 		EventTrigger trigger = new EventTrigger();
 		trigger.setTriggerType(EventTrigger.TYPE_TIME);
 		trigger.setTriggerCondition("0 0 20 ? * 1,2,3,4,5 *");
-		trigger.setTimeOut(60);
+		trigger.setTimeOut(600);
 		trigger.setPriority("NC");
 		List<EventTrigger> triggers = new ArrayList<>();
 		EventTrigger trigger2 = new EventTrigger();
 		trigger2.setTriggerType(EventTrigger.TYPE_MANUAL);
 		trigger2.setTriggerCondition(EventTrigger.TYPE_MANUAL);
 		trigger2.setPriority("NC");
+		trigger2.setTimeOut(18000);
 		triggers.add(trigger);
 		triggers.add(trigger2);
 
@@ -230,6 +231,90 @@ public class App {
 		rs.setResults(results);		
 		ResultsSessionRestFacade rsf = new ResultsSessionRestFacade();
 		String rjson = rsf.post(rs, true);
+	}
+	
+	private static void populate2() {
+		Observer researcher = new Observer();
+		researcher.setName("Bruna Tester");
+		researcher.setEmail("bruna@teste.com.br");
+		researcher.setRole("adm");
+		List<Observer> observers = new ArrayList<>();
+		observers.add(researcher);
+
+		Person participant1 = new Person();
+		participant1.setName("Claudiane Souza");
+		participant1.setEmail("clau7374@gmail.com");
+		List<Person> participants = new ArrayList<>();
+		participants.add(participant1);
+
+		QuestionIntervention question1 = new QuestionIntervention();
+		question1.setStatement("Quais os nomes das pessoas com as quais você conversou hoje?");
+		List<MediaPresentation> medias = new ArrayList<>();
+		MediaPresentation media = new MediaPresentation();
+		media.setMediaUrl("http://www.w3schools.com/tags/horse.mp3");
+		media.setType(MediaPresentation.MEDIA_TYPE_AUDIO);
+		medias.add(media);
+		question1.setMedias(medias);
+		question1.setObligatory(true);
+		question1.setOrderPosition(1);
+		question1.setNext(2);
+		question1.setFirst(true);
+		question1.setQuestionType(QuestionIntervention.QUESTION_TYPE_OPEN_TEXT);
+		
+		TaskIntervention task = new TaskIntervention();
+		task.setStatement("Jogue por 3 minutos. Pressione o botão para iniciar o jogo.");
+		task.setObligatory(false);
+		task.setOrderPosition(2);
+		task.setNext(3);
+		task.setAppPackage("br.usp.icmc.intermidia.memorygame");
+		Map<String, String> parameters = new HashMap<>();
+		parameters.put("CHAVE1", "VALOR1");
+		parameters.put("CHAVE2", "VALOR2");		
+		task.setParameters(parameters);
+		
+		EmptyIntervention message = new EmptyIntervention();
+		message.setStatement("Parabéns por completar a tarefa!");
+		message.setObligatory(false);
+		message.setOrderPosition(3);
+		message.setNext(0);
+		
+		List<Intervention> interventions = new ArrayList<>();
+		interventions.add(question1);
+		interventions.add(task);
+		interventions.add(message);
+
+		EventTrigger trigger = new EventTrigger();
+		trigger.setTriggerType(EventTrigger.TYPE_TIME);
+		trigger.setTriggerCondition("0 0 20 ? * 1,2,3,4,5 *");
+		trigger.setTimeOut(600);
+		trigger.setPriority("NC");
+		List<EventTrigger> triggers = new ArrayList<>();
+		EventTrigger trigger2 = new EventTrigger();
+		trigger2.setTriggerType(EventTrigger.TYPE_MANUAL);
+		trigger2.setTriggerCondition(EventTrigger.TYPE_MANUAL);
+		trigger2.setPriority("NC");
+		trigger2.setTimeOut(18000);
+		triggers.add(trigger);
+		triggers.add(trigger2);
+
+		ActiveEvent sample = new ActiveEvent();
+		sample.setTitle("Questões");
+		sample.setDescription("Esta é uma intervenção que possui questões teste.");
+		sample.setInterventions(interventions);
+		sample.setTriggers(triggers);
+		List<Event> events = new ArrayList<>();
+		events.add(sample);
+
+		Program experiment = new Program();
+		experiment.setDescription("Esse é um experimento para testes.");
+		experiment.setTitle("Experimento Teste");
+		Long time = new Date().getTime();
+		experiment.setUpdateDate(String.valueOf(time));
+		ProgramRestFacade experimentFacade = new ProgramRestFacade();
+		experiment.setParticipants(participants);
+		experiment.setObservers(observers);
+		experiment.setEvents(events);
+		experimentFacade.post(experiment, true);
 	}
 
 }
