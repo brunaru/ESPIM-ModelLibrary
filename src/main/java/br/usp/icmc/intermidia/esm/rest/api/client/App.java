@@ -219,7 +219,7 @@ public class App {
 	private static void populateResults() {
 		QuestionResult qr = new QuestionResult();
 		qr.setAnswer("Maria apenas.");
-		qr.setQuestion(2);
+		qr.setIntervention(2);
 		qr.setStarted("1234");
 		qr.setEnded("1235");		
 		List<Result> results = new ArrayList<>();

@@ -26,6 +26,8 @@ public abstract class Result extends AbstractJsonModel {
 	private String started;
 	
 	private String ended;
+	
+	private long intervention;
 
 	public String getStarted() {
 		return started;
@@ -49,6 +51,14 @@ public abstract class Result extends AbstractJsonModel {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public long getIntervention() {
+		return intervention;
+	}
+
+	public void setIntervention(long intervention) {
+		this.intervention = intervention;
 	}
 	
 }
