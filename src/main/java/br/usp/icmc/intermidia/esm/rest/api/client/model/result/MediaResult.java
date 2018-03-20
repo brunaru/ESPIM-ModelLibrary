@@ -3,8 +3,6 @@ package br.usp.icmc.intermidia.esm.rest.api.client.model.result;
 public class MediaResult extends Result {
 
 	private static final long serialVersionUID = -8009203369253116532L;
-
-	private long media;
 	
 	private String urlForDataFile;
 
@@ -18,14 +16,6 @@ public class MediaResult extends Result {
 
 	public void setUrlForDataFile(String urlForDataFile) {
 		this.urlForDataFile = urlForDataFile;
-	}
-
-	public long getMedia() {
-		return media;
-	}
-
-	public void setMedia(long media) {
-		this.media = media;
 	}
 	
 }
