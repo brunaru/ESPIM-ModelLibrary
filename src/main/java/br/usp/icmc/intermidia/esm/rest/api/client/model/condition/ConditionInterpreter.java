@@ -17,27 +17,24 @@ public class ConditionInterpreter {
 	public static final String GREATER_THAN = "GREATER_THAN";
 	public static final String LESS_THAN = "LESS_THAN";
 
-	public static boolean checkMissed(List<String> conditions, int value) {
+	public static boolean checkMissed(String condition, int value) {
 		try {
-			for (String condition : conditions) {
-				if (condition.contains(OP_MISSED)) {
-					String[] ops = condition.split("\\s+");
-					return checkComparisonCondition(ops[1], Integer.valueOf(ops[2]), value);
-				}
+			if (condition.contains(OP_MISSED)) {
+				String[] ops = condition.split("\\s+");
+				return checkComparisonCondition(ops[1], Integer.valueOf(ops[2]), value);
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return false;
 	}
-	
-	public static boolean checkAttempts(List<String> conditions, int value) {
+
+	public static boolean checkAttempts(String condition, int value) {
 		try {
-			for (String condition : conditions) {
-				if (condition.contains(OP_ATTEMPTS)) {
-					String[] ops = condition.split("\\s+");
-					return checkComparisonCondition(ops[1], Integer.valueOf(ops[2]), value);
-				}
+			if (condition.contains(OP_ATTEMPTS)) {
+				String[] ops = condition.split("\\s+");
+				return checkComparisonCondition(ops[1], Integer.valueOf(ops[2]), value);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
