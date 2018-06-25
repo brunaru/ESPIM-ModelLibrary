@@ -17,7 +17,7 @@ public class ConditionInterpreter {
 	public static final String GREATER_THAN = "GREATER_THAN";
 	public static final String LESS_THAN = "LESS_THAN";
 
-	public boolean opMissed(List<String> conditions, int value) {
+	public static boolean checkMissed(List<String> conditions, int value) {
 		try {
 			for (String condition : conditions) {
 				if (condition.contains(OP_MISSED)) {
@@ -31,7 +31,7 @@ public class ConditionInterpreter {
 		return false;
 	}
 	
-	public boolean opAttempts(List<String> conditions, int value) {
+	public static boolean checkAttempts(List<String> conditions, int value) {
 		try {
 			for (String condition : conditions) {
 				if (condition.contains(OP_ATTEMPTS)) {
@@ -45,7 +45,7 @@ public class ConditionInterpreter {
 		return false;
 	}
 
-	private boolean checkComparisonCondition(String operator, int conditionValue, int value) {
+	private static boolean checkComparisonCondition(String operator, int conditionValue, int value) {
 		if (operator.contains(EQUALS)) {
 			if (conditionValue == value) {
 				return true;
