@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.condition.ComplexCondition;
 
 
 @JsonTypeInfo(
@@ -37,6 +38,8 @@ public abstract class Intervention extends AbstractJsonModel {
 	private int next;
 	
 	private boolean obligatory;
+	
+	private List<ComplexCondition> complexConditions = new ArrayList<>();
 
 	public String getStatement() {
 		return statement;
@@ -92,6 +95,14 @@ public abstract class Intervention extends AbstractJsonModel {
 
 	public void setMedias(List<MediaPresentation> medias) {
 		this.medias = medias;
+	}
+
+	public List<ComplexCondition> getComplexConditions() {
+		return complexConditions;
+	}
+
+	public void setComplexConditions(List<ComplexCondition> complexConditions) {
+		this.complexConditions = complexConditions;
 	}
 
 }

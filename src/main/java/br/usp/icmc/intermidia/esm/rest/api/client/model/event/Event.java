@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.model.AbstractJsonModel;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.condition.ComplexCondition;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.sensor.Sensor;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.trigger.EventTrigger;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -31,6 +32,8 @@ public abstract class Event extends AbstractJsonModel {
 	private List<EventTrigger> triggers;
 
 	private List<Sensor> sensors = new ArrayList<>();
+	
+	private List<ComplexCondition> complexConditions = new ArrayList<>();
 
 	public String getTitle() {
 		return title;
@@ -70,5 +73,13 @@ public abstract class Event extends AbstractJsonModel {
 
 	public void setTriggers(List<EventTrigger> triggers) {
 		this.triggers = triggers;
+	}
+
+	public List<ComplexCondition> getComplexConditions() {
+		return complexConditions;
+	}
+
+	public void setComplexConditions(List<ComplexCondition> complexConditions) {
+		this.complexConditions = complexConditions;
 	}
 }

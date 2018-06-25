@@ -6,9 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.program.ProgramRestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.facade.result.ResultsSessionRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.event.ActiveEvent;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.event.Event;
-import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.ComplexCondition;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.EmptyIntervention;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.Intervention;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.MediaIntervention;
@@ -16,11 +17,9 @@ import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.MediaPresen
 import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.QuestionIntervention;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.TaskIntervention;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.program.Program;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.program.ProgramRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.result.QuestionResult;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.result.Result;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.result.ResultsSession;
-import br.usp.icmc.intermidia.esm.rest.api.client.facade.result.ResultsSessionRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.trigger.EventTrigger;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.user.Observer;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.user.Person;
@@ -31,7 +30,6 @@ public class App {
 		testExperiment();
 	}
 
-	@SuppressWarnings("unused")
 	static void testExperiment() {
 
 		ProgramRestFacade experimentFacade = new ProgramRestFacade();
@@ -111,14 +109,6 @@ public class App {
 		Map<String, Integer> conditions = new HashMap<>();
 		conditions.put("Bolo", 4);
 		question2.setConditions(conditions);
-		ComplexCondition c = new ComplexCondition();
-		c.setCondition("");
-		c.setType("simple");
-		c.setNext(4);
-		c.setValue("Bolo");
-		List<ComplexCondition> cs = new ArrayList<ComplexCondition>();
-		cs.add(c);
-		question2.setComplexConditions(cs);
 		
 		QuestionIntervention question3 = new QuestionIntervention();
 		question3.setStatement("Porque não escolheu bolo?");
