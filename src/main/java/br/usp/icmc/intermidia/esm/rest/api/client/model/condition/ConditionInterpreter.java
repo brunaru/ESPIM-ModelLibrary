@@ -42,18 +42,18 @@ public class ConditionInterpreter {
 		return false;
 	}
 
-	private static boolean checkComparisonCondition(String operator, int conditionValue, int value) {
+	private static boolean checkComparisonCondition(String operator, int conditionStringValue, int value) {
 		if (operator.contains(EQUALS)) {
-			if (conditionValue == value) {
+			if (value == conditionStringValue) {
 				return true;
 			}
 
 		} else if (operator.contains(GREATER_THAN)) {
-			if (conditionValue > value) {
+			if (value > conditionStringValue) {
 				return true;
 			}
 		} else if (operator.contains(LESS_THAN)) {
-			if (conditionValue < value) {
+			if (value < conditionStringValue) {
 				return true;
 			}
 		}
