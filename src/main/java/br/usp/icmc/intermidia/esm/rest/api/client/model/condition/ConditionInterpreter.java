@@ -1,7 +1,5 @@
 package br.usp.icmc.intermidia.esm.rest.api.client.model.condition;
 
-import java.util.List;
-
 public class ConditionInterpreter {
 
 	/**
@@ -16,6 +14,22 @@ public class ConditionInterpreter {
 	public static final String EQUALS = "EQUALS";
 	public static final String GREATER_THAN = "GREATER_THAN";
 	public static final String LESS_THAN = "LESS_THAN";
+	
+	public static boolean checkAllConditions(String condition, int missedTimes, int attempts) {
+		String[] ands = condition.split("\\s* AND \\s*");
+		for (int i = 0; i < ands.length; i++) {
+			boolean check = false;
+			if (ands[i].contains(OP_MISSED)) {
+				check = checkMissed(ands[i], missedTimes);
+			} else if (ands[i].contains(OP_ATTEMPTS)) {
+				check = checkAttempts(ands[i], attempts);
+			}
+			if (check == false) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	public static boolean checkMissed(String condition, int value) {
 		try {

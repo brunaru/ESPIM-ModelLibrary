@@ -8,6 +8,7 @@ import java.util.Map;
 
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.program.ProgramRestFacade;
 import br.usp.icmc.intermidia.esm.rest.api.client.facade.result.ResultsSessionRestFacade;
+import br.usp.icmc.intermidia.esm.rest.api.client.model.condition.ConditionInterpreter;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.event.ActiveEvent;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.event.Event;
 import br.usp.icmc.intermidia.esm.rest.api.client.model.intervention.EmptyIntervention;
@@ -32,7 +33,7 @@ public class App {
 
 	static void testExperiment() {
 
-		ProgramRestFacade experimentFacade = new ProgramRestFacade();
+		/*ProgramRestFacade experimentFacade = new ProgramRestFacade();
 		//ObserverRestFacade of = new ObserverRestFacade();
 		//List<Observer> observers = of.getAll();
 		//Observer observer = of.findByEmail("brunaru@icmc.usp.br");
@@ -44,7 +45,10 @@ public class App {
 			//populate();
 			//populate2();
 		}
-		//populateResults();
+		//populateResults();*/
+		
+		boolean check = ConditionInterpreter.checkAllConditions("MISSED GREATER_THAN 0 AND MISSED LESS_THAN 2", 2, 5);
+		
 		System.out.println("SUCESSO");
 	}
 
