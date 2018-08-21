@@ -2,7 +2,6 @@ package br.usp.icmc.intermidia.esm.rest.api.client.model.intervention;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class TaskIntervention extends Intervention {
 	
@@ -13,6 +12,8 @@ public class TaskIntervention extends Intervention {
 	private String appPackage;
 	
 	private Map<String, String> parameters = new HashMap<>();
+	
+	private boolean startFromNotification = false;
 	
 	public TaskIntervention() {
 		this.setType("task");
@@ -35,6 +36,14 @@ public class TaskIntervention extends Intervention {
 		if (values instanceof Map<?, ?>) {
 			this.parameters = (Map<String, String>) values;
 		}
+	}
+
+	public boolean isStartFromNotification() {
+		return startFromNotification;
+	}
+
+	public void setStartFromNotification(boolean startFromNotification) {
+		this.startFromNotification = startFromNotification;
 	}
 
 }

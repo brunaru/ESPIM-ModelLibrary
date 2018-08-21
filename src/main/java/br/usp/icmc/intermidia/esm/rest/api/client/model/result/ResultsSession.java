@@ -17,6 +17,8 @@ public class ResultsSession extends AbstractJsonModel {
 	String ended = "";
 	
 	List<Result> results;
+	
+	private long eventTrigger;
 
 	public long getParticipant() {
 		return participant;
@@ -56,6 +58,14 @@ public class ResultsSession extends AbstractJsonModel {
 
 	public void setEnded(String ended) {
 		this.ended = ended;
+	}
+
+	public long getEventTrigger() {
+		return eventTrigger;
+	}
+
+	public void setEventTrigger(long eventTrigger) {
+		this.eventTrigger = eventTrigger;
 	}
 
 }

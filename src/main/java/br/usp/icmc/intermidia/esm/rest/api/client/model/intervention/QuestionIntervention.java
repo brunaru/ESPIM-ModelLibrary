@@ -22,6 +22,8 @@ public class QuestionIntervention extends Intervention {
 	
 	private Map<String, Integer> conditions = new HashMap<>();
 	
+	private int scale;
+	
 	public QuestionIntervention() {
 		this.setType("question");
 	}
@@ -48,6 +50,14 @@ public class QuestionIntervention extends Intervention {
 
 	public void setConditions(Map<String, Integer> conditions) {
 		this.conditions = conditions;
+	}
+
+	public int getScale() {
+		return scale;
+	}
+
+	public void setScale(int scale) {
+		this.scale = scale;
 	}
 	
 }

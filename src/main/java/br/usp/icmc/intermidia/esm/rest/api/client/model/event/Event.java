@@ -34,6 +34,8 @@ public abstract class Event extends AbstractJsonModel {
 	private List<Sensor> sensors = new ArrayList<>();
 	
 	private List<ComplexCondition> complexConditions = new ArrayList<>();
+	
+	private String color;
 
 	public String getTitle() {
 		return title;
@@ -81,5 +83,13 @@ public abstract class Event extends AbstractJsonModel {
 
 	public void setComplexConditions(List<ComplexCondition> complexConditions) {
 		this.complexConditions = complexConditions;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 }

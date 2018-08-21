@@ -29,6 +29,8 @@ public class Program extends AbstractJsonModel {
 	
 	/** When it was updated: timestamp.  */
 	private String updateDate;
+	
+	private boolean hasPhases = false;
 
 	public String getTitle() {
 		return title;
@@ -92,5 +94,13 @@ public class Program extends AbstractJsonModel {
 
 	public void setEvents(List<Event> events) {
 		this.events = events;
+	}
+
+	public boolean isHasPhases() {
+		return hasPhases;
+	}
+
+	public void setHasPhases(boolean hasPhases) {
+		this.hasPhases = hasPhases;
 	}
 }

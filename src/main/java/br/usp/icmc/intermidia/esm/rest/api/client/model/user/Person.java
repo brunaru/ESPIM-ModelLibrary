@@ -9,6 +9,10 @@ public class Person extends AbstractJsonModel {
 	private String name;
 
 	private String email;
+	
+	private String phoneNumber;
+	
+	private String profilePhotoUrl;
 
 	public String getName() {
 		return name;
@@ -24,6 +28,22 @@ public class Person extends AbstractJsonModel {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getProfilePhotoUrl() {
+		return profilePhotoUrl;
+	}
+
+	public void setProfilePhotoUrl(String profilePhotoUrl) {
+		this.profilePhotoUrl = profilePhotoUrl;
 	}
 
 }

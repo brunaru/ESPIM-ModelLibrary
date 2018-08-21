@@ -15,6 +15,8 @@ public class MediaPresentation extends AbstractJsonModel {
 	private String type;
 
 	private String mediaUrl;
+	
+	private boolean autoPlay;
 
 	public String getType() {
 		return type;
@@ -30,6 +32,14 @@ public class MediaPresentation extends AbstractJsonModel {
 
 	public void setMediaUrl(String mediaUrl) {
 		this.mediaUrl = mediaUrl;
+	}
+
+	public boolean isAutoPlay() {
+		return autoPlay;
+	}
+
+	public void setAutoPlay(boolean autoPlay) {
+		this.autoPlay = autoPlay;
 	}
 
 }
