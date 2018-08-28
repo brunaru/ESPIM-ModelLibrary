@@ -31,6 +31,8 @@ public class Program extends AbstractJsonModel {
 	private String updateDate;
 	
 	private boolean hasPhases = false;
+	
+	private boolean isPublic = false;
 
 	public String getTitle() {
 		return title;
@@ -102,5 +104,13 @@ public class Program extends AbstractJsonModel {
 
 	public void setHasPhases(boolean hasPhases) {
 		this.hasPhases = hasPhases;
+	}
+
+	public boolean isPublic() {
+		return isPublic;
+	}
+
+	public void setPublic(boolean isPublic) {
+		this.isPublic = isPublic;
 	}
 }

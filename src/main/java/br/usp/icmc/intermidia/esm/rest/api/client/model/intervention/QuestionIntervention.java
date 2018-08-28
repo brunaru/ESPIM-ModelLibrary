@@ -11,8 +11,8 @@ public class QuestionIntervention extends Intervention {
 	
 	public static final int QUESTION_TYPE_OPEN_TEXT = 0;	
 	public static final int QUESTION_TYPE_RADIO = 1;	
-	public static final int QUESTION_TYPE_CHECKBOX = 2;	
-	public static final int QUESTION_TYPE_LIKERT = 3;	
+	public static final int QUESTION_TYPE_CHECKBOX = 2;
+	public static final int QUESTION_TYPE_LIKERT = 3;
 	public static final int QUESTION_TYPE_SEMANTIC_DIFFERENTIAL = 4;
 	
 	/** OPEN TEXT, RADIO, CHECKBOX, LIKERT or SEMANTIC DIFFERENTIAL. */
@@ -22,7 +22,7 @@ public class QuestionIntervention extends Intervention {
 	
 	private Map<String, Integer> conditions = new HashMap<>();
 	
-	private int scale;
+	private String scale;
 	
 	public QuestionIntervention() {
 		this.setType("question");
@@ -52,11 +52,11 @@ public class QuestionIntervention extends Intervention {
 		this.conditions = conditions;
 	}
 
-	public int getScale() {
+	public String getScale() {
 		return scale;
 	}
 
-	public void setScale(int scale) {
+	public void setScale(String scale) {
 		this.scale = scale;
 	}
 	
