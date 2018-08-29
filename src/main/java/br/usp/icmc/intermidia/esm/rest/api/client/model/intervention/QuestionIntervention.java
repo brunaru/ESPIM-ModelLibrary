@@ -13,6 +13,7 @@ public class QuestionIntervention extends Intervention {
 	public static final int QUESTION_TYPE_RADIO = 1;	
 	public static final int QUESTION_TYPE_CHECKBOX = 2;
 	public static final int QUESTION_TYPE_LIKERT = 3;
+	public static final int QUESTION_TYPE_LIKERT_CUSTOM = 31;
 	public static final int QUESTION_TYPE_SEMANTIC_DIFFERENTIAL = 4;
 	
 	/** OPEN TEXT, RADIO, CHECKBOX, LIKERT or SEMANTIC DIFFERENTIAL. */
