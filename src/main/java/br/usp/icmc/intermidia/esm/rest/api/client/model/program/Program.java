@@ -30,9 +30,9 @@ public class Program extends AbstractJsonModel {
 	/** When it was updated: timestamp.  */
 	private String updateDate;
 	
-	private boolean hasPhases = false;
+	private boolean hasPhases;
 	
-	private boolean isPublic = false;
+	private boolean isPublic;
 
 	public String getTitle() {
 		return title;
@@ -98,7 +98,7 @@ public class Program extends AbstractJsonModel {
 		this.events = events;
 	}
 
-	public boolean isHasPhases() {
+	public boolean getHasPhases() {
 		return hasPhases;
 	}
 
@@ -106,11 +106,11 @@ public class Program extends AbstractJsonModel {
 		this.hasPhases = hasPhases;
 	}
 
-	public boolean isPublic() {
+	public boolean getIsPublic() {
 		return isPublic;
 	}
 
-	public void setPublic(boolean isPublic) {
+	public void setIsPublic(boolean isPublic) {
 		this.isPublic = isPublic;
 	}
 }
