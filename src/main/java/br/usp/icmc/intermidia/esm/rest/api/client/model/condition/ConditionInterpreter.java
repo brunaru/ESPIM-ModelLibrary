@@ -6,7 +6,7 @@ public class ConditionInterpreter {
 	 * OPERATIONS
 	 */
 	public static final String OP_MISSED = "MISSED";
-	public static final String OP_ATTEMPTS = "ATTEMPTS";
+	public static final String OP_COMPLETED = "COMPLETED";
 
 	/**
 	 * OPERATORS
@@ -21,8 +21,8 @@ public class ConditionInterpreter {
 			boolean check = false;
 			if (ands[i].contains(OP_MISSED)) {
 				check = checkMissed(ands[i], missedTimes);
-			} else if (ands[i].contains(OP_ATTEMPTS)) {
-				check = checkAttempts(ands[i], attempts);
+			} else if (ands[i].contains(OP_COMPLETED)) {
+				check = checkCompleted(ands[i], attempts);
 			}
 			if (check == false) {
 				return false;
@@ -44,9 +44,9 @@ public class ConditionInterpreter {
 		return false;
 	}
 
-	public static boolean checkAttempts(String condition, int value) {
+	public static boolean checkCompleted(String condition, int value) {
 		try {
-			if (condition.contains(OP_ATTEMPTS)) {
+			if (condition.contains(OP_COMPLETED)) {
 				String[] ops = condition.split("\\s+");
 				return checkComparisonCondition(ops[1], Integer.valueOf(ops[2]), value);
 			}
