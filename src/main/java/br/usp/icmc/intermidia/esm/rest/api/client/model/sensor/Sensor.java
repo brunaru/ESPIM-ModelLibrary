@@ -23,11 +23,20 @@ public class Sensor extends AbstractJsonModel {
 	/** Audio sensor. */
 	public static final String SENSOR_MICROPHONE = "microphone";
 	
+	/** Collector Device: smartphone. */
+	public static final String COLLECTOR_SMARTPHONE = "smartphone";
+	
+	/** Collector Device: smartwatch. */
+	public static final String COLLECTOR_SMARTWATCH = "smartwatch";
+	
 	/** Interval or whole event. */
 	private int sensorType;
 	
 	/** ACITIVTY, LIGHT, AUDIO, ETC. */
 	private String sensor;
+	
+	/** Device. Smartphone, smartwatch, etc. */
+	private String collector;
 
 	public String getSensor() {
 		return sensor;
@@ -43,6 +52,14 @@ public class Sensor extends AbstractJsonModel {
 
 	public void setSensorType(int sensorType) {
 		this.sensorType = sensorType;
+	}
+
+	public String getCollector() {
+		return collector;
+	}
+
+	public void setCollector(String collector) {
+		this.collector = collector;
 	}
 
 }
