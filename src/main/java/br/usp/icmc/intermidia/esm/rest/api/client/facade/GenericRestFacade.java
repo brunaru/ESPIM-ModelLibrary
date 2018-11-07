@@ -11,6 +11,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -30,6 +31,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	private final RestTemplate restTemplate;
 	private final Class<T> genericType;
 	protected final String resourceName;
+	private HttpHeaders headers = new HttpHeaders();
 
 	@SuppressWarnings("unchecked")
 	public GenericRestFacade(String resourceName) {
@@ -39,6 +41,24 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		this.restTemplate.getMessageConverters().add(1, new MappingJackson2HttpMessageConverter());
 		mapper = new ObjectMapper();
 		this.genericType = (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), GenericRestFacade.class);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+	}
+	
+	public GenericRestFacade(String resourceName, String token) {
+		this(resourceName);
+		headers = createHeaders(token);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+	}
+	
+	HttpHeaders createHeaders(String token) {
+		return new HttpHeaders() {
+			private static final long serialVersionUID = 488918398000090553L;
+
+			{
+				String authHeader = "Basic " + token;
+				set("Authorization", authHeader);
+			}
+		};
 	}
 
 	public T get(Long id) {
@@ -68,7 +88,10 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 
 	public T get(URI location) {
 		try {
-			String json = restTemplate.getForObject(location, String.class);
+			HttpEntity<String> entity = new HttpEntity<>(headers);
+			ResponseEntity<String> response = restTemplate.exchange(location, HttpMethod.GET, entity, String.class);
+			String json = response.getBody();
+			//String json = restTemplate.getForObject(location, String.class);
 			T object = mapper.readValue(json, genericType);
 			return object;
 		} catch (Exception e) {
@@ -81,7 +104,10 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	public List<T> getAll() {
 		List<T> objects = new ArrayList<T>();
 		try {
-			String json = restTemplate.getForObject(ApiAddress.getRestApiAddress() + resourceName + "/?verbose=true", String.class);
+			HttpEntity<String> entity = new HttpEntity<>(headers);
+			ResponseEntity<String> response = restTemplate.exchange(ApiAddress.getRestApiAddress() + resourceName + "/?verbose=true", HttpMethod.GET, entity, String.class);
+			String json = response.getBody();
+			//String json = restTemplate.getForObject(ApiAddress.getRestApiAddress() + resourceName + "/?verbose=true", String.class);
 			if (json != null) {
 				objects = mapper.readValue(json, TypeFactory.defaultInstance().constructCollectionType(List.class, genericType));
 			}
@@ -109,7 +135,10 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		List<T> objects = new ArrayList<T>();
 		String json = null;
 		try {
-			json = restTemplate.getForObject(searchString, String.class);
+			HttpEntity<String> entity = new HttpEntity<>(headers);
+			ResponseEntity<String> response = restTemplate.exchange(searchString, HttpMethod.GET, entity, String.class);
+			json = response.getBody();
+			//json = restTemplate.getForObject(searchString, String.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return objects;
@@ -132,9 +161,7 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		try {
 			String json = mapper.writeValueAsString(object);
 			json = json.replaceAll("\"id\":0,", "");
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
-			HttpEntity<String> entity = new HttpEntity<String>(json, headers);
+			HttpEntity<String> entity = new HttpEntity<>(json, headers);
 			String answer = restTemplate.postForObject(url, entity, String.class);
 			return answer;
 		} catch (Exception e) {
@@ -154,8 +181,6 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 	public boolean put(T object, String url) {
 		try {
 			String json = mapper.writeValueAsString(object);
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
 			HttpEntity<String> entity = new HttpEntity<String>(json, headers);			
 			restTemplate.put(url, entity);
 			return true;
@@ -181,14 +206,11 @@ public abstract class GenericRestFacade<T extends AbstractJsonModel> implements 
 		try {
 			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 			restTemplate.setRequestFactory(requestFactory);
-			HttpHeaders headers = new HttpHeaders();
 			MediaType mediaType = new MediaType("application", "json", Charset.forName("UTF-8"));
 			headers.setContentType(mediaType);
-			// headers.setContentType(MediaType.APPLICATION_JSON);
 			String json = mapper.writeValueAsString(object);
 			HttpEntity<String> entity = new HttpEntity<String>(json, headers);
 			restTemplate.exchange(location, HttpMethod.PATCH, entity, String.class);
-			// restTemplate.put(location, object);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
